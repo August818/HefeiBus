@@ -16,7 +16,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected Context mContext;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mContext = this;
         ActivityController.getInstance().add(this);
@@ -25,6 +25,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         setAttributes();
 
     }
+
 
     protected abstract void setAttributes();
 

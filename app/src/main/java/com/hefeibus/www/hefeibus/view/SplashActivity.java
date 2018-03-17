@@ -1,12 +1,8 @@
 package com.hefeibus.www.hefeibus.view;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.PersistableBundle;
-import android.os.Trace;
 import android.support.annotation.Nullable;
 import android.view.WindowManager;
 
@@ -31,33 +27,58 @@ public class SplashActivity extends BaseActivity {
 
     @Override
     protected int setLayoutView() {
-        return R.layout.splash_layout;
+        return R.layout.activity_splash;
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         //1.判断 Android Runtime Permission
-        //2.判断 network status
-        //3.判断 version status
-        //4.跳转 main activity
+        checkRuntimePermissions();
 
+        //2.判断 network status
+        checkNetworkConnections();
+
+        //3.判断 version status
+        checkVersionUpdate();
+
+        //4.跳转 main activity
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 startMainActivity();
             }
-        }, 3000);
+        }, 1);
+    }
+
+    /**
+     * 检查版本情况
+     */
+    private void checkVersionUpdate() {
+
+    }
+
+    /**
+     * 检查网络连通情况
+     */
+    private void checkNetworkConnections() {
+
+    }
+
+    /**
+     * 检查运行时权限
+     */
+    private void checkRuntimePermissions() {
+
     }
 
     /**
      * 跳转到主界面
      */
     private void startMainActivity() {
-        Intent intent = new Intent(SplashActivity.this, MainAcivity.class);
+        Intent intent = new Intent(SplashActivity.this, MainActivity.class);
         startActivity(intent);
         this.finish();
     }
