@@ -27,10 +27,22 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * init some content within views
+     * eg: setAdapter addListener;
+     */
     protected abstract void setAttributes();
 
+    /**
+     * find Views in the layout and set into the members
+     */
     protected abstract void findViews();
 
+    /**
+     * setting the layout resource of the Activity
+     *
+     * @return the resource id of layout resource
+     */
     protected abstract int setLayoutView();
 
     @Override
