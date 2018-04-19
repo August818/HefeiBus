@@ -7,14 +7,16 @@ import android.support.annotation.Nullable;
 import android.view.WindowManager;
 
 import com.hefeibus.www.hefeibus.R;
-import com.hefeibus.www.hefeibus.base.BaseActivity;
+import com.hefeibus.www.hefeibus.basemvp.BaseMvpActivity;
+import com.hefeibus.www.hefeibus.basemvp.IPresenter;
+import com.hefeibus.www.hefeibus.view.framework.MainActivity;
 
 /**
  * splash activity
  * Created by cx on 2018/3/17.
  */
 
-public class SplashActivity extends BaseActivity {
+public class SplashActivity extends BaseMvpActivity {
     @Override
     protected void setAttributes() {
 
@@ -51,6 +53,11 @@ public class SplashActivity extends BaseActivity {
                 startMainActivity();
             }
         }, 1500);
+    }
+
+    @Override
+    protected IPresenter onCreatePresenter() {
+        return null;
     }
 
     /**

@@ -14,6 +14,9 @@
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.MainActivity" />
+        <activity
+            android:name=".view.framework.MainActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
     </application>
 </manifest>

@@ -5,16 +5,19 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import com.hefeibus.www.hefeibus.R;
-import com.hefeibus.www.hefeibus.base.BaseFragment;
+import com.hefeibus.www.hefeibus.basemvp.BaseMvpFragment;
 
 /**
  * 搜索界面
  * Created by xyw-mac on 2018/3/18.
  */
 
-public class SearchFragment extends BaseFragment {
+public class SearchFragment extends BaseMvpFragment {
+
+    private EditText searchBox;
 
     @Nullable
     @Override
@@ -29,7 +32,8 @@ public class SearchFragment extends BaseFragment {
 
     @Override
     protected void findViews(View view) {
-
+        searchBox = findID(view, R.id.search_box);
+        searchBox.clearFocus();
     }
 
     @Override

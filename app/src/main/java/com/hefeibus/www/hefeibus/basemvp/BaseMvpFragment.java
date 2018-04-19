@@ -1,4 +1,4 @@
-package com.hefeibus.www.hefeibus.base;
+package com.hefeibus.www.hefeibus.basemvp;
 
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -10,8 +10,7 @@ import android.view.ViewGroup;
  * Created by xyw-mac on 2018/3/18.
  */
 
-public abstract class BaseFragment extends Fragment {
-
+public abstract class BaseMvpFragment extends Fragment {
 
     protected View invokeMe(LayoutInflater inflater, ViewGroup container) {
 
@@ -22,6 +21,10 @@ public abstract class BaseFragment extends Fragment {
         setAttributes();
 
         return view;
+    }
+
+    protected <T extends View> T findID(View view, int id) {
+        return (T) view.findViewById(id);
     }
 
     /**

@@ -7,14 +7,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.hefeibus.www.hefeibus.R;
-import com.hefeibus.www.hefeibus.base.BaseFragment;
+import com.hefeibus.www.hefeibus.basemvp.BaseMvpFragment;
 
 /**
  * 个人资料界面
  * Created by xyw-mac on 2018/3/18.
  */
 
-public class ProfileFragment extends BaseFragment {
+public class ProfileFragment extends BaseMvpFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

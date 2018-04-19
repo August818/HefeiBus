@@ -1,4 +1,4 @@
-package com.hefeibus.www.hefeibus.view;
+package com.hefeibus.www.hefeibus.view.framework;
 
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -8,7 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 
 import com.hefeibus.www.hefeibus.R;
-import com.hefeibus.www.hefeibus.base.BaseActivity;
+import com.hefeibus.www.hefeibus.basemvp.BaseMvpActivity;
 import com.hefeibus.www.hefeibus.fragment.ArroundFragment;
 import com.hefeibus.www.hefeibus.fragment.ExchangeFragment;
 import com.hefeibus.www.hefeibus.fragment.ProfileFragment;
@@ -22,19 +22,21 @@ import java.util.List;
  * Created by cx on 2018/3/17.
  */
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseMvpActivity<IMainPresenter> implements IMainView {
     private TabLayout mTablayout;
     private Toolbar mToolbar;
     private ViewPager mViewPager;
+
+    @Override
+    protected IMainPresenter onCreatePresenter() {
+        return new MainPresenter();
+    }
 
     /**
      * 设置控件属性
      */
     @Override
     protected void setAttributes() {
-        //设置 Toolbar 的 title
-        mToolbar.setTitle("合肥城市公交");
-        setSupportActionBar(mToolbar);
 
         //设置 Tablayout 的 title
         mTablayout.addTab(mTablayout.newTab().setText("搜索"));
@@ -61,7 +63,7 @@ public class MainActivity extends BaseActivity {
      */
     @Override
     protected void findViews() {
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        // mToolbar = (Toolbar) findViewById(R.id.component_global_toolbar);
         mTablayout = (TabLayout) findViewById(R.id.activity_main_tablayout);
         mViewPager = (ViewPager) findViewById(R.id.activity_main_content);
     }

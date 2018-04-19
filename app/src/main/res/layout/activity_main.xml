@@ -5,9 +5,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/toolbar" />
-
-
     <android.support.v4.view.ViewPager
         android:id="@+id/activity_main_content"
         android:layout_width="match_parent"
@@ -18,13 +15,14 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/colorPrimary" />
+        android:background="@color/primary" />
 
     <android.support.design.widget.TabLayout
         android:id="@+id/activity_main_tablayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:tabIndicatorColor="@color/colorPrimary"
-        app:tabSelectedTextColor="@color/colorAccent" />
+        android:background="@color/icons"
+        app:tabIndicatorColor="@color/primary"
+        app:tabIndicatorHeight="0dp" />
 
 </LinearLayout>
