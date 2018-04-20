@@ -1,5 +1,7 @@
 package com.hefeibus.www.hefeibus.basemvp;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,9 +12,12 @@ import android.view.ViewGroup;
  * Created by xyw-mac on 2018/3/18.
  */
 
-public abstract class BaseMvpFragment extends Fragment {
+public abstract class BaseMvpFragment<P extends IPresenter> extends Fragment implements IView {
+    protected P presenter;
 
     protected View invokeMe(LayoutInflater inflater, ViewGroup container) {
+
+        presenter = onPresenterCreated();
 
         View view = inflater.inflate(setLayoutView(), container, false);
 
@@ -23,9 +28,26 @@ public abstract class BaseMvpFragment extends Fragment {
         return view;
     }
 
-    protected <T extends View> T findID(View view, int id) {
-        return (T) view.findViewById(id);
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (presenter != null) presenter.onAttach(this);
     }
+
+
+    @Override
+    public void onDestroy() {
+        if (presenter != null) presenter.onDetach();
+        super.onDestroy();
+    }
+
+
+    /**
+     * Generate the correspond presenter layer
+     *
+     * @return the presenter reference;
+     */
+    protected abstract P onPresenterCreated();
 
     /**
      * init some content within views

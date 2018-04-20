@@ -15,7 +15,7 @@
         app:titleTextColor="@color/icons">
 
         <Switch
-            android:id="@+id/online_switcher"
+            android:id="@+id/net_switcher"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|clip_horizontal|center_vertical" />
@@ -23,16 +23,27 @@
 
     </android.support.v7.widget.Toolbar>
 
-    <EditText
+    <TextView
         android:id="@+id/search_box"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
         android:backgroundTint="@color/icons"
         android:drawableStart="@drawable/ic_search"
-        android:hint="搜索线路、站点"
-        android:singleLine="true"
-        android:textColorHint="@color/icons" />
+        android:gravity="center_vertical"
+        android:text="搜索线路、站点"
+        android:textColor="@color/icons"
+        android:textSize="18sp" />
+
+    <view
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@color/icons" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -46,11 +57,11 @@
         <LinearLayout
             android:id="@+id/recycler"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:orientation="vertical">
 
-            <android.support.v7.widget.RecyclerView
+            <ExpandableListView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </LinearLayout>

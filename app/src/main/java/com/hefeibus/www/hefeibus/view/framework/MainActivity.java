@@ -12,7 +12,7 @@ import com.hefeibus.www.hefeibus.basemvp.BaseMvpActivity;
 import com.hefeibus.www.hefeibus.fragment.ArroundFragment;
 import com.hefeibus.www.hefeibus.fragment.ExchangeFragment;
 import com.hefeibus.www.hefeibus.fragment.ProfileFragment;
-import com.hefeibus.www.hefeibus.fragment.SearchFragment;
+import com.hefeibus.www.hefeibus.fragment.search.SearchFragment;
 
 import java.util.ArrayList;
 import java.util.List;
