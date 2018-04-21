@@ -12,7 +12,12 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.hefeibus.www.hefeibus.R;
+import com.hefeibus.www.hefeibus.adapter.SearchPageExpandListAdapter;
 import com.hefeibus.www.hefeibus.basemvp.BaseMvpFragment;
+import com.hefeibus.www.hefeibus.entity.GroupDetail;
+
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * 搜索界面
@@ -25,6 +30,7 @@ public class SearchFragment extends BaseMvpFragment<ISearchPresenter> implements
     private Switch netChanger;
     private ExpandableListView mListView;
     private RelativeLayout container;
+    private SearchPageExpandListAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -48,13 +54,11 @@ public class SearchFragment extends BaseMvpFragment<ISearchPresenter> implements
         searchTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                restoreLayout();
             }
         });
         container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showLoadingLayout();
             }
         });
     }
@@ -84,6 +88,11 @@ public class SearchFragment extends BaseMvpFragment<ISearchPresenter> implements
                 getResources().getColor(R.color.primary),
                 android.graphics.PorterDuff.Mode.SRC_IN);
         container.addView(progressBar);
+    }
+
+    @Override
+    public void setGroupListDetail(HashMap<String, GroupDetail> map, List<String> groupIndex) {
+        mListView.setAdapter(new SearchPageExpandListAdapter(map, groupIndex, getContext()));
     }
 
     @Override

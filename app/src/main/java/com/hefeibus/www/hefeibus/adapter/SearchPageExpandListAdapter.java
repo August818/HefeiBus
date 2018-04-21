@@ -1,10 +1,14 @@
 package com.hefeibus.www.hefeibus.adapter;
 
+import android.content.Context;
 import android.database.DataSetObserver;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListAdapter;
+import android.widget.TextView;
 
+import com.hefeibus.www.hefeibus.R;
 import com.hefeibus.www.hefeibus.entity.GroupDetail;
 import com.hefeibus.www.hefeibus.entity.Line;
 
@@ -13,15 +17,20 @@ import java.util.List;
 
 public class SearchPageExpandListAdapter implements ExpandableListAdapter {
 
+
     /**
      * String -> 分组名称
      * List<GroupDetail> 当前分组下的线路列表
      */
-    private HashMap<String, List<GroupDetail>> mGroupNameList;
+    private HashMap<String, GroupDetail> map;
+    private List<String> list;
     private onLineItemClickListener listener;
+    private Context mContext;
 
-    public SearchPageExpandListAdapter(HashMap<String, List<GroupDetail>> groupNameList) {
-        mGroupNameList = groupNameList;
+    public SearchPageExpandListAdapter(HashMap<String, GroupDetail> map, List<String> list, Context context) {
+        this.map = map;
+        this.list = list;
+        this.mContext = context;
     }
 
     public void setListener(onLineItemClickListener listener) {
@@ -38,34 +47,57 @@ public class SearchPageExpandListAdapter implements ExpandableListAdapter {
 
     }
 
+    /**
+     * 返回 分组名称索引的数量
+     *
+     * @return lise.size()
+     */
     @Override
     public int getGroupCount() {
-        return 0;
+        if (list == null) {
+            return 0;
+        }
+        return list.size();
     }
 
+    /**
+     * @param groupPosition 位置 - 分组名 - line count
+     * @return 子项数目
+     */
     @Override
     public int getChildrenCount(int groupPosition) {
-        return 0;
+
+        if (map == null || list == null) {
+            return 0;
+        }
+
+        return map.get(list.get(groupPosition)).getLineList().size();
     }
 
     @Override
     public Object getGroup(int groupPosition) {
-        return null;
+        if (map == null || list == null) {
+            return null;
+        }
+        return map.get(list.get(groupPosition));
     }
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-        return null;
+        if (map == null || list == null) {
+            return null;
+        }
+        return map.get(list.get(groupPosition)).getLineList().get(childPosition);
     }
 
     @Override
     public long getGroupId(int groupPosition) {
-        return 0;
+        return groupPosition;
     }
 
     @Override
     public long getChildId(int groupPosition, int childPosition) {
-        return 0;
+        return childPosition;
     }
 
     @Override
@@ -75,12 +107,30 @@ public class SearchPageExpandListAdapter implements ExpandableListAdapter {
 
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-        return null;
+        View view = LayoutInflater.from(mContext)
+                .inflate(R.layout.component_group_line_father, null);
+        ((TextView) view.findViewById(R.id.group_name)).setText(((GroupDetail) getGroup(groupPosition)).getGroupName());
+        ((TextView) view.findViewById(R.id.line_count)).setText(((GroupDetail) getGroup(groupPosition)).getLineCount() + "条");
+        return view;
     }
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        return null;
+        View view = LayoutInflater.from(mContext)
+                .inflate(R.layout.component_group_line_son, null);
+        GroupDetail groupDetail = (GroupDetail) getGroup(groupPosition);
+        final Line line = groupDetail.getLineList().get(childPosition);
+        ((TextView) view.findViewById(R.id.line_name)).setText(line.getLineName());
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (listener != null) {
+                    listener.onClick(line);
+                }
+            }
+        });
+        return view;
+
     }
 
     @Override

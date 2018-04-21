@@ -68,5 +68,74 @@ public class Line {
     /**
      * 途径站点列表
      */
+
     private List<Station> passStationList;
+
+    public Line(String lineName) {
+        this.lineName = lineName;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public String getLineName() {
+        return lineName;
+    }
+
+    public void setLineName(String lineName) {
+        this.lineName = lineName;
+    }
+
+    public String getDesc1() {
+        return desc1;
+    }
+
+    public void setDesc1(String desc1) {
+        this.desc1 = desc1;
+    }
+
+    public String getDesc2() {
+        return desc2;
+    }
+
+    public void setDesc2(String desc2) {
+        this.desc2 = desc2;
+    }
+
+    public Station getSite1() {
+        return site1;
+    }
+
+    public void setSite1(Station site1) {
+        this.site1 = site1;
+    }
+
+    public Station getSite2() {
+        return site2;
+    }
+
+    public void setSite2(Station site2) {
+        this.site2 = site2;
+    }
+
+    public int getStationCount() {
+        return stationCount;
+    }
+
+    public void setStationCount(int stationCount) {
+        this.stationCount = stationCount;
+    }
+
+    public List<Station> getPassStationList() {
+        return passStationList;
+    }
+
+    public void setPassStationList(List<Station> passStationList) {
+        this.passStationList = passStationList;
+    }
 }
