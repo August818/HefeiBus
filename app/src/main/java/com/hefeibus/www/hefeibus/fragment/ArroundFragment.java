@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import com.hefeibus.www.hefeibus.R;
 import com.hefeibus.www.hefeibus.basemvp.BaseMvpFragment;
+import com.hefeibus.www.hefeibus.basemvp.IPresenter;
 
 /**
  * 附近界面
@@ -15,6 +16,15 @@ import com.hefeibus.www.hefeibus.basemvp.BaseMvpFragment;
  */
 
 public class ArroundFragment extends BaseMvpFragment {
+    @Override
+    protected void init() {
+
+    }
+
+    @Override
+    protected IPresenter onPresenterCreated() {
+        return null;
+    }
 
     @Nullable
     @Override

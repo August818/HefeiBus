@@ -17,7 +17,6 @@ public abstract class BaseMvpFragment<P extends IPresenter> extends Fragment imp
 
     protected View invokeMe(LayoutInflater inflater, ViewGroup container) {
 
-        presenter = onPresenterCreated();
 
         View view = inflater.inflate(setLayoutView(), container, false);
 
@@ -25,20 +24,24 @@ public abstract class BaseMvpFragment<P extends IPresenter> extends Fragment imp
 
         setAttributes();
 
+        init();
         return view;
     }
+
+    protected abstract void init();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        presenter = onPresenterCreated();
         if (presenter != null) presenter.onAttach(this);
     }
 
 
     @Override
-    public void onDestroy() {
+    public void onDetach() {
         if (presenter != null) presenter.onDetach();
-        super.onDestroy();
+        super.onDetach();
     }
 
 

@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import com.hefeibus.www.hefeibus.R;
 import com.hefeibus.www.hefeibus.basemvp.BaseMvpFragment;
+import com.hefeibus.www.hefeibus.basemvp.IPresenter;
 
 /**
  * 个人资料界面
@@ -19,6 +20,16 @@ public class ProfileFragment extends BaseMvpFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return invokeMe(inflater, container);
+    }
+
+    @Override
+    protected void init() {
+
+    }
+
+    @Override
+    protected IPresenter onPresenterCreated() {
+        return null;
     }
 
     @Override

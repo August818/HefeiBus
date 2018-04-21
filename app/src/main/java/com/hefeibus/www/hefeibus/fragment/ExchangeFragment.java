@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import com.hefeibus.www.hefeibus.R;
 import com.hefeibus.www.hefeibus.basemvp.BaseMvpFragment;
+import com.hefeibus.www.hefeibus.basemvp.IPresenter;
 
 /**
  * 换乘界面
@@ -20,6 +21,16 @@ public class ExchangeFragment extends BaseMvpFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return invokeMe(inflater, container);
 
+    }
+
+    @Override
+    protected void init() {
+
+    }
+
+    @Override
+    protected IPresenter onPresenterCreated() {
+        return null;
     }
 
     @Override

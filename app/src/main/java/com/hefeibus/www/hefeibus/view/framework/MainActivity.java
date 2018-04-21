@@ -9,9 +9,6 @@ import android.support.v7.widget.Toolbar;
 
 import com.hefeibus.www.hefeibus.R;
 import com.hefeibus.www.hefeibus.basemvp.BaseMvpActivity;
-import com.hefeibus.www.hefeibus.fragment.ArroundFragment;
-import com.hefeibus.www.hefeibus.fragment.ExchangeFragment;
-import com.hefeibus.www.hefeibus.fragment.ProfileFragment;
 import com.hefeibus.www.hefeibus.fragment.search.SearchFragment;
 
 import java.util.ArrayList;
@@ -51,9 +48,9 @@ public class MainActivity extends BaseMvpActivity<IMainPresenter> implements IMa
         //初始化 viewpager 内容
         List<Fragment> list = new ArrayList<>();
         list.add(new SearchFragment());
-        list.add(new ExchangeFragment());
-        list.add(new ArroundFragment());
-        list.add(new ProfileFragment());
+        //list.add(new ExchangeFragment());
+        //list.add(new ArroundFragment());
+        //list.add(new ProfileFragment());
         MyPagerAdapter adapter = new MyPagerAdapter(getSupportFragmentManager(), list);
         mViewPager.setAdapter(adapter);
     }
