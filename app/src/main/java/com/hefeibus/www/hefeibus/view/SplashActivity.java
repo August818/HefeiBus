@@ -15,6 +15,7 @@ import com.hefeibus.www.hefeibus.basemvp.IPresenter;
 import com.hefeibus.www.hefeibus.utils.Parameters;
 import com.hefeibus.www.hefeibus.view.framework.MainActivity;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,8 +25,6 @@ import java.io.InputStream;
  * Created by cx on 2018/3/17.
  */
 
-//数据库文件存放位置 /data/user/0/com.hefeibus.www.hefeibus/files/
-// getFilesDir().getAbsolutePath();
 
 public class SplashActivity extends BaseMvpActivity {
     private static final String TAG = "SplashActivity";
@@ -84,7 +83,8 @@ public class SplashActivity extends BaseMvpActivity {
         String[] associateFile = getApplicationContext().fileList();
         for (String s : associateFile) {
             if (s.equals(Parameters.LINE_GROUP_DATABASE_NAME)) {
-                isExisted = true;
+                File file = new File(getFilesDir().getAbsolutePath() + "/" + Parameters.LINE_GROUP_DATABASE_NAME);
+                isExisted = !file.delete();
             }
         }
 

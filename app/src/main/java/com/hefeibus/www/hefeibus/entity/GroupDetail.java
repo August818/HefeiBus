@@ -21,11 +21,6 @@ public class GroupDetail {
     public GroupDetail() {
     }
 
-    public GroupDetail(String groupName, int lineCount) {
-        this.groupName = groupName;
-        this.lineCount = lineCount;
-    }
-
     public String getGroupName() {
         return groupName;
     }
