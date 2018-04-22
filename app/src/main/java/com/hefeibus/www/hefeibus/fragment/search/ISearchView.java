@@ -16,4 +16,6 @@ interface ISearchView extends IView {
     void restoreLayout();
 
     void setGroupListDetail(HashMap<String, GroupDetail> map, List<String> groupIndex);
+
+    SearchFragment getCurrentActivity();
 }

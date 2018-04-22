@@ -15,4 +15,5 @@ public interface IPresenter<V extends IView> {
      * reference.
      */
     void onDetach();
+
 }

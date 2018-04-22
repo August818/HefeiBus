@@ -18,6 +18,9 @@ public class GroupDetail {
 
     private int lineCount;
 
+    public GroupDetail() {
+    }
+
     public GroupDetail(String groupName, int lineCount) {
         this.groupName = groupName;
         this.lineCount = lineCount;
@@ -46,6 +49,7 @@ public class GroupDetail {
     public void setLineList(List<Line> lineList) {
         this.lineList = lineList;
     }
+
     /**
      * 当前分组下线路列表
      */

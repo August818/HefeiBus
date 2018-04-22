@@ -9,12 +9,11 @@
         android:id="@+id/group_name"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="25dp"
         android:layout_weight="4"
         android:gravity="center_vertical"
         android:text="线路名称"
-        android:textSize="16sp"
-        android:textStyle="bold" />
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/line_count"
@@ -26,14 +25,6 @@
         android:textAlignment="center"
         android:textSize="16sp"
 
-        android:textStyle="bold" />
+        />
 
-    <ImageView
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:layout_gravity="clip_horizontal|end"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:background="@color/primary_dark"
-        android:src="@drawable/ic_location" />
 </LinearLayout>

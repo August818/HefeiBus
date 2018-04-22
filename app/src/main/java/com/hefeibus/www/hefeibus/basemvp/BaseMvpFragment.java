@@ -16,8 +16,6 @@ public abstract class BaseMvpFragment<P extends IPresenter> extends Fragment imp
     protected P presenter;
 
     protected View invokeMe(LayoutInflater inflater, ViewGroup container) {
-
-
         View view = inflater.inflate(setLayoutView(), container, false);
 
         findViews(view);

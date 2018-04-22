@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.hefeibus.www.hefeibus.R;
 import com.hefeibus.www.hefeibus.entity.GroupDetail;
@@ -127,6 +128,7 @@ public class SearchPageExpandListAdapter implements ExpandableListAdapter {
                 if (listener != null) {
                     listener.onClick(line);
                 }
+                Toast.makeText(mContext, "查询" + line.getLineName() + "线路", Toast.LENGTH_SHORT).show();
             }
         });
         return view;

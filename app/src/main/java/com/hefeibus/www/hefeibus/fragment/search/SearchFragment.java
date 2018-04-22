@@ -91,6 +91,11 @@ public class SearchFragment extends BaseMvpFragment<ISearchPresenter> implements
     }
 
     @Override
+    public SearchFragment getCurrentActivity() {
+        return this;
+    }
+
+    @Override
     public void setGroupListDetail(HashMap<String, GroupDetail> map, List<String> groupIndex) {
         mListView.setAdapter(new SearchPageExpandListAdapter(map, groupIndex, getContext()));
     }
