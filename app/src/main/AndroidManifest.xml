@@ -15,8 +15,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".view.framework.MainActivity"
+            android:name=".view.mian_framework.MainActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity android:name=".view.line_detail.LineDetailActivity" />
     </application>
 </manifest>

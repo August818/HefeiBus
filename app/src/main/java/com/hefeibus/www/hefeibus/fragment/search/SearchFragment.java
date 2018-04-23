@@ -1,5 +1,6 @@
 package com.hefeibus.www.hefeibus.fragment.search;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +16,8 @@ import com.hefeibus.www.hefeibus.R;
 import com.hefeibus.www.hefeibus.adapter.SearchPageExpandListAdapter;
 import com.hefeibus.www.hefeibus.basemvp.BaseMvpFragment;
 import com.hefeibus.www.hefeibus.entity.GroupDetail;
+import com.hefeibus.www.hefeibus.entity.Line;
+import com.hefeibus.www.hefeibus.view.line_detail.LineDetailActivity;
 
 import java.util.HashMap;
 import java.util.List;
@@ -61,6 +64,14 @@ public class SearchFragment extends BaseMvpFragment<ISearchPresenter> implements
             public void onClick(View v) {
             }
         });
+        adapter.setListener(new SearchPageExpandListAdapter.onLineItemClickListener() {
+            @Override
+            public void onClick(Line line) {
+                Intent intent = new Intent(getContext(), LineDetailActivity.class);
+                intent.putExtra("line", line);
+                getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -69,6 +80,7 @@ public class SearchFragment extends BaseMvpFragment<ISearchPresenter> implements
         netChanger = (Switch) view.findViewById(R.id.net_switcher);
         mListView = (ExpandableListView) view.findViewById(R.id.expandable_list);
         container = (RelativeLayout) view.findViewById(R.id.container);
+        adapter = new SearchPageExpandListAdapter(getContext());
     }
 
     @Override
@@ -97,7 +109,9 @@ public class SearchFragment extends BaseMvpFragment<ISearchPresenter> implements
 
     @Override
     public void setGroupListDetail(HashMap<String, GroupDetail> map, List<String> groupIndex) {
-        mListView.setAdapter(new SearchPageExpandListAdapter(map, groupIndex, getContext()));
+        adapter.setGroupNameIndex(groupIndex);
+        adapter.setMap(map);
+        mListView.setAdapter(adapter);
     }
 
     @Override

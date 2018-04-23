@@ -1,4 +1,4 @@
-package com.hefeibus.www.hefeibus.view.framework;
+package com.hefeibus.www.hefeibus.view.mian_framework;
 
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;

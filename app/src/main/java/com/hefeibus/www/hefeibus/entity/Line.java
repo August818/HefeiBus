@@ -1,5 +1,6 @@
 package com.hefeibus.www.hefeibus.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -28,7 +29,7 @@ import java.util.List;
  * <p>
  * passStationList 南门换乘中心|王下份|世纪金源饭店|……
  */
-public class Line {
+public class Line implements Serializable {
 
     /**
      * 线路价格

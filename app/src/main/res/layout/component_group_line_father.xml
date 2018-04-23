@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tool="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="5dp"
     android:orientation="horizontal"
     android:padding="5dp">
 
@@ -12,8 +14,8 @@
         android:layout_marginStart="25dp"
         android:layout_weight="4"
         android:gravity="center_vertical"
-        android:text="线路名称"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        tool:text="线路名称" />
 
     <TextView
         android:id="@+id/line_count"
@@ -21,10 +23,8 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:gravity="center_vertical"
-        android:text="N/A条"
         android:textAlignment="center"
         android:textSize="16sp"
-
-        />
+        tool:text="线路名称" />
 
 </LinearLayout>

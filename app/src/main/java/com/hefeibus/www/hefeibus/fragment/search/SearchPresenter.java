@@ -4,7 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.hefeibus.www.hefeibus.basemvp.BaseMvpPresenter;
 import com.hefeibus.www.hefeibus.entity.GroupDetail;
-import com.hefeibus.www.hefeibus.sqlite.GroupLineDatabase;
+import com.hefeibus.www.hefeibus.sqlite.HefeiBusDatabase;
 
 import java.util.HashMap;
 import java.util.List;
@@ -14,7 +14,7 @@ class SearchPresenter extends BaseMvpPresenter<ISearchView> implements ISearchPr
     /**
      * 数据库操作层
      */
-    private GroupLineDatabase mDal;
+    private HefeiBusDatabase mDal;
 
     public SearchPresenter() {
     }
@@ -28,7 +28,7 @@ class SearchPresenter extends BaseMvpPresenter<ISearchView> implements ISearchPr
             }
         });
 
-        mDal = new GroupLineDatabase(weakView.get().getCurrentActivity().getContext());
+        mDal = new HefeiBusDatabase(weakView.get().getCurrentActivity().getContext());
         final HashMap<String, GroupDetail> map = mDal.queryAllGroupDetail();
         final List<String> groupIndex = mDal.queryGroupIndex();
         mDal.close();

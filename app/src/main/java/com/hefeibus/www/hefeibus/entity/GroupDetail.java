@@ -1,11 +1,12 @@
 package com.hefeibus.www.hefeibus.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Search Page 分组公交信息的实体类
  */
-public class GroupDetail {
+public class GroupDetail implements Serializable {
     /**
      * 分组名称
      */

@@ -13,7 +13,7 @@ import com.hefeibus.www.hefeibus.R;
 import com.hefeibus.www.hefeibus.basemvp.BaseMvpActivity;
 import com.hefeibus.www.hefeibus.basemvp.IPresenter;
 import com.hefeibus.www.hefeibus.utils.Parameters;
-import com.hefeibus.www.hefeibus.view.framework.MainActivity;
+import com.hefeibus.www.hefeibus.view.mian_framework.MainActivity;
 
 import java.io.File;
 import java.io.FileOutputStream;
