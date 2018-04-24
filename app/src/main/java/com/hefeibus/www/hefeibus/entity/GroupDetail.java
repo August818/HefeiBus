@@ -12,7 +12,6 @@ public class GroupDetail implements Serializable {
      */
     private String groupName;
 
-
     /**
      * 当前分组下线路数量
      */

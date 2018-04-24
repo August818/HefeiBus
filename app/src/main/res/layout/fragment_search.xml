@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?><!-- 容器  线性布局 特点是 在某个方向上摆放 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,7 +7,7 @@
 
     <include layout="@layout/top_toolbar" />
 
-
+    <!-- 搜索框 -->
     <TextView
         android:id="@+id/search_box"
         android:layout_width="match_parent"
@@ -22,6 +22,7 @@
         android:textColor="@color/icons"
         android:textSize="18sp" />
 
+    <!-- 分割线 -->
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -30,6 +31,7 @@
         android:layout_marginRight="20dp"
         android:background="@color/icons" />
 
+    <!-- 容器  相对布局 特点是 相对摆放 -->
 
     <RelativeLayout
         android:id="@+id/container"
@@ -42,6 +44,7 @@
         android:background="@drawable/search_background_selector"
         android:gravity="center_vertical|center_horizontal">
 
+        <!-- 分组列表 -->
         <ExpandableListView
             android:id="@+id/expandable_list"
             android:layout_width="match_parent"

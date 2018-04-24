@@ -35,6 +35,12 @@ public class SearchFragment extends BaseMvpFragment<ISearchPresenter> implements
     private RelativeLayout container;
     private SearchPageExpandListAdapter adapter;
 
+
+    /**
+     * 这里是 Fragment 执行的入口
+     *
+     * @return View - 抽象对象，界面，看到的 View
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return invokeMe(inflater, container);
@@ -59,11 +65,7 @@ public class SearchFragment extends BaseMvpFragment<ISearchPresenter> implements
             public void onClick(View v) {
             }
         });
-        container.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            }
-        });
+
         adapter.setListener(new SearchPageExpandListAdapter.onLineItemClickListener() {
             @Override
             public void onClick(Line line) {
@@ -74,6 +76,11 @@ public class SearchFragment extends BaseMvpFragment<ISearchPresenter> implements
         });
     }
 
+    /**
+     * 初始化 你需要用的 所有的 控件
+     *
+     * @param view the View that contains the widgets
+     */
     @Override
     protected void findViews(View view) {
         searchTv = (TextView) view.findViewById(R.id.search_box);
@@ -120,4 +127,6 @@ public class SearchFragment extends BaseMvpFragment<ISearchPresenter> implements
         container.removeAllViews();
         container.addView(mListView);
     }
+
+
 }

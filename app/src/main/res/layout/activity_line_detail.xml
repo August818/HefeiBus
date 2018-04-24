@@ -27,7 +27,8 @@
             android:layout_height="match_parent"
             android:layout_gravity="end"
             android:layout_marginEnd="10dp"
-            android:src="@drawable/ic_search" />
+            android:src="@drawable/ic_search"
+            android:visibility="invisible" />
 
     </android.support.v7.widget.Toolbar>
 
@@ -42,13 +43,13 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/line_price_desc"
+            android:id="@+id/line_stop"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="100dp"
             android:layout_marginStart="5dp"
             android:textColor="@color/icons"
-            tool:text="无人售票，全线空调车，3、4、10、11月份票价1元、刷卡0.7元，其他月份票价2元、刷卡1.7元。" />
+            tool:text="合肥火车站 5:00-22:30" />
 
         <TextView
             android:id="@+id/line_start"
@@ -60,13 +61,13 @@
             tool:text="南门换乘中心 5:00-22:30" />
 
         <TextView
-            android:id="@+id/line_stop"
+            android:id="@+id/line_price_desc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="100dp"
             android:layout_marginStart="5dp"
             android:textColor="@color/icons"
-            tool:text="合肥火车站 5:00-22:30" />
+            tool:text="无人售票，全线空调车，3、4、10、11月份票价1元、刷卡0.7元，其他月份票价2元、刷卡1.7元。" />
 
     </LinearLayout>
 

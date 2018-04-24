@@ -50,8 +50,6 @@ public class MainActivity extends BaseMvpActivity<IMainPresenter> implements IMa
         List<Fragment> list = new ArrayList<>();
         list.add(new SearchFragment());
         list.add(new ExchangeFragment());
-        //list.add(new ArroundFragment());
-        //list.add(new ProfileFragment());
         MyPagerAdapter adapter = new MyPagerAdapter(getSupportFragmentManager(), list);
         mViewPager.setAdapter(adapter);
     }

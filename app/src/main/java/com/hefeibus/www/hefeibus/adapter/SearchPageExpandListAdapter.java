@@ -143,6 +143,7 @@ public class SearchPageExpandListAdapter implements ExpandableListAdapter {
         GroupDetail groupDetail = (GroupDetail) getGroup(groupPosition);
         final Line line = groupDetail.getLineList().get(childPosition);
         ((TextView) view.findViewById(R.id.line_name)).setText(line.getLineName() + "路");
+
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

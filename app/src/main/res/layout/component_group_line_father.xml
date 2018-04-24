@@ -25,6 +25,6 @@
         android:gravity="center_vertical"
         android:textAlignment="center"
         android:textSize="16sp"
-        tool:text="线路名称" />
+        tool:text="线路数量" />
 
 </LinearLayout>

@@ -91,10 +91,9 @@ public class SplashActivity extends BaseMvpActivity {
         //检测并复制
         try {
             if (!isExisted) {
-                int resource = R.raw.hefeibus_1;
+                int resource = R.raw.hefeibus_2;
                 InputStream inputStream = getResources().openRawResource(resource);
                 FileOutputStream outputStream = openFileOutput(Parameters.LINE_GROUP_DATABASE_NAME, Context.MODE_PRIVATE);
-                byte[] buffer = new byte[inputStream.available()];
                 int c;
                 while ((c = inputStream.read()) != -1) {
                     outputStream.write(c);
