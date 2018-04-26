@@ -23,8 +23,5 @@
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity android:name=".view.line_detail.LineDetailActivity" />
         <activity android:name=".view.station_detail.StationDetailActivity" />
-        <activity
-            android:name=".TestActivity"
-            android:exported="true" />
     </application>
 </manifest>
