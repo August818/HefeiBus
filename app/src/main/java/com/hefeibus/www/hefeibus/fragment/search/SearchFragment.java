@@ -6,12 +6,27 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.baidu.mapapi.SDKInitializer;
+import com.baidu.mapapi.search.busline.BusLineResult;
+import com.baidu.mapapi.search.busline.BusLineSearch;
+import com.baidu.mapapi.search.busline.BusLineSearchOption;
+import com.baidu.mapapi.search.busline.OnGetBusLineSearchResultListener;
+import com.baidu.mapapi.search.core.PoiInfo;
+import com.baidu.mapapi.search.core.SearchResult;
+import com.baidu.mapapi.search.poi.OnGetPoiSearchResultListener;
+import com.baidu.mapapi.search.poi.PoiCitySearchOption;
+import com.baidu.mapapi.search.poi.PoiDetailResult;
+import com.baidu.mapapi.search.poi.PoiIndoorResult;
+import com.baidu.mapapi.search.poi.PoiResult;
+import com.baidu.mapapi.search.poi.PoiSearch;
 import com.hefeibus.www.hefeibus.R;
 import com.hefeibus.www.hefeibus.adapter.SearchPageExpandListAdapter;
 import com.hefeibus.www.hefeibus.basemvp.BaseMvpFragment;
@@ -19,6 +34,7 @@ import com.hefeibus.www.hefeibus.entity.GroupDetail;
 import com.hefeibus.www.hefeibus.entity.Line;
 import com.hefeibus.www.hefeibus.view.line_detail.LineDetailActivity;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -34,6 +50,10 @@ public class SearchFragment extends BaseMvpFragment<ISearchPresenter> implements
     private ExpandableListView mListView;
     private RelativeLayout container;
     private SearchPageExpandListAdapter adapter;
+    private PoiSearch mSearch;
+    private List<String> busLineIDList = new ArrayList<>();
+    private BusLineSearch mBusLineSearch;
+    private Button btn;
 
 
     /**
@@ -43,6 +63,8 @@ public class SearchFragment extends BaseMvpFragment<ISearchPresenter> implements
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        SDKInitializer.initialize(getContext().getApplicationContext());
+
         return invokeMe(inflater, container);
     }
 
@@ -74,6 +96,57 @@ public class SearchFragment extends BaseMvpFragment<ISearchPresenter> implements
                 getContext().startActivity(intent);
             }
         });
+
+        mBusLineSearch.setOnGetBusLineSearchResultListener(new OnGetBusLineSearchResultListener() {
+            @Override
+            public void onGetBusLineResult(BusLineResult busLineResult) {
+                Log.d(TAG, "onGetBusLineResult: " + busLineResult.status);
+            }
+        });
+
+        mSearch.setOnGetPoiSearchResultListener(new OnGetPoiSearchResultListener() {
+            @Override
+            public void onGetPoiResult(PoiResult result) {
+                if (result == null || result.error != SearchResult.ERRORNO.NO_ERROR) {
+                    Toast.makeText(getContext(), "抱歉，未找到结果",
+                            Toast.LENGTH_LONG).show();
+                    return;
+                }
+                // 遍历所有poi，找到类型为公交线路的poi
+                busLineIDList.clear();
+                for (PoiInfo poi : result.getAllPoi()) {
+                    if (poi.type == PoiInfo.POITYPE.BUS_LINE || poi.type == PoiInfo.POITYPE.SUBWAY_LINE) {
+                        busLineIDList.add(poi.uid);
+                    }
+                }
+            }
+
+            @Override
+            public void onGetPoiDetailResult(PoiDetailResult poiDetailResult) {
+
+            }
+
+            @Override
+            public void onGetPoiIndoorResult(PoiIndoorResult poiIndoorResult) {
+
+            }
+        });
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mBusLineSearch.searchBusLine(new BusLineSearchOption().city("合肥").uid(busLineIDList.get(0)));
+            }
+        });
+
+        searchTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mSearch.searchInCity((new PoiCitySearchOption())
+                        .city("合肥")
+                        .keyword("华润幸福里"));
+            }
+        });
     }
 
     /**
@@ -88,6 +161,10 @@ public class SearchFragment extends BaseMvpFragment<ISearchPresenter> implements
         mListView = (ExpandableListView) view.findViewById(R.id.expandable_list);
         container = (RelativeLayout) view.findViewById(R.id.container);
         adapter = new SearchPageExpandListAdapter(getContext());
+        btn = (Button) view.findViewById(R.id.button4);
+        mSearch = PoiSearch.newInstance();
+        mBusLineSearch = BusLineSearch.newInstance();
+
     }
 
     @Override

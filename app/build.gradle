@@ -5,7 +5,7 @@ android {
     defaultConfig {
         applicationId "com.hefeibus.www.hefeibus"
         minSdkVersion 21
-        targetSdkVersion 25
+        targetSdkVersion 21
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -33,12 +33,11 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava:2.4.0'
-
     implementation 'com.squareup.okhttp3:okhttp:3.10.0'
-
     implementation 'com.google.code.gson:gson:2.8.2'
     implementation 'com.squareup.okio:okio:1.14.0'
     //尝试 RxJava + Retrofit 做网络请求
     implementation 'io.reactivex.rxjava2:rxjava:2.1.12'
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
+    implementation files('src/main/jniLibs/BaiduLBS_Android.jar')
 }

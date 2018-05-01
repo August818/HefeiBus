@@ -6,6 +6,7 @@ import com.hefeibus.www.hefeibus.entity.TransferData;
 import com.hefeibus.www.hefeibus.entity.Type;
 
 import java.io.IOException;
+import java.util.List;
 
 import okhttp3.OkHttpClient;
 import retrofit2.CallAdapter;
@@ -23,7 +24,7 @@ public class Network {
     private static OkHttpClient okHttpClient = new OkHttpClient();
     private static Converter.Factory gsonConverterFactory = GsonConverterFactory.create();
     private static CallAdapter.Factory rxJavaCallAdapterFactory = RxJavaCallAdapterFactory.create();
-    private static TransferData transferData;
+    private static List<TransferData> transferData;
     private static LineData lineData;
     private static StationData stationData;
 
@@ -45,12 +46,12 @@ public class Network {
     }
 
     public static void main(String[] args) {
+
         Retrofit retrofit = new Retrofit.Builder()
                 .client(okHttpClient)
                 .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-
         HefeiBusApi api = retrofit.create(HefeiBusApi.class);
 
         try {
@@ -58,7 +59,7 @@ public class Network {
             Thread.sleep(3000);
             lineData = api.getLineData(Type.线路查询.getType(), "136").execute().body();
             Thread.sleep(3000);
-            transferData = api.getVehicleTransfer(Type.换乘查询.getType(), "三孝口", "省旅游学校").execute().body().get(0);
+            transferData = api.getVehicleTransfer(Type.换乘查询.getType(), "三孝口", "省旅游学校").execute().body();
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
