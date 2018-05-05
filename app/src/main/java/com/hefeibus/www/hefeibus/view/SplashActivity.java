@@ -68,6 +68,7 @@ public class SplashActivity extends BaseMvpActivity {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        //检查动态权限
         checkRuntimePermissions();
     }
 
@@ -110,7 +111,7 @@ public class SplashActivity extends BaseMvpActivity {
             }
         } catch (IOException e) {
             e.printStackTrace();
-            Toast.makeText(this, "Database File Init Failed!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "数据库文件初始化出错", Toast.LENGTH_SHORT).show();
         } finally {
             new Handler().postDelayed(new Runnable() {
                 @Override

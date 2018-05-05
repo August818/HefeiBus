@@ -4,7 +4,13 @@ import com.hefeibus.www.hefeibus.basemvp.IView;
 import com.hefeibus.www.hefeibus.entity.Line;
 
 interface ILineDetailView extends IView {
-    LineDetailActivity getCurrentActicity();
+    LineDetailActivity getCurrentActivity();
 
     void showLineInfo(Line line);
+
+    void counterApiError();
+
+    void showLoading();
+
+    void closeLoading();
 }

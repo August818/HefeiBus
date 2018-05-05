@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -17,12 +16,10 @@ import android.widget.Toast;
 import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.search.busline.BusLineResult;
 import com.baidu.mapapi.search.busline.BusLineSearch;
-import com.baidu.mapapi.search.busline.BusLineSearchOption;
 import com.baidu.mapapi.search.busline.OnGetBusLineSearchResultListener;
 import com.baidu.mapapi.search.core.PoiInfo;
 import com.baidu.mapapi.search.core.SearchResult;
 import com.baidu.mapapi.search.poi.OnGetPoiSearchResultListener;
-import com.baidu.mapapi.search.poi.PoiCitySearchOption;
 import com.baidu.mapapi.search.poi.PoiDetailResult;
 import com.baidu.mapapi.search.poi.PoiIndoorResult;
 import com.baidu.mapapi.search.poi.PoiResult;
@@ -53,7 +50,6 @@ public class SearchFragment extends BaseMvpFragment<ISearchPresenter> implements
     private PoiSearch mSearch;
     private List<String> busLineIDList = new ArrayList<>();
     private BusLineSearch mBusLineSearch;
-    private Button btn;
 
 
     /**
@@ -132,21 +128,6 @@ public class SearchFragment extends BaseMvpFragment<ISearchPresenter> implements
             }
         });
 
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mBusLineSearch.searchBusLine(new BusLineSearchOption().city("合肥").uid(busLineIDList.get(0)));
-            }
-        });
-
-        searchTv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mSearch.searchInCity((new PoiCitySearchOption())
-                        .city("合肥")
-                        .keyword("华润幸福里"));
-            }
-        });
     }
 
     /**
@@ -161,7 +142,6 @@ public class SearchFragment extends BaseMvpFragment<ISearchPresenter> implements
         mListView = (ExpandableListView) view.findViewById(R.id.expandable_list);
         container = (RelativeLayout) view.findViewById(R.id.container);
         adapter = new SearchPageExpandListAdapter(getContext());
-        btn = (Button) view.findViewById(R.id.button4);
         mSearch = PoiSearch.newInstance();
         mBusLineSearch = BusLineSearch.newInstance();
 
