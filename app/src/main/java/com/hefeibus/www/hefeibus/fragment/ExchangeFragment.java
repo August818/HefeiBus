@@ -39,7 +39,7 @@ public class ExchangeFragment extends BaseMvpFragment {
     }
 
     @Override
-    protected void findViews(View view) {
+    protected void initViews(View view) {
 
     }
 

@@ -11,10 +11,12 @@
     tools:showIn="@layout/fragment_search">
 
     <Switch
-        android:id="@+id/net_switcher"
+        android:id="@+id/cache_switcher"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="end|clip_horizontal|center_vertical" />
+        android:layout_gravity="end|clip_horizontal|center_vertical"
+        android:textOff="@string/noCaching"
+        android:textOn="@string/yesCaching" />
 
 
 </android.support.v7.widget.Toolbar>

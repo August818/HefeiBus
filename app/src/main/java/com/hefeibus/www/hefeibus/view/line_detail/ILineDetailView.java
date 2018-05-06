@@ -1,12 +1,12 @@
 package com.hefeibus.www.hefeibus.view.line_detail;
 
 import com.hefeibus.www.hefeibus.basemvp.IView;
-import com.hefeibus.www.hefeibus.entity.Line;
+import com.hefeibus.www.hefeibus.entity.LineData;
 
 interface ILineDetailView extends IView {
     LineDetailActivity getCurrentActivity();
 
-    void showLineInfo(Line line);
+    void showLineInfo(LineData line);
 
     void counterApiError();
 

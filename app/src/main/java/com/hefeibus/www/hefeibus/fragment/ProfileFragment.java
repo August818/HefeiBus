@@ -38,7 +38,7 @@ public class ProfileFragment extends BaseMvpFragment {
     }
 
     @Override
-    protected void findViews(View view) {
+    protected void initViews(View view) {
 
     }
 

@@ -87,8 +87,8 @@ public class SplashActivity extends BaseMvpActivity {
         //检测App关联的文件
         String[] associateFile = getApplicationContext().fileList();
         for (String s : associateFile) {
-            if (s.equals(Parameters.LINE_GROUP_DATABASE_NAME)) {
-                File file = new File(getFilesDir().getAbsolutePath() + "/" + Parameters.LINE_GROUP_DATABASE_NAME);
+            if (s.equals(Parameters.DATABASE_NAME)) {
+                File file = new File(getFilesDir().getAbsolutePath() + "/" + Parameters.DATABASE_NAME);
                 isExisted = !file.delete();
             }
         }
@@ -96,9 +96,9 @@ public class SplashActivity extends BaseMvpActivity {
         //检测并复制
         try {
             if (!isExisted) {
-                int resource = R.raw.hefeibus_2;
+                int resource = R.raw.local;
                 InputStream inputStream = getResources().openRawResource(resource);
-                FileOutputStream outputStream = openFileOutput(Parameters.LINE_GROUP_DATABASE_NAME, Context.MODE_PRIVATE);
+                FileOutputStream outputStream = openFileOutput(Parameters.DATABASE_NAME, Context.MODE_PRIVATE);
                 int c;
                 while ((c = inputStream.read()) != -1) {
                     outputStream.write(c);

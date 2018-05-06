@@ -1,11 +1,14 @@
 package com.hefeibus.www.hefeibus.fragment.search;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.ExpandableListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -13,25 +16,13 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.baidu.mapapi.SDKInitializer;
-import com.baidu.mapapi.search.busline.BusLineResult;
-import com.baidu.mapapi.search.busline.BusLineSearch;
-import com.baidu.mapapi.search.busline.OnGetBusLineSearchResultListener;
-import com.baidu.mapapi.search.core.PoiInfo;
-import com.baidu.mapapi.search.core.SearchResult;
-import com.baidu.mapapi.search.poi.OnGetPoiSearchResultListener;
-import com.baidu.mapapi.search.poi.PoiDetailResult;
-import com.baidu.mapapi.search.poi.PoiIndoorResult;
-import com.baidu.mapapi.search.poi.PoiResult;
-import com.baidu.mapapi.search.poi.PoiSearch;
 import com.hefeibus.www.hefeibus.R;
 import com.hefeibus.www.hefeibus.adapter.SearchPageExpandListAdapter;
 import com.hefeibus.www.hefeibus.basemvp.BaseMvpFragment;
-import com.hefeibus.www.hefeibus.entity.GroupDetail;
-import com.hefeibus.www.hefeibus.entity.Line;
+import com.hefeibus.www.hefeibus.entity.GroupInfo;
+import com.hefeibus.www.hefeibus.utils.Parameters;
 import com.hefeibus.www.hefeibus.view.line_detail.LineDetailActivity;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -42,14 +33,16 @@ import java.util.List;
 
 public class SearchFragment extends BaseMvpFragment<ISearchPresenter> implements ISearchView {
     private static final String TAG = "SearchFragment";
+    //搜索框
     private TextView searchTv;
-    private Switch netChanger;
+    //是否开启缓存
+    private Switch cacheSwitcher;
+    //线路列表
     private ExpandableListView mListView;
+    //容器
     private RelativeLayout container;
+    //适配器
     private SearchPageExpandListAdapter adapter;
-    private PoiSearch mSearch;
-    private List<String> busLineIDList = new ArrayList<>();
-    private BusLineSearch mBusLineSearch;
 
 
     /**
@@ -59,15 +52,7 @@ public class SearchFragment extends BaseMvpFragment<ISearchPresenter> implements
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        SDKInitializer.initialize(getContext().getApplicationContext());
-
         return invokeMe(inflater, container);
-    }
-
-
-    @Override
-    protected void init() {
-        presenter.loadGroupLineData();
     }
 
     @Override
@@ -76,89 +61,85 @@ public class SearchFragment extends BaseMvpFragment<ISearchPresenter> implements
     }
 
     @Override
+    protected int setLayoutView() {
+        return R.layout.fragment_search;
+    }
+
+    /**
+     * 初始化控件
+     *
+     * @param view the View that contains the widgets
+     */
+    @Override
+    protected void initViews(View view) {
+        searchTv = (TextView) view.findViewById(R.id.search_box);
+        cacheSwitcher = (Switch) view.findViewById(R.id.cache_switcher);
+        mListView = (ExpandableListView) view.findViewById(R.id.expandable_list);
+        container = (RelativeLayout) view.findViewById(R.id.container);
+        adapter = new SearchPageExpandListAdapter(getContext());
+    }
+
+    @Override
     protected void setAttributes() {
-        //设置查询具体线路、站点的点击事件
+        //点击开始查询线路信息
         searchTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
             }
         });
-
+        //开关缓存功能
+        cacheSwitcher.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                SharedPreferences preferences = SearchFragment.this.getContext().getSharedPreferences(Parameters.APP_PREFERENCES, Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+                if (isChecked) {
+                    Toast.makeText(buttonView.getContext(), "已开启数据缓存", Toast.LENGTH_SHORT).show();
+                    editor.putBoolean(Parameters.IS_CACHING, true);
+                } else {
+                    Toast.makeText(buttonView.getContext(), "已关闭数据缓存", Toast.LENGTH_SHORT).show();
+                    editor.putBoolean(Parameters.IS_CACHING, false);
+                }
+                editor.apply();
+            }
+        });
+        //点击开始查询线路详情
         adapter.setListener(new SearchPageExpandListAdapter.onLineItemClickListener() {
             @Override
-            public void onClick(Line line) {
+            public void onClick(String lineName) {
                 Intent intent = new Intent(getContext(), LineDetailActivity.class);
-                intent.putExtra("line", line);
+                intent.putExtra(Parameters.INTENT_LINE_KEY, lineName);
                 getContext().startActivity(intent);
             }
         });
-
-        mBusLineSearch.setOnGetBusLineSearchResultListener(new OnGetBusLineSearchResultListener() {
-            @Override
-            public void onGetBusLineResult(BusLineResult busLineResult) {
-                Log.d(TAG, "onGetBusLineResult: " + busLineResult.status);
-            }
-        });
-
-        mSearch.setOnGetPoiSearchResultListener(new OnGetPoiSearchResultListener() {
-            @Override
-            public void onGetPoiResult(PoiResult result) {
-                if (result == null || result.error != SearchResult.ERRORNO.NO_ERROR) {
-                    Toast.makeText(getContext(), "抱歉，未找到结果",
-                            Toast.LENGTH_LONG).show();
-                    return;
-                }
-                // 遍历所有poi，找到类型为公交线路的poi
-                busLineIDList.clear();
-                for (PoiInfo poi : result.getAllPoi()) {
-                    if (poi.type == PoiInfo.POITYPE.BUS_LINE || poi.type == PoiInfo.POITYPE.SUBWAY_LINE) {
-                        busLineIDList.add(poi.uid);
-                    }
-                }
-            }
-
-            @Override
-            public void onGetPoiDetailResult(PoiDetailResult poiDetailResult) {
-
-            }
-
-            @Override
-            public void onGetPoiIndoorResult(PoiIndoorResult poiIndoorResult) {
-
-            }
-        });
-
-    }
-
-    /**
-     * 初始化 你需要用的 所有的 控件
-     *
-     * @param view the View that contains the widgets
-     */
-    @Override
-    protected void findViews(View view) {
-        searchTv = (TextView) view.findViewById(R.id.search_box);
-        netChanger = (Switch) view.findViewById(R.id.net_switcher);
-        mListView = (ExpandableListView) view.findViewById(R.id.expandable_list);
-        container = (RelativeLayout) view.findViewById(R.id.container);
-        adapter = new SearchPageExpandListAdapter(getContext());
-        mSearch = PoiSearch.newInstance();
-        mBusLineSearch = BusLineSearch.newInstance();
-
     }
 
     @Override
-    protected int setLayoutView() {
-        return R.layout.fragment_search;
+    protected void init() {
+        presenter.loadGroupLineData();
     }
 
+
+    @Override
+    public SearchFragment getCurrentFragment() {
+        return this;
+    }
+
+    @Override
+    public void showGroupInfo(HashMap<String, GroupInfo> map, List<String> index) {
+        adapter.setGroupNameIndex(index);
+        adapter.setMap(map);
+        mListView.setAdapter(adapter);
+    }
 
     @Override
     public void showLoadingLayout() {
         Log.d(TAG, "showLoadingLayout!");
         container.removeAllViews();
         ProgressBar progressBar = new ProgressBar(getContext());
-        ViewGroup.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        ViewGroup.LayoutParams params = new RelativeLayout.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT);
         progressBar.setLayoutParams(params);
         progressBar.getIndeterminateDrawable().setColorFilter(
                 getResources().getColor(R.color.primary),
@@ -167,20 +148,8 @@ public class SearchFragment extends BaseMvpFragment<ISearchPresenter> implements
     }
 
     @Override
-    public SearchFragment getCurrentActivity() {
-        return this;
-    }
-
-    @Override
-    public void setGroupListDetail(HashMap<String, GroupDetail> map, List<String> groupIndex) {
-        adapter.setGroupNameIndex(groupIndex);
-        adapter.setMap(map);
-        mListView.setAdapter(adapter);
-    }
-
-    @Override
     public void restoreLayout() {
-        Log.d(TAG, "restoreLayout!");
+        Log.d(TAG, "restoreLoadingLayout!");
         container.removeAllViews();
         container.addView(mListView);
     }

@@ -3,24 +3,18 @@ package com.hefeibus.www.hefeibus.fragment.search;
 import android.support.annotation.NonNull;
 
 import com.hefeibus.www.hefeibus.basemvp.BaseMvpPresenter;
-import com.hefeibus.www.hefeibus.entity.GroupDetail;
-import com.hefeibus.www.hefeibus.sqlite.HefeiBusDatabase;
+import com.hefeibus.www.hefeibus.entity.GroupInfo;
+import com.hefeibus.www.hefeibus.sqlite.AppDatabase;
 
 import java.util.HashMap;
 import java.util.List;
 
 class SearchPresenter extends BaseMvpPresenter<ISearchView> implements ISearchPresenter {
-
-    /**
-     * 数据库操作层
-     */
-    private HefeiBusDatabase mDal;
-
-    public SearchPresenter() {
-    }
+    private static final String TAG = "SearchPresenter";
 
     @Override
     public void loadGroupLineData() {
+
         ifViewAttached(new ViewAction<ISearchView>() {
             @Override
             public void run(@NonNull ISearchView view) {
@@ -28,15 +22,16 @@ class SearchPresenter extends BaseMvpPresenter<ISearchView> implements ISearchPr
             }
         });
 
-        mDal = new HefeiBusDatabase(weakView.get().getCurrentActivity().getContext());
-        final HashMap<String, GroupDetail> map = mDal.queryAllGroupDetail();
-        final List<String> groupIndex = mDal.queryGroupIndex();
-        mDal.close();
+        AppDatabase database = new AppDatabase(weakView.get().getCurrentFragment().getContext());
+        final HashMap<String, GroupInfo> map = database.queryGroupInfo();
+        final List<String> index = database.getGroupIndex();
+        database.close();
+
         ifViewAttached(new ViewAction<ISearchView>() {
             @Override
             public void run(@NonNull ISearchView view) {
                 view.restoreLayout();
-                view.setGroupListDetail(map, groupIndex);
+                view.showGroupInfo(map, index);
             }
         });
 

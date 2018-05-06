@@ -10,8 +10,8 @@ import android.widget.ExpandableListAdapter;
 import android.widget.TextView;
 
 import com.hefeibus.www.hefeibus.R;
-import com.hefeibus.www.hefeibus.entity.GroupDetail;
-import com.hefeibus.www.hefeibus.entity.Line;
+import com.hefeibus.www.hefeibus.entity.GroupInfo;
+import com.hefeibus.www.hefeibus.entity.LineData;
 
 import java.util.HashMap;
 import java.util.List;
@@ -21,9 +21,9 @@ public class SearchPageExpandListAdapter implements ExpandableListAdapter {
     private static final String TAG = "ExpandListAdapter";
     /**
      * String 分组名称
-     * GroupDetail 当前分组下的线路列表
+     * GroupInfo 当前分组下的线路列表
      */
-    private HashMap<String, GroupDetail> map;
+    private HashMap<String, GroupInfo> map;
     /**
      * groupNameIndex 分组名称索引
      */
@@ -31,7 +31,7 @@ public class SearchPageExpandListAdapter implements ExpandableListAdapter {
     private onLineItemClickListener listener;
     private Context mContext;
 
-    public SearchPageExpandListAdapter(HashMap<String, GroupDetail> map, List<String> list, Context context) {
+    public SearchPageExpandListAdapter(HashMap<String, GroupInfo> map, List<String> list, Context context) {
         this.map = map;
         this.groupNameIndex = list;
         this.mContext = context;
@@ -41,7 +41,7 @@ public class SearchPageExpandListAdapter implements ExpandableListAdapter {
         this.mContext = context;
     }
 
-    public void setMap(HashMap<String, GroupDetail> map) {
+    public void setMap(HashMap<String, GroupInfo> map) {
         this.map = map;
     }
 
@@ -73,10 +73,7 @@ public class SearchPageExpandListAdapter implements ExpandableListAdapter {
      */
     @Override
     public int getGroupCount() {
-        if (groupNameIndex == null) {
-            return 0;
-        }
-        return groupNameIndex.size();
+        return groupNameIndex == null ? 0 : groupNameIndex.size();
     }
 
     /**
@@ -85,11 +82,9 @@ public class SearchPageExpandListAdapter implements ExpandableListAdapter {
      */
     @Override
     public int getChildrenCount(int groupPosition) {
-
         if (map == null || groupNameIndex == null) {
             return 0;
         }
-
         return map.get(groupNameIndex.get(groupPosition)).getLineList().size();
     }
 
@@ -132,23 +127,22 @@ public class SearchPageExpandListAdapter implements ExpandableListAdapter {
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.component_group_line_father, null);
-        ((TextView) view.findViewById(R.id.group_name)).setText(((GroupDetail) getGroup(groupPosition)).getGroupName());
-        ((TextView) view.findViewById(R.id.line_count)).setText(((GroupDetail) getGroup(groupPosition)).getLineCount() + "条");
+        ((TextView) view.findViewById(R.id.group_name)).setText(((GroupInfo) getGroup(groupPosition)).getGroupName());
+        ((TextView) view.findViewById(R.id.line_count)).setText(((GroupInfo) getGroup(groupPosition)).getLineCount() + "条");
         return view;
     }
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.component_group_line_son, null);
-        GroupDetail groupDetail = (GroupDetail) getGroup(groupPosition);
-        final Line line = groupDetail.getLineList().get(childPosition);
+        GroupInfo groupInfo = (GroupInfo) getGroup(groupPosition);
+        final LineData line = groupInfo.getLineList().get(childPosition);
         ((TextView) view.findViewById(R.id.line_name)).setText(line.getLineName() + "路");
-
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (listener != null) {
-                    listener.onClick(line);
+                    listener.onClick(line.getLineName());
                 }
                 Log.d(TAG, "onClick: " + line.getLineName());
             }
@@ -191,12 +185,11 @@ public class SearchPageExpandListAdapter implements ExpandableListAdapter {
         return 0;
     }
 
-
     /**
      * 将adapter中点击的某个线路分发到 fragment 中去
      */
     public interface onLineItemClickListener {
-        void onClick(Line line);
+        void onClick(String lineName);
     }
 }
 

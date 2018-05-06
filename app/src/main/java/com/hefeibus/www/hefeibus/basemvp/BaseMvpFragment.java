@@ -15,10 +15,17 @@ import android.view.ViewGroup;
 public abstract class BaseMvpFragment<P extends IPresenter> extends Fragment implements IView {
     protected P presenter;
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        presenter = onPresenterCreated();
+        if (presenter != null) presenter.onAttach(this);
+    }
+
     protected View invokeMe(LayoutInflater inflater, ViewGroup container) {
         View view = inflater.inflate(setLayoutView(), container, false);
 
-        findViews(view);
+        initViews(view);
 
         setAttributes();
 
@@ -27,13 +34,6 @@ public abstract class BaseMvpFragment<P extends IPresenter> extends Fragment imp
     }
 
     protected abstract void init();
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        presenter = onPresenterCreated();
-        if (presenter != null) presenter.onAttach(this);
-    }
 
 
     @Override
@@ -61,7 +61,7 @@ public abstract class BaseMvpFragment<P extends IPresenter> extends Fragment imp
      *
      * @param view the View that contains the widgets
      */
-    protected abstract void findViews(View view);
+    protected abstract void initViews(View view);
 
     /**
      * setting the layout resource of the Activity

@@ -57,7 +57,7 @@ public class Network {
         try {
             stationData = api.getStationData(Type.站点查询.getType(), "三孝口").execute().body().get(0);
             Thread.sleep(3000);
-            lineData = api.getLineData(Type.线路查询.getType(), "136").execute().body();
+            lineData = api.getLineData(Type.线路查询.getType(), "1").execute().body();
             Thread.sleep(3000);
             transferData = api.getVehicleTransfer(Type.换乘查询.getType(), "三孝口", "省旅游学校").execute().body();
         } catch (IOException | InterruptedException e) {

@@ -1,7 +1,6 @@
 package com.hefeibus.www.hefeibus.adapter;
 
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,12 +8,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.hefeibus.www.hefeibus.R;
-import com.hefeibus.www.hefeibus.entity.Line;
-import com.hefeibus.www.hefeibus.entity.Station;
+import com.hefeibus.www.hefeibus.entity.LineData;
+import com.hefeibus.www.hefeibus.entity.StationData;
 
 public class LineDetailAdapter extends RecyclerView.Adapter<LineDetailAdapter.ViewHolder> {
     private static final String TAG = "LineDetailAdapter";
-    private Line line;
+    private LineData line;
     private onItemClickListener listener;
 
     public void setListener(onItemClickListener listener) {
@@ -31,25 +30,20 @@ public class LineDetailAdapter extends RecyclerView.Adapter<LineDetailAdapter.Vi
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.name.setText(line.getPassStationList().get(position).getStationName());
-        holder.number.setText(String.valueOf(position + 1));
     }
 
     @Override
     public int getItemCount() {
-        if (line == null) {
-            return 0;
-        }
-        return line.getPassStationList().size();
+        return 0;
     }
 
-    public void setLines(Line line) {
+    public void setLines(LineData line) {
         this.line = line;
         this.notifyDataSetChanged();
     }
 
     public interface onItemClickListener {
-        void onClick(Station station);
+        void onClick(StationData station);
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -61,9 +55,7 @@ public class LineDetailAdapter extends RecyclerView.Adapter<LineDetailAdapter.Vi
                 @Override
                 public void onClick(View v) {
                     if (listener != null) {
-                        listener.onClick(line.getPassStationList().get(getAdapterPosition()));
                     }
-                    Log.d(TAG, "onClick: " + line.getPassStationList().get(getAdapterPosition()).getStationName());
                 }
             });
             number = (TextView) itemView.findViewById(R.id.station_number);

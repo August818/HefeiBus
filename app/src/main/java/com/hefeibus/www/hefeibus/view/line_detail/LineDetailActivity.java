@@ -16,11 +16,11 @@ import android.widget.Toast;
 import com.hefeibus.www.hefeibus.R;
 import com.hefeibus.www.hefeibus.adapter.LineDetailAdapter;
 import com.hefeibus.www.hefeibus.basemvp.BaseMvpActivity;
-import com.hefeibus.www.hefeibus.entity.Line;
-import com.hefeibus.www.hefeibus.entity.Station;
+import com.hefeibus.www.hefeibus.entity.LineData;
+import com.hefeibus.www.hefeibus.entity.StationData;
 
 public class LineDetailActivity extends BaseMvpActivity<ILineDetailPresenter> implements ILineDetailView {
-    private Line line;
+    private LineData line;
     private Toolbar toolbar;
     private TextView lineName;
     private TextView linePrice;
@@ -33,7 +33,6 @@ public class LineDetailActivity extends BaseMvpActivity<ILineDetailPresenter> im
 
     @Override
     protected ILineDetailPresenter onCreatePresenter() {
-        line = (Line) getIntent().getSerializableExtra("line");
         return new LineDetailPresenter();
     }
 
@@ -41,15 +40,13 @@ public class LineDetailActivity extends BaseMvpActivity<ILineDetailPresenter> im
     @Override
     protected void setAttributes() {
         setToolbar();
-        lineName.setText(line.getLineName() + "路");
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         adapter.setListener(new LineDetailAdapter.onItemClickListener() {
             @Override
-            public void onClick(Station station) {
+            public void onClick(StationData station) {
                 //跳转到站点信息查询
             }
         });
-        presenter.queryLineDetail(line.getLineName());
         recyclerView.setAdapter(adapter);
     }
 
@@ -126,22 +123,8 @@ public class LineDetailActivity extends BaseMvpActivity<ILineDetailPresenter> im
     }
 
     @Override
-    public void showLineInfo(Line line) {
-        mDialog.dismiss();
-        if (line.getPassStationList() == null) {
-            Toast.makeText(this, "暂未收录数据\n自动返回上一级界面", Toast.LENGTH_LONG).show();
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    LineDetailActivity.this.finish();
-                }
-            }, 1000);
-            return;
-        }
-        linePrice.setText(line.getPrice());
-        lineStart.setText(line.getDesc1());
-        lineStop.setText(line.getDesc2());
-        adapter.setLines(line);
+    public void showLineInfo(LineData line) {
+
     }
 
     @Override

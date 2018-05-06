@@ -6,7 +6,12 @@ import java.util.List;
 /**
  * Search Page 分组公交信息的实体类
  */
-public class GroupDetail implements Serializable {
+public class GroupInfo implements Serializable {
+    /**
+     * 当前分组下线路列表
+     */
+    private List<LineData> lineList;
+
     /**
      * 分组名称
      */
@@ -15,10 +20,10 @@ public class GroupDetail implements Serializable {
     /**
      * 当前分组下线路数量
      */
-
     private int lineCount;
 
-    public GroupDetail() {
+
+    public GroupInfo() {
     }
 
     public String getGroupName() {
@@ -37,18 +42,13 @@ public class GroupDetail implements Serializable {
         this.lineCount = lineCount;
     }
 
-    public List<Line> getLineList() {
+    public List<LineData> getLineList() {
         return lineList;
     }
 
-    public void setLineList(List<Line> lineList) {
+    public void setLineList(List<LineData> lineList) {
         this.lineList = lineList;
     }
-
-    /**
-     * 当前分组下线路列表
-     */
-    private List<Line> lineList;
 
 
 }

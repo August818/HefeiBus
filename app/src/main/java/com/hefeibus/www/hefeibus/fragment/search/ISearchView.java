@@ -1,7 +1,7 @@
 package com.hefeibus.www.hefeibus.fragment.search;
 
 import com.hefeibus.www.hefeibus.basemvp.IView;
-import com.hefeibus.www.hefeibus.entity.GroupDetail;
+import com.hefeibus.www.hefeibus.entity.GroupInfo;
 
 import java.util.HashMap;
 import java.util.List;
@@ -15,7 +15,7 @@ interface ISearchView extends IView {
 
     void restoreLayout();
 
-    void setGroupListDetail(HashMap<String, GroupDetail> map, List<String> groupIndex);
+    void showGroupInfo(HashMap<String, GroupInfo> map, List<String> index);
 
-    SearchFragment getCurrentActivity();
+    SearchFragment getCurrentFragment();
 }
