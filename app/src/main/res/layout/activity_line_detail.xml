@@ -42,8 +42,8 @@
 
         <Button
             android:id="@+id/line_reverse_btn"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginEnd="10dp"
@@ -128,7 +128,7 @@
             android:layout_margin="5dp"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
-            android:text="@string/operate_compant"
+            android:text="@string/operate_company"
             android:textColor="@color/icons" />
 
         <TextView
@@ -143,6 +143,54 @@
             android:textAlignment="center"
             android:textColor="@color/icons"
             tool:text="合肥公交四公司" />
+
+        <TextView
+            android:id="@+id/line_info9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/line_info7"
+            android:layout_margin="5dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:text="@string/station_count"
+            android:textColor="@color/icons" />
+
+        <TextView
+            android:id="@+id/line_info10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/line_info7"
+            android:layout_margin="5dp"
+            android:layout_toEndOf="@id/line_info7"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:textAlignment="center"
+            android:textColor="@color/icons"
+            tool:text="35站" />
+
+        <TextView
+            android:id="@+id/line_info11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/line_info9"
+            android:layout_margin="5dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:text="@string/lint_length"
+            android:textColor="@color/icons" />
+
+        <TextView
+            android:id="@+id/line_info12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/line_info9"
+            android:layout_margin="5dp"
+            android:layout_toEndOf="@id/line_info11"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:textAlignment="center"
+            android:textColor="@color/icons"
+            tool:text="13.5 千米" />
     </RelativeLayout>
 
     <View

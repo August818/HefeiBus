@@ -32,7 +32,7 @@ import io.reactivex.functions.Function;
 public class LineDetailActivity extends BaseMvpActivity<ILineDetailPresenter> implements ILineDetailView {
     private Toolbar toolbar;
     private RecyclerView recyclerView;
-    private TextView info1, info2, info3, info4;
+    private TextView info1, info2, info3, info4, info5, info6;
     private Button reverse_btn;
     private Button favour_Btn;
     private LineDetailAdapter adapter = new LineDetailAdapter();
@@ -71,6 +71,10 @@ public class LineDetailActivity extends BaseMvpActivity<ILineDetailPresenter> im
         info3 = (TextView) findViewById(R.id.line_info6);
         //运营公司
         info4 = (TextView) findViewById(R.id.line_info8);
+        //线路站点
+        info5 = (TextView) findViewById(R.id.line_info10);
+        //线路长度
+        info6 = (TextView) findViewById(R.id.line_info12);
     }
 
     @SuppressLint("SetTextI18n")
@@ -107,6 +111,8 @@ public class LineDetailActivity extends BaseMvpActivity<ILineDetailPresenter> im
                     info2.setText(lineData.getUpStation().get(lineData.getUpCount() - 1).getStationName());
                     info3.setText(lineData.getMainFirstTime() + " - " + lineData.getMainLastTime());
                     info4.setText(lineData.getOrg());
+                    info5.setText(lineData.getUpCount() + " 站");
+                    info6.setText(lineData.getUpLen() + " 千米");
                     adapter.setStations(lineData.getUpStation());
                     isDown = false;
                 } else {
@@ -116,6 +122,8 @@ public class LineDetailActivity extends BaseMvpActivity<ILineDetailPresenter> im
                     info2.setText(lineData.getDownStation().get(lineData.getDownCount() - 1).getStationName());
                     info3.setText(lineData.getSubFirstTime() + " - " + lineData.getSubLastTime());
                     info4.setText(lineData.getOrg());
+                    info5.setText(lineData.getDownCount() + " 站");
+                    info6.setText(lineData.getDownLen() + " 千米");
                     adapter.setStations(lineData.getDownStation());
                     isDown = true;
                 }
@@ -171,14 +179,16 @@ public class LineDetailActivity extends BaseMvpActivity<ILineDetailPresenter> im
                         if (lineData.getRunCateGory() == 1 || lineData.getRunCateGory() == 3) {
                             int downCount = lineData.getDownStation().size();
                             lineData.setDownCount(downCount);
-                            reverse_btn.setClickable(true);
+                            reverse_btn.setVisibility(View.VISIBLE);
                         } else {
-                            reverse_btn.setClickable(false);
+                            reverse_btn.setVisibility(View.INVISIBLE);
                         }
                         info1.setText(lineData.getUpStation().get(0).getStationName());
                         info2.setText(lineData.getUpStation().get(upCount - 1).getStationName());
                         info3.setText(lineData.getMainFirstTime() + " - " + lineData.getMainLastTime());
                         info4.setText(lineData.getOrg());
+                        info5.setText(upCount + " 站");
+                        info6.setText(lineData.getUpLen() + " 千米");
                         LineDetailActivity.this.lineData = lineData;
                         return lineData.getUpStation();
                     }
