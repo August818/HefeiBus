@@ -26,6 +26,10 @@ public abstract class BaseMvpActivity<P extends IPresenter> extends AppCompatAct
         init();
     }
 
+    public App getMyApp() {
+        return ((App) getApplication());
+    }
+
     protected abstract void init();
 
 

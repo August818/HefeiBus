@@ -25,6 +25,7 @@ class SearchPresenter extends BaseMvpPresenter<ISearchView> implements ISearchPr
         AppDatabase database = new AppDatabase(weakView.get().getCurrentFragment().getContext());
         final HashMap<String, GroupInfo> map = database.queryGroupInfo();
         final List<String> index = database.getGroupIndex();
+
         database.close();
 
         ifViewAttached(new ViewAction<ISearchView>() {

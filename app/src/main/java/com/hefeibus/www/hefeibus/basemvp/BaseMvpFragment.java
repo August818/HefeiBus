@@ -35,6 +35,9 @@ public abstract class BaseMvpFragment<P extends IPresenter> extends Fragment imp
 
     protected abstract void init();
 
+    protected BaseMvpActivity getMyActivity() {
+        return ((BaseMvpActivity) getActivity());
+    }
 
     @Override
     public void onDetach() {

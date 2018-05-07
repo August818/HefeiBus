@@ -73,4 +73,17 @@ public class AppDatabase {
         mHelper.close();
         mContext = null;
     }
+
+    /**
+     * @param lineData 将线路信息写入本地
+     */
+    public void writeLineToLocal(LineData lineData) {
+
+    }
+
+    public LineData queryLineFromLocal(String lineName) {
+        LineData lineData = new LineData(lineName);
+        lineData.setLineId(0);
+        return lineData;
+    }
 }

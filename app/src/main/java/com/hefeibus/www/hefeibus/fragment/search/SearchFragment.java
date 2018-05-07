@@ -1,9 +1,7 @@
 package com.hefeibus.www.hefeibus.fragment.search;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -94,16 +92,12 @@ public class SearchFragment extends BaseMvpFragment<ISearchPresenter> implements
 
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                SharedPreferences preferences = SearchFragment.this.getContext().getSharedPreferences(Parameters.APP_PREFERENCES, Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = preferences.edit();
+                getMyActivity().getMyApp().setCachingStatus(isChecked);
                 if (isChecked) {
                     showToast("已开启数据缓存");
-                    editor.putBoolean(Parameters.IS_CACHING, true);
                 } else {
                     showToast("已关闭数据缓存");
-                    editor.putBoolean(Parameters.IS_CACHING, false);
                 }
-                editor.apply();
             }
         });
         //点击开始查询线路详情
@@ -135,6 +129,7 @@ public class SearchFragment extends BaseMvpFragment<ISearchPresenter> implements
 
     @Override
     protected void init() {
+        cacheSwitcher.setChecked(getMyActivity().getMyApp().isCaching());
         presenter.loadGroupLineData();
     }
 
