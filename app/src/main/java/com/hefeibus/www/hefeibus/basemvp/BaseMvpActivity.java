@@ -21,9 +21,12 @@ public abstract class BaseMvpActivity<P extends IPresenter> extends AppCompatAct
         if (presenter != null) presenter.onAttach(this);
         ActivityController.getInstance().add(this);
         setContentView(setLayoutView());
-        findViews();
+        initViews();
         setAttributes();
+        init();
     }
+
+    protected abstract void init();
 
 
     /**
@@ -43,7 +46,7 @@ public abstract class BaseMvpActivity<P extends IPresenter> extends AppCompatAct
     /**
      * find Views in the layout and set into the members
      */
-    protected abstract void findViews();
+    protected abstract void initViews();
 
     /**
      * setting the layout resource of the Activity

@@ -19,8 +19,14 @@ public class LineData {
     private String MainLastTime;
     private String SubFirstTime;
     private String SubLastTime;
-    private List<UpStationBean> UpStation;
-    private List<DownStationBean> DownStation;
+    private List<StationBean> UpStation;
+    private List<StationBean> DownStation;
+    private int mDownCount;
+    private int mUpCount;
+
+    public int getUpCount() {
+        return mUpCount;
+    }
 
     public LineData(String lineName) {
         this.LineName = lineName;
@@ -106,23 +112,35 @@ public class LineData {
         this.UpLen = UpLen;
     }
 
-    public List<DownStationBean> getDownStation() {
+    public void setUpCount(int upCount) {
+        mUpCount = upCount;
+    }
+
+    public List<StationBean> getDownStation() {
         return DownStation;
     }
 
-    public void setDownStation(List<DownStationBean> DownStation) {
+    public void setDownStation(List<StationBean> DownStation) {
         this.DownStation = DownStation;
     }
 
-    public List<UpStationBean> getUpStation() {
+    public List<StationBean> getUpStation() {
         return UpStation;
     }
 
-    public void setUpStation(List<UpStationBean> UpStation) {
+    public void setUpStation(List<StationBean> UpStation) {
         this.UpStation = UpStation;
     }
 
-    public static class DownStationBean {
+    public int getDownCount() {
+        return mDownCount;
+    }
+
+    public void setDownCount(int downCount) {
+        mDownCount = downCount;
+    }
+
+    public static class StationBean {
         /**
          * 经纬度、站点名称、站点ID
          */
@@ -135,75 +153,34 @@ public class LineData {
             return Latitude;
         }
 
-        public void setLatitude(double Latitude) {
-            this.Latitude = Latitude;
+        public void setLatitude(double latitude) {
+            Latitude = latitude;
         }
 
         public double getLongitude() {
             return Longitude;
         }
 
-        public void setLongitude(double Longitude) {
-            this.Longitude = Longitude;
-        }
-
-
-        public String getStationName() {
-            return StationName;
-        }
-
-        public void setStationName(String StationName) {
-            this.StationName = StationName;
-        }
-
-        public int getStationPointId() {
-            return StationPointId;
-        }
-
-        public void setStationPointId(int StationPointId) {
-            this.StationPointId = StationPointId;
-        }
-    }
-
-    public static class UpStationBean {
-        /**
-         * 经纬度、站点名称、站点ID
-         */
-        private double Latitude;
-        private double Longitude;
-        private String StationName;
-        private int StationPointId;
-
-        public double getLatitude() {
-            return Latitude;
-        }
-
-        public void setLatitude(double Latitude) {
-            this.Latitude = Latitude;
-        }
-
-        public double getLongitude() {
-            return Longitude;
-        }
-
-        public void setLongitude(double Longitude) {
-            this.Longitude = Longitude;
+        public void setLongitude(double longitude) {
+            Longitude = longitude;
         }
 
         public String getStationName() {
             return StationName;
         }
 
-        public void setStationName(String StationName) {
-            this.StationName = StationName;
+        public void setStationName(String stationName) {
+            StationName = stationName;
         }
 
         public int getStationPointId() {
             return StationPointId;
         }
 
-        public void setStationPointId(int StationPointId) {
-            this.StationPointId = StationPointId;
+        public void setStationPointId(int stationPointId) {
+            StationPointId = stationPointId;
         }
+
     }
+
 }

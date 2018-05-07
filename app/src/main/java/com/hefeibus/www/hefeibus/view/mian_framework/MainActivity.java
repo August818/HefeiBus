@@ -26,6 +26,11 @@ public class MainActivity extends BaseMvpActivity<IMainPresenter> implements IMa
     private ViewPager mViewPager;
 
     @Override
+    protected void init() {
+
+    }
+
+    @Override
     protected IMainPresenter onCreatePresenter() {
         return new MainPresenter();
     }
@@ -58,7 +63,7 @@ public class MainActivity extends BaseMvpActivity<IMainPresenter> implements IMa
      * 初始化控件
      */
     @Override
-    protected void findViews() {
+    protected void initViews() {
         // mToolbar = (Toolbar) findViewById(R.id.component_global_toolbar);
         mTablayout = (TabLayout) findViewById(R.id.activity_main_tablayout);
         mViewPager = (ViewPager) findViewById(R.id.activity_main_content);

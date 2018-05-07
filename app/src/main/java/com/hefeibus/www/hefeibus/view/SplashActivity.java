@@ -55,7 +55,7 @@ public class SplashActivity extends BaseMvpActivity {
     }
 
     @Override
-    protected void findViews() {
+    protected void initViews() {
 
     }
 
@@ -70,6 +70,11 @@ public class SplashActivity extends BaseMvpActivity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         //检查动态权限
         checkRuntimePermissions();
+    }
+
+    @Override
+    protected void init() {
+
     }
 
     @Override

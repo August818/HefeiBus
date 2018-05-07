@@ -1,5 +1,6 @@
 package com.hefeibus.www.hefeibus.fragment.search;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -43,7 +44,8 @@ public class SearchFragment extends BaseMvpFragment<ISearchPresenter> implements
     private RelativeLayout container;
     //适配器
     private SearchPageExpandListAdapter adapter;
-
+    //静态toast
+    private static Toast toast;
 
     /**
      * 这里是 Fragment 执行的入口
@@ -89,15 +91,16 @@ public class SearchFragment extends BaseMvpFragment<ISearchPresenter> implements
         });
         //开关缓存功能
         cacheSwitcher.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 SharedPreferences preferences = SearchFragment.this.getContext().getSharedPreferences(Parameters.APP_PREFERENCES, Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = preferences.edit();
                 if (isChecked) {
-                    Toast.makeText(buttonView.getContext(), "已开启数据缓存", Toast.LENGTH_SHORT).show();
+                    showToast("已开启数据缓存");
                     editor.putBoolean(Parameters.IS_CACHING, true);
                 } else {
-                    Toast.makeText(buttonView.getContext(), "已关闭数据缓存", Toast.LENGTH_SHORT).show();
+                    showToast("已关闭数据缓存");
                     editor.putBoolean(Parameters.IS_CACHING, false);
                 }
                 editor.apply();
@@ -112,6 +115,22 @@ public class SearchFragment extends BaseMvpFragment<ISearchPresenter> implements
                 getContext().startActivity(intent);
             }
         });
+    }
+
+    @SuppressLint("ShowToast")
+    private void showToast(String msg) {
+        if (toast == null) {
+            toast = Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT);
+        } else {
+            toast.setText(msg);
+        }
+        toast.show();
+    }
+
+    @Override
+    public void onDestroy() {
+        toast = null;
+        super.onDestroy();
     }
 
     @Override

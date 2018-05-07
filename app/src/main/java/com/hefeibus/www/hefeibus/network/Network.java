@@ -12,7 +12,7 @@ import okhttp3.OkHttpClient;
 import retrofit2.CallAdapter;
 import retrofit2.Converter;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
@@ -21,15 +21,15 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class Network {
     public static final String baseUrl = "http://www.hfbus.cn/map/AjaxHandler/";
     private static HefeiBusApi api;
+    private static HefeiBusApi rxApi;
     private static OkHttpClient okHttpClient = new OkHttpClient();
     private static Converter.Factory gsonConverterFactory = GsonConverterFactory.create();
-    private static CallAdapter.Factory rxJavaCallAdapterFactory = RxJavaCallAdapterFactory.create();
+    private static CallAdapter.Factory rxJavaCallAdapterFactory = RxJava2CallAdapterFactory.create();
     private static List<TransferData> transferData;
     private static LineData lineData;
     private static StationData stationData;
 
     private Network() {
-
     }
 
     public static HefeiBusApi getApi() {
@@ -38,11 +38,30 @@ public class Network {
                     .client(okHttpClient)
                     .baseUrl(baseUrl)
                     .addConverterFactory(gsonConverterFactory)
-                    .addCallAdapterFactory(rxJavaCallAdapterFactory)
                     .build();
             api = retrofit.create(HefeiBusApi.class);
         }
         return api;
+    }
+
+    /**
+     * @return 支持 RxJava 操作
+     */
+    public static HefeiBusApi getRxApi() {
+        if (rxApi == null) {
+            synchronized (Network.class) {
+                if (rxApi == null) {
+                    Retrofit retrofit = new Retrofit.Builder()
+                            .client(okHttpClient)
+                            .baseUrl(baseUrl)
+                            .addConverterFactory(gsonConverterFactory)
+                            .addCallAdapterFactory(rxJavaCallAdapterFactory)
+                            .build();
+                    rxApi = retrofit.create(HefeiBusApi.class);
+                }
+            }
+        }
+        return rxApi;
     }
 
     public static void main(String[] args) {

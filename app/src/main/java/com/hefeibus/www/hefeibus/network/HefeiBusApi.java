@@ -6,6 +6,7 @@ import com.hefeibus.www.hefeibus.entity.TransferData;
 
 import java.util.List;
 
+import io.reactivex.Observable;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
@@ -20,6 +21,13 @@ public interface HefeiBusApi {
     @GET("BusLineHandler.ashx")
     Call<LineData> getLineData(@Query("type") String type, @Query("lineName") String lineName);
 
+    /**
+     * @param type     业务类型
+     * @param lineName 线路名称
+     * @return 线路操作符
+     */
+    @GET("BusLineHandler.ashx")
+    Observable<LineData> getRxLineData(@Query("type") String type, @Query("lineName") String lineName);
 
     /**
      * @param type        业务类型

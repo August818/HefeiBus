@@ -5,6 +5,11 @@ import com.hefeibus.www.hefeibus.basemvp.BaseMvpActivity;
 
 public class StationDetailActivity extends BaseMvpActivity<IStationDetailPresenter> implements IStationDetailView {
     @Override
+    protected void init() {
+
+    }
+
+    @Override
     protected IStationDetailPresenter onCreatePresenter() {
         return new StationDetailPresenter();
     }
@@ -15,7 +20,7 @@ public class StationDetailActivity extends BaseMvpActivity<IStationDetailPresent
     }
 
     @Override
-    protected void findViews() {
+    protected void initViews() {
 
     }
 

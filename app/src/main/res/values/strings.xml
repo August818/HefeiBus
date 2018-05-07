@@ -2,4 +2,8 @@
     <string name="app_name">合肥公交</string>
     <string name="noCaching">关闭缓存</string>
     <string name="yesCaching">开启缓存</string>
+    <string name="start_point_name">起点名称</string>
+    <string name="end_point_name">终点名称</string>
+    <string name="operate_time">运营时间</string>
+    <string name="operate_compant">运营公司</string>
 </resources>
