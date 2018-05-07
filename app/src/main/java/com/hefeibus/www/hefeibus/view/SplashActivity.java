@@ -24,7 +24,6 @@ import com.hefeibus.www.hefeibus.utils.ActivityController;
 import com.hefeibus.www.hefeibus.utils.Parameters;
 import com.hefeibus.www.hefeibus.view.mian_framework.MainActivity;
 
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -86,21 +85,13 @@ public class SplashActivity extends BaseMvpActivity {
      * 检查版本情况
      */
     private void initDatabase() {
-        //复制标记
-        boolean isExisted = false;
+        //缓存重建标记，默认重建缓存
+        boolean clearCache = getSharedPreferences(Parameters.APP_PREFERENCES, MODE_PRIVATE)
+                .getBoolean(Parameters.CLEAR_CACHE, true);
 
-        //检测App关联的文件
-        String[] associateFile = getApplicationContext().fileList();
-        for (String s : associateFile) {
-            if (s.equals(Parameters.DATABASE_NAME)) {
-                File file = new File(getFilesDir().getAbsolutePath() + "/" + Parameters.DATABASE_NAME);
-                isExisted = !file.delete();
-            }
-        }
-
-        //检测并复制
+        //重建缓存
         try {
-            if (!isExisted) {
+            if (clearCache) {
                 int resource = R.raw.local;
                 InputStream inputStream = getResources().openRawResource(resource);
                 FileOutputStream outputStream = openFileOutput(Parameters.DATABASE_NAME, Context.MODE_PRIVATE);
@@ -110,9 +101,9 @@ public class SplashActivity extends BaseMvpActivity {
                 }
                 outputStream.close();
                 inputStream.close();
-                Log.d(TAG, "initDatabase: Database file write succeed");
+                Log.d(TAG, "initDatabase: 重建缓存成功！");
             } else {
-                Log.d(TAG, "initDatabase: Already has Database File!");
+                Log.d(TAG, "initDatabase: 已使用现有缓存");
             }
         } catch (IOException e) {
             e.printStackTrace();

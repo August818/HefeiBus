@@ -9,7 +9,6 @@ import com.hefeibus.www.hefeibus.entity.Type;
 import com.hefeibus.www.hefeibus.network.Network;
 import com.hefeibus.www.hefeibus.sqlite.AppDatabase;
 
-import java.io.IOException;
 import java.util.NoSuchElementException;
 
 import io.reactivex.Observable;
@@ -71,16 +70,12 @@ class LineDetailPresenter extends BaseMvpPresenter<ILineDetailView> implements I
                 .map(new Function<LineData, LineData>() {
                     @Override
                     public LineData apply(LineData lineData) {
-                        if (weakView.get().getCurrentActivity().getMyApp().isCaching()) {
+                        if (weakView.get().getCurrentActivity().getMyApp().isCaching() && !lineData.isLocal()) {
+                            Log.d(TAG, "apply: 来源网络");
                             Log.d(TAG, "apply: 写入本地数据库");
-                            try {
-                                writeLineToLocal(lineData);
-                            } catch (IOException e) {
-                                Log.d(TAG, "apply: 数据库写入出错---");
-                                e.printStackTrace();
-                                Log.d(TAG, "apply: 数据库写入出错---");
-                            }
+                            writeLineToLocal(lineData);
                         } else {
+                            Log.d(TAG, "apply: 本地");
                             Log.d(TAG, "apply: 不写入本地数据库");
                         }
                         return lineData;
@@ -112,70 +107,13 @@ class LineDetailPresenter extends BaseMvpPresenter<ILineDetailView> implements I
                         });
                     }
                 });
-
-/*        disposable = Network.getRxApi()
-                .getRxLineData(type, lineName)
-                .subscribeOn(Schedulers.io())
-                .doOnSubscribe(new Consumer<Disposable>() {
-                    @Override
-                    public void accept(Disposable disposable) {
-                        ifViewAttached(new ViewAction<ILineDetailView>() {
-                            @Override
-                            public void run(@NonNull ILineDetailView view) {
-                                view.showLoading();
-                            }
-                        });
-                    }
-                })
-                .subscribeOn(AndroidSchedulers.mainThread())
-                .map(new Function<LineData, LineData>() {
-                    @Override
-                    public LineData apply(LineData lineData) {
-                        if (weakView.get().getCurrentActivity().getMyApp().isCaching()) {
-                            try {
-                                writeLineToLocal(lineData);
-                            } catch (IOException e) {
-                                Log.d(TAG, "apply: 数据库写入出错---");
-                                e.printStackTrace();
-                                Log.d(TAG, "apply: 数据库写入出错---");
-                            }
-                        }
-                        return lineData;
-                    }
-                })
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<LineData>() {
-                    @Override
-                    public void accept(final LineData lineData) {
-                        ifViewAttached(new ViewAction<ILineDetailView>() {
-                            @Override
-                            public void run(@NonNull ILineDetailView view) {
-                                view.closeLoading();
-                                view.showLineInfo(lineData);
-                            }
-                        });
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) {
-                        throwable.printStackTrace();
-                        ifViewAttached(new ViewAction<ILineDetailView>() {
-                            @Override
-                            public void run(@NonNull ILineDetailView view) {
-                                view.closeLoading();
-                                view.counterApiError();
-                            }
-                        });
-                    }
-                })*/
     }
 
     private LineData queryLineFromLocal(String lineName) {
         return database.queryLineFromLocal(lineName);
     }
 
-    private void writeLineToLocal(LineData lineData) throws IOException {
+    private void writeLineToLocal(LineData lineData) {
         database.writeLineToLocal(lineData);
     }
 

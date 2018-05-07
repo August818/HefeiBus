@@ -24,6 +24,12 @@ public class LineData {
     private int mDownCount;
     private int mUpCount;
 
+    private boolean isLocal;
+
+    public boolean isLocal() {
+        return isLocal;
+    }
+
     public int getUpCount() {
         return mUpCount;
     }
@@ -140,6 +146,10 @@ public class LineData {
         mDownCount = downCount;
     }
 
+    public void isFromLocal() {
+        isLocal = true;
+    }
+
     public static class StationBean {
         /**
          * 经纬度、站点名称、站点ID
@@ -148,6 +158,14 @@ public class LineData {
         private double Longitude;
         private String StationName;
         private int StationPointId;
+
+        public StationBean() {
+
+        }
+
+        public StationBean(String stationName) {
+            StationName = stationName;
+        }
 
         public double getLatitude() {
             return Latitude;

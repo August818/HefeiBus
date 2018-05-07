@@ -38,6 +38,14 @@ public class App extends Application {
         SharedPreferences preferences = getSharedPreferences(Parameters.APP_PREFERENCES, MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putBoolean(Parameters.IS_CACHING, isCaching);
+        if (isCaching) {
+            editor.putBoolean(Parameters.CLEAR_CACHE, false);
+            Log.d(TAG, "setCachingStatus: 开启缓存");
+        } else {
+            //如果关闭了缓存，下次启动时重新建库
+            editor.putBoolean(Parameters.CLEAR_CACHE, true);
+            Log.d(TAG, "setCachingStatus: 已关闭缓存，将在下次启动时重建数据库");
+        }
         editor.apply();
     }
 

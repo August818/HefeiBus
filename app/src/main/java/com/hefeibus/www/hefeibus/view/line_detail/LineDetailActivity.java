@@ -25,6 +25,7 @@ import com.hefeibus.www.hefeibus.utils.Parameters;
 import java.util.List;
 
 import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
@@ -104,6 +105,7 @@ public class LineDetailActivity extends BaseMvpActivity<ILineDetailPresenter> im
         reverse_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(LineDetailActivity.this, "切换方向", Toast.LENGTH_SHORT).show();
                 //默认为 false - 即为显示上行
                 if (isDown) {
                     //此处切换上行
@@ -170,6 +172,11 @@ public class LineDetailActivity extends BaseMvpActivity<ILineDetailPresenter> im
                 .map(new Function<LineData, List<LineData.StationBean>>() {
                     @Override
                     public List<LineData.StationBean> apply(LineData lineData) {
+                        if (lineData.isLocal()) {
+                            Toast.makeText(LineDetailActivity.this, "本地数据", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(LineDetailActivity.this, "网络数据", Toast.LENGTH_SHORT).show();
+                        }
                         lineName.setText(lineData.getLineName() + "路");
                         //存储上行站点数量
                         int upCount = lineData.getUpStation().size();
@@ -192,12 +199,16 @@ public class LineDetailActivity extends BaseMvpActivity<ILineDetailPresenter> im
                         LineDetailActivity.this.lineData = lineData;
                         return lineData.getUpStation();
                     }
-                }).subscribe(new Consumer<List<LineData.StationBean>>() {
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<List<LineData.StationBean>>() {
                     @Override
                     public void accept(List<LineData.StationBean> stationBeans) {
                         adapter.setStations(stationBeans);
                     }
                 });
+
     }
 
     @Override
