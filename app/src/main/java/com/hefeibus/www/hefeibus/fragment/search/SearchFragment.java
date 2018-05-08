@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hefeibus.www.hefeibus.R;
+import com.hefeibus.www.hefeibus.adapter.OnItemClickListener;
 import com.hefeibus.www.hefeibus.adapter.SearchPageExpandListAdapter;
 import com.hefeibus.www.hefeibus.basemvp.BaseMvpFragment;
 import com.hefeibus.www.hefeibus.entity.GroupInfo;
@@ -101,11 +102,11 @@ public class SearchFragment extends BaseMvpFragment<ISearchPresenter> implements
             }
         });
         //点击开始查询线路详情
-        adapter.setListener(new SearchPageExpandListAdapter.onLineItemClickListener() {
+        adapter.setListener(new OnItemClickListener() {
             @Override
-            public void onClick(String lineName) {
+            public void onClick(String itemName) {
                 Intent intent = new Intent(getContext(), LineDetailActivity.class);
-                intent.putExtra(Parameters.INTENT_LINE_KEY, lineName);
+                intent.putExtra(Parameters.INTENT_LINE_KEY, itemName);
                 getContext().startActivity(intent);
             }
         });

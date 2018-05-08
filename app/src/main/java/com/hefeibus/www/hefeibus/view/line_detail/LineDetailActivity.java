@@ -2,6 +2,7 @@ package com.hefeibus.www.hefeibus.view.line_detail;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,10 +18,11 @@ import android.widget.Toast;
 
 import com.hefeibus.www.hefeibus.R;
 import com.hefeibus.www.hefeibus.adapter.LineDetailAdapter;
+import com.hefeibus.www.hefeibus.adapter.OnItemClickListener;
 import com.hefeibus.www.hefeibus.basemvp.BaseMvpActivity;
 import com.hefeibus.www.hefeibus.entity.LineData;
-import com.hefeibus.www.hefeibus.entity.StationData;
 import com.hefeibus.www.hefeibus.utils.Parameters;
+import com.hefeibus.www.hefeibus.view.station_detail.StationDetailActivity;
 
 import java.util.List;
 
@@ -83,10 +85,12 @@ public class LineDetailActivity extends BaseMvpActivity<ILineDetailPresenter> im
     protected void setAttributes() {
         setToolbar();
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        adapter.setListener(new LineDetailAdapter.onItemClickListener() {
+        adapter.setListener(new OnItemClickListener() {
             @Override
-            public void onClick(StationData station) {
-                //跳转到站点信息查询
+            public void onClick(String station) {
+                Intent intent = new Intent(LineDetailActivity.this, StationDetailActivity.class);
+                intent.putExtra(Parameters.INTENT_STATION_KEY, station);
+                LineDetailActivity.this.startActivity(intent);
             }
         });
         recyclerView.setAdapter(adapter);

@@ -114,7 +114,7 @@ public class SplashActivity extends BaseMvpActivity {
                 public void run() {
                     startMainActivity();
                 }
-            }, 3000);
+            }, 500);
         }
 
     }

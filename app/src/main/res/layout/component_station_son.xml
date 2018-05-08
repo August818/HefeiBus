@@ -3,34 +3,36 @@
     xmlns:tool="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/primary"
-    android:orientation="vertical">
-
+    android:orientation="vertical"
+    android:padding="5dp">
 
     <TextView
         android:id="@+id/line_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_marginStart="40dp"
         android:textColor="@color/icons"
         android:textSize="16sp"
-        android:textStyle="bold"
         tool:text="快速公交2号线" />
 
     <TextView
-        android:id="@+id/line_start"
+        android:id="@+id/line_station1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="10dp"
         android:textColor="@color/icons"
+        android:visibility="gone"
         tool:text="合肥火车站 6:00-23:00" />
 
     <TextView
-        android:id="@+id/line_stop"
+        android:id="@+id/line_station2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="5dp"
         android:textColor="@color/icons"
+        android:visibility="gone"
         tool:text="南门换乘中心 6:00-23:00" />
 
 

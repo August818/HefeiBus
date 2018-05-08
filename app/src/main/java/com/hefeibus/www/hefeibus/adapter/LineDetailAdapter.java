@@ -1,6 +1,5 @@
 package com.hefeibus.www.hefeibus.adapter;
 
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,18 +10,15 @@ import android.widget.TextView;
 
 import com.hefeibus.www.hefeibus.R;
 import com.hefeibus.www.hefeibus.entity.LineData;
-import com.hefeibus.www.hefeibus.entity.StationData;
-import com.hefeibus.www.hefeibus.utils.Parameters;
-import com.hefeibus.www.hefeibus.view.station_detail.StationDetailActivity;
 
 import java.util.List;
 
 public class LineDetailAdapter extends RecyclerView.Adapter<LineDetailAdapter.ViewHolder> {
     private static final String TAG = "LineDetailAdapter";
     private List<LineData.StationBean> stations;
-    private onItemClickListener listener;
+    private OnItemClickListener listener;
 
-    public void setListener(onItemClickListener listener) {
+    public void setListener(OnItemClickListener listener) {
         this.listener = listener;
     }
 
@@ -50,9 +46,6 @@ public class LineDetailAdapter extends RecyclerView.Adapter<LineDetailAdapter.Vi
         this.notifyDataSetChanged();
     }
 
-    public interface onItemClickListener {
-        void onClick(StationData station);
-    }
 
     class ViewHolder extends RecyclerView.ViewHolder {
         private TextView number, name;
@@ -63,9 +56,7 @@ public class LineDetailAdapter extends RecyclerView.Adapter<LineDetailAdapter.Vi
                 @Override
                 public void onClick(View v) {
                     if (listener != null) {
-                        Intent intent = new Intent(v.getContext(), StationDetailActivity.class);
-                        intent.putExtra(Parameters.INTENT_STATION_KEY, stations.get(getAdapterPosition()).getStationName());
-                        v.getContext().startActivity(intent);
+                        listener.onClick(stations.get(getAdapterPosition()).getStationName());
                     }
                     Log.d(TAG, "onClick: " + stations.get(getAdapterPosition()).getStationName());
                 }

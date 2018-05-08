@@ -1,12 +1,10 @@
 package com.hefeibus.www.hefeibus.adapter;
 
 import android.content.Context;
-import android.database.DataSetObserver;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ExpandableListAdapter;
 import android.widget.TextView;
 
 import com.hefeibus.www.hefeibus.R;
@@ -16,7 +14,7 @@ import com.hefeibus.www.hefeibus.entity.LineData;
 import java.util.HashMap;
 import java.util.List;
 
-public class SearchPageExpandListAdapter implements ExpandableListAdapter {
+public class SearchPageExpandListAdapter extends ExpandListAdapter {
 
     private static final String TAG = "ExpandListAdapter";
     /**
@@ -28,14 +26,9 @@ public class SearchPageExpandListAdapter implements ExpandableListAdapter {
      * groupNameIndex 分组名称索引
      */
     private List<String> groupNameIndex;
-    private onLineItemClickListener listener;
+    private OnItemClickListener listener;
     private Context mContext;
 
-    public SearchPageExpandListAdapter(HashMap<String, GroupInfo> map, List<String> list, Context context) {
-        this.map = map;
-        this.groupNameIndex = list;
-        this.mContext = context;
-    }
 
     public SearchPageExpandListAdapter(Context context) {
         this.mContext = context;
@@ -49,23 +42,8 @@ public class SearchPageExpandListAdapter implements ExpandableListAdapter {
         this.groupNameIndex = groupNameIndex;
     }
 
-    public void setmContext(Context mContext) {
-        this.mContext = mContext;
-    }
-
-
-    public void setListener(onLineItemClickListener listener) {
+    public void setListener(OnItemClickListener listener) {
         this.listener = listener;
-    }
-
-    @Override
-    public void registerDataSetObserver(DataSetObserver observer) {
-
-    }
-
-    @Override
-    public void unregisterDataSetObserver(DataSetObserver observer) {
-
     }
 
     /**
@@ -110,21 +88,6 @@ public class SearchPageExpandListAdapter implements ExpandableListAdapter {
     }
 
     @Override
-    public long getGroupId(int groupPosition) {
-        return groupPosition;
-    }
-
-    @Override
-    public long getChildId(int groupPosition, int childPosition) {
-        return childPosition;
-    }
-
-    @Override
-    public boolean hasStableIds() {
-        return false;
-    }
-
-    @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.component_group_line_father, null);
         ((TextView) view.findViewById(R.id.group_name)).setText(((GroupInfo) getGroup(groupPosition)).getGroupName());
@@ -148,48 +111,6 @@ public class SearchPageExpandListAdapter implements ExpandableListAdapter {
             }
         });
         return view;
-    }
-
-    @Override
-    public boolean isChildSelectable(int groupPosition, int childPosition) {
-        return false;
-    }
-
-    @Override
-    public boolean areAllItemsEnabled() {
-        return false;
-    }
-
-    @Override
-    public boolean isEmpty() {
-        return false;
-    }
-
-    @Override
-    public void onGroupExpanded(int groupPosition) {
-
-    }
-
-    @Override
-    public void onGroupCollapsed(int groupPosition) {
-
-    }
-
-    @Override
-    public long getCombinedChildId(long groupId, long childId) {
-        return 0;
-    }
-
-    @Override
-    public long getCombinedGroupId(long groupId) {
-        return 0;
-    }
-
-    /**
-     * 将adapter中点击的某个线路分发到 fragment 中去
-     */
-    public interface onLineItemClickListener {
-        void onClick(String lineName);
     }
 }
 

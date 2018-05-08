@@ -13,29 +13,33 @@
         android:gravity="center">
 
         <TextView
-            android:id="@+id/line_name"
+            android:id="@+id/station_name"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:textColor="@color/icons"
             android:textSize="18sp"
-            tool:text="Station_Name" />
+            tool:text="station_name" />
 
-        <ImageView
+        <Button
             android:id="@+id/line_favour_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:layout_gravity="end"
             android:layout_marginEnd="10dp"
-            android:src="@drawable/ic_search"
-            android:visibility="invisible" />
+            android:background="@drawable/ic_favorite_disable_24dp" />
 
     </android.support.v7.widget.Toolbar>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/station_detail_recycler"
+    <View
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="1dp"
+        android:background="@color/icons" />
+
+    <ExpandableListView
+        android:id="@+id/expandable_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 
 </LinearLayout>

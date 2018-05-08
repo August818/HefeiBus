@@ -27,7 +27,7 @@ public class Network {
     private static CallAdapter.Factory rxJavaCallAdapterFactory = RxJava2CallAdapterFactory.create();
     private static List<TransferData> transferData;
     private static LineData lineData;
-    private static StationData stationData;
+    private static List<StationData> stationData;
 
     private Network() {
     }
@@ -74,7 +74,7 @@ public class Network {
         HefeiBusApi api = retrofit.create(HefeiBusApi.class);
 
         try {
-            stationData = api.getStationData(Type.站点查询.getType(), "三孝口").execute().body().get(0);
+            stationData = api.getStationData(Type.站点查询.getType(), "南七里站").execute().body();
             Thread.sleep(3000);
             lineData = api.getLineData(Type.线路查询.getType(), "1").execute().body();
             Thread.sleep(3000);
