@@ -21,6 +21,7 @@ import com.hefeibus.www.hefeibus.adapter.SearchPageExpandListAdapter;
 import com.hefeibus.www.hefeibus.basemvp.BaseMvpFragment;
 import com.hefeibus.www.hefeibus.entity.GroupInfo;
 import com.hefeibus.www.hefeibus.utils.Parameters;
+import com.hefeibus.www.hefeibus.view.auto_complete.AutoSearchActivity;
 import com.hefeibus.www.hefeibus.view.line_detail.LineDetailActivity;
 
 import java.util.HashMap;
@@ -86,6 +87,8 @@ public class SearchFragment extends BaseMvpFragment<ISearchPresenter> implements
         searchTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), AutoSearchActivity.class);
+                SearchFragment.this.startActivity(intent);
             }
         });
         //开关缓存功能

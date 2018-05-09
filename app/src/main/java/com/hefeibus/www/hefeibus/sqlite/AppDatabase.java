@@ -5,7 +5,9 @@ import android.database.Cursor;
 import android.util.Log;
 
 import com.hefeibus.www.hefeibus.entity.GroupInfo;
+import com.hefeibus.www.hefeibus.entity.Item;
 import com.hefeibus.www.hefeibus.entity.LineData;
+import com.hefeibus.www.hefeibus.entity.StationData;
 import com.hefeibus.www.hefeibus.utils.Parameters;
 
 import java.util.ArrayList;
@@ -22,12 +24,6 @@ public class AppDatabase {
 
     public AppDatabase(Context context) {
         mContext = context;
-        init();
-    }
-
-    public AppDatabase(Context context, String dbName) {
-        mContext = context;
-        this.dbName = dbName;
         init();
     }
 
@@ -119,13 +115,11 @@ public class AppDatabase {
             selection[11] = "";
         }
         selection[12] = Calendar.getInstance().getTime().toString();
-        int count = mHelper.executeModifyCount(dbName,
+        mHelper.executeModifyCount(dbName,
                 "insert into LineCache (id,name,org,category,upLength,downLength,mainFirstTime,mainLastTime," +
                         "subFirstTime,subLastTime,upStation,downStation,timeStamp) values (?,?,?,?,?,?,?,?,?,?,?,?,?) "
                 , selection);
-        if (count != -1) {
-            Log.d(TAG, "writeLineToLocal: 数据库插入成功！");
-        }
+        Log.d(TAG, "writeLineToLocal: 数据库插入成功！");
     }
 
     public LineData queryLineFromLocal(String lineName) {
@@ -173,5 +167,79 @@ public class AppDatabase {
             lineData.setLineId(0);
         }
         return lineData;
+    }
+
+    public List<StationData> queryStationFromLocal(String name) {
+        List<StationData> stationData = new ArrayList<>();
+        Cursor cursor = mHelper.executeCursor(dbName, "select * from StationCache where name = ?", new String[]{name});
+        while (cursor.moveToNext()) {
+            StationData data = new StationData();
+            //id
+            data.setStationPointId(cursor.getString(cursor.getColumnIndex("id")));
+            //name
+            data.setStationName(cursor.getString(cursor.getColumnIndex("name")));
+            //ori
+            data.setOrientationInfo(cursor.getString(cursor.getColumnIndex("orientation")));
+            //line
+            data.setLineName(cursor.getString(cursor.getColumnIndex("line")));
+            //lat
+            data.setLat(cursor.getString(cursor.getColumnIndex("lat")));
+            //lng
+            data.setStationPointId(cursor.getColumnName(cursor.getColumnIndex("lng")));
+            stationData.add(data);
+        }
+        cursor.close();
+        return stationData;
+    }
+
+    public void writeStationToLocal(List<StationData> stationData) {
+        for (StationData data : stationData) {
+            String[] selection = new String[7];
+            //id
+            selection[0] = data.getStationPointId();
+            //name
+            selection[1] = data.getStationName();
+            //ori
+            selection[2] = data.getOrientationInfo();
+            //line
+            selection[3] = data.getLineName();
+            //lat
+            selection[4] = data.getLat();
+            //lng
+            selection[5] = data.getLng();
+            //time
+            selection[6] = Calendar.getInstance().getTime().toString();
+            mHelper.executeModifyCount(dbName,
+                    "insert into StationCache (id,name,orientation,line,lat,lng,timeStamp) values (?,?,?,?,?,?,?)", selection);
+            Log.d(TAG, "writeLineToLocal: 数据库插入成功！" + data.getStationName() + "  " + data.getOrientationInfo());
+        }
+    }
+
+    public List<Item> queryResultSet() {
+        List<Item> resultSet = new ArrayList<>();
+        Cursor cursor = mHelper.executeCursor(dbName,
+                "select value from AutoComplete where name = ?",
+                new String[]{"line"});
+        if (cursor.moveToFirst()) {
+            String largeStation = cursor.getString(0);
+            String[] array = largeStation.split(",");
+            for (String s : array) {
+                String line = s + "路";
+                resultSet.add(new Item(line, 1));
+            }
+        }
+        cursor.close();
+        cursor = mHelper.executeCursor(dbName,
+                "select value from AutoComplete where name = ?",
+                new String[]{"station"});
+        if (cursor.moveToFirst()) {
+            String largeStation = cursor.getString(0);
+            String[] array = largeStation.split(",");
+            for (String s : array) {
+                resultSet.add(new Item(s, 0));
+            }
+        }
+        cursor.close();
+        return resultSet;
     }
 }

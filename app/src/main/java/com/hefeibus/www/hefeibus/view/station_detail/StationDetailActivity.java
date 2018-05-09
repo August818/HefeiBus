@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ExpandableListView;
@@ -28,6 +29,7 @@ public class StationDetailActivity extends BaseMvpActivity<IStationDetailPresent
     private StationDetailExpandListAdapter adapter;
     private Dialog mDialog;
     private Toolbar toolbar;
+    private static final String TAG = "StationDetailActivity";
 
     @Override
     protected IStationDetailPresenter onCreatePresenter() {
@@ -71,6 +73,8 @@ public class StationDetailActivity extends BaseMvpActivity<IStationDetailPresent
 
     @Override
     public void showStationInfo(List<StationData> stationData) {
+        String msg = presenter.isLocal() ? "本地数据" : "网络数据";
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
         adapter.setDataList(stationData);
         mExpandableListView.setAdapter(adapter);
     }
@@ -126,5 +130,13 @@ public class StationDetailActivity extends BaseMvpActivity<IStationDetailPresent
         mDialog.setCancelable(false);
         mDialog.setCanceledOnTouchOutside(false);
         mDialog.setContentView(view, new LinearLayout.LayoutParams(500, 500));
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        int i = presenter == null ? 0 : presenter.onDestroy();
+        if (i == 1) Log.d(TAG, "onDestroy: RxJava has disposed");
+        super.onDestroy();
     }
 }

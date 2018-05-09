@@ -60,9 +60,9 @@ class LineDetailPresenter extends BaseMvpPresenter<ILineDetailView> implements I
                         }
                     }
                 })
-                .onErrorResumeNext(new Function<Throwable, ObservableSource<? extends LineData>>() {
+                .onErrorResumeNext(new Function<Throwable, ObservableSource<LineData>>() {
                     @Override
-                    public ObservableSource<? extends LineData> apply(Throwable throwable) {
+                    public ObservableSource<LineData> apply(Throwable throwable) {
                         Log.d(TAG, "apply: 从网络查询");
                         return Network.getRxApi().getRxLineData(type, lineName);
                     }
@@ -72,7 +72,7 @@ class LineDetailPresenter extends BaseMvpPresenter<ILineDetailView> implements I
                     public LineData apply(LineData lineData) {
                         if (weakView.get().getCurrentActivity().getMyApp().isCaching() && !lineData.isLocal()) {
                             Log.d(TAG, "apply: 来源网络");
-                            Log.d(TAG, "apply: 写入本地数据库");
+                            Log.d(TAG, "apply: 将线路信息写入本地数据库");
                             writeLineToLocal(lineData);
                         } else {
                             Log.d(TAG, "apply: 本地");
