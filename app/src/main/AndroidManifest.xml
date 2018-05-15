@@ -37,6 +37,7 @@
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity android:name=".view.line_detail.LineDetailActivity" />
         <activity android:name=".view.station_detail.StationDetailActivity" />
-        <activity android:name=".view.auto_complete.AutoSearchActivity" />
+        <activity android:name=".view.auto_search.AutoSearchActivity" />
+        <activity android:name=".view.select_station.SelectStationActivity" />
     </application>
 </manifest>

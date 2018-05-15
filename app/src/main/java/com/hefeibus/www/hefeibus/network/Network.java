@@ -78,7 +78,7 @@ public class Network {
             Thread.sleep(3000);
             lineData = api.getLineData(Type.线路查询.getType(), "1").execute().body();
             Thread.sleep(3000);
-            transferData = api.getVehicleTransfer(Type.换乘查询.getType(), "三孝口", "省旅游学校").execute().body();
+            transferData = api.getVehicleTransfer(Type.换乘查询.getType(), "安高城市天地", "安徽轻工商城").execute().body();
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }

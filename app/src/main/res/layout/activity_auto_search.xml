@@ -19,6 +19,7 @@
         android:drawableStart="@drawable/ic_search"
         android:gravity="center_vertical"
         android:hint="搜索线路、站点"
+        android:inputType="text"
         android:textColor="@color/icons"
         android:textColorHint="@color/icons"
         android:textSize="18sp" />

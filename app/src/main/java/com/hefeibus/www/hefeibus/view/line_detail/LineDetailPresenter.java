@@ -8,8 +8,7 @@ import com.hefeibus.www.hefeibus.entity.LineData;
 import com.hefeibus.www.hefeibus.entity.Type;
 import com.hefeibus.www.hefeibus.network.Network;
 import com.hefeibus.www.hefeibus.sqlite.AppDatabase;
-
-import java.util.NoSuchElementException;
+import com.hefeibus.www.hefeibus.utils.NoSuchDataException;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
@@ -28,7 +27,9 @@ class LineDetailPresenter extends BaseMvpPresenter<ILineDetailView> implements I
 
     @Override
     public void queryLineDetail(final String lineName) {
-        database = new AppDatabase(weakView.get().getCurrentActivity());
+        if (database == null) {
+            database = new AppDatabase(weakView.get().getCurrentActivity());
+        }
         disposable = Observable.just(lineName)
                 .doOnSubscribe(new Consumer<Disposable>() {
                     @Override
@@ -53,10 +54,10 @@ class LineDetailPresenter extends BaseMvpPresenter<ILineDetailView> implements I
                 })
                 .doOnNext(new Consumer<LineData>() {
                     @Override
-                    public void accept(LineData lineData) throws NoSuchElementException {
+                    public void accept(LineData lineData) throws NoSuchDataException {
                         if (lineData.getLineId() == 0) {
                             Log.d(TAG, "accept: 本地查询结果为空");
-                            throw new NoSuchElementException();
+                            throw new NoSuchDataException();
                         }
                     }
                 })

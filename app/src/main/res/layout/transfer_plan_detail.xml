@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tool="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:orientation="vertical"
+    android:padding="5dp">
+
+    <TextView
+        android:id="@+id/transfer_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="5dp"
+        tool:text="起点：三孝口" />
+
+    <TextView
+        android:id="@+id/transfer_info1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="5dp"
+        tool:text="三孝口站上车乘坐122路 (8 站)周谷堆站下车" />
+
+    <TextView
+        android:id="@+id/transfer_info2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="5dp"
+        tool:text="乘坐111路(13 站)\n在省旅游学校站下车" />
+
+    <TextView
+        android:id="@+id/transfer_stop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="5dp"
+        tool:text="终点：省旅游学校" />
+
+</LinearLayout>

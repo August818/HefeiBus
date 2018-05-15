@@ -8,4 +8,9 @@
     <string name="operate_company">运营公司</string>
     <string name="station_count">线路站点</string>
     <string name="lint_length">线路长度</string>
+    <string name="transfer_start">请点击选择起点</string>
+    <string name="transfer_stop">请点击选择终点</string>
+    <string name="transfer_search_commit">换乘查询</string>
+    <string name="no_data_tips">暂时没有数据，来一组查询吧？</string>
+    <string name="clear">清空</string>
 </resources>

@@ -8,9 +8,11 @@ import com.hefeibus.www.hefeibus.entity.GroupInfo;
 import com.hefeibus.www.hefeibus.entity.Item;
 import com.hefeibus.www.hefeibus.entity.LineData;
 import com.hefeibus.www.hefeibus.entity.StationData;
+import com.hefeibus.www.hefeibus.entity.TransferData;
 import com.hefeibus.www.hefeibus.utils.Parameters;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -241,5 +243,26 @@ public class AppDatabase {
         }
         cursor.close();
         return resultSet;
+    }
+
+    public List<String> getStationIndex() {
+        List<String> resultSet = new ArrayList<>();
+        Cursor cursor = mHelper.executeCursor(dbName,
+                "select value from AutoComplete where name = ?",
+                new String[]{"station"});
+        if (cursor.moveToFirst()) {
+            String largeStation = cursor.getString(0);
+            String[] array = largeStation.split(",");
+            resultSet.addAll(Arrays.asList(array));
+        }
+        return resultSet;
+    }
+
+    public List<TransferData> queryTransferPlan(String start, String stop) {
+        return new ArrayList<>();
+    }
+
+    public void writeTransferPlanToLocal(String start, String stop) {
+
     }
 }

@@ -1,8 +1,10 @@
 package com.hefeibus.www.hefeibus.basemvp;
 
+import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.SharedPreferences;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.baidu.mapapi.SDKInitializer;
 import com.hefeibus.www.hefeibus.utils.Parameters;
@@ -11,6 +13,7 @@ public class App extends Application {
 
     private static final String TAG = "App";
     private boolean isCaching;
+    private Toast toast;
 
     @Override
     public void onCreate() {
@@ -35,6 +38,11 @@ public class App extends Application {
     public void setCachingStatus(boolean isCaching) {
         this.isCaching = isCaching;
         Log.d(TAG, "setCachingStatus: " + isCaching);
+        if (isCaching) {
+            showToast("已开启数据缓存");
+        } else {
+            showToast("已关闭数据缓存");
+        }
         SharedPreferences preferences = getSharedPreferences(Parameters.APP_PREFERENCES, MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putBoolean(Parameters.IS_CACHING, isCaching);
@@ -56,4 +64,16 @@ public class App extends Application {
         SharedPreferences preferences = getSharedPreferences(Parameters.APP_PREFERENCES, MODE_PRIVATE);
         isCaching = preferences.getBoolean(Parameters.IS_CACHING, false);
     }
+
+    @SuppressLint("ShowToast")
+    private void showToast(String msg) {
+        if (toast == null) {
+            toast = Toast.makeText(this, msg, Toast.LENGTH_SHORT);
+        } else {
+            toast.setText(msg);
+        }
+        toast.show();
+    }
+
+
 }

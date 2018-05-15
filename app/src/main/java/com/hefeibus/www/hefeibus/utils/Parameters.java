@@ -23,4 +23,10 @@ public class Parameters {
     //清空缓存
     //true - 下次启动时清空数据库 false - 不清空数据库
     public static final String CLEAR_CACHE = "clear_cache";
+
+    //请求 Request Code
+    //起点 Code
+    public static final int CODE_START = 50;
+    //终点 Code
+    public static final int CODE_STOP = 60;
 }

@@ -8,9 +8,9 @@ import com.hefeibus.www.hefeibus.entity.StationData;
 import com.hefeibus.www.hefeibus.entity.Type;
 import com.hefeibus.www.hefeibus.network.Network;
 import com.hefeibus.www.hefeibus.sqlite.AppDatabase;
+import com.hefeibus.www.hefeibus.utils.NoSuchDataException;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
@@ -29,7 +29,9 @@ class StationDetailPresenter extends BaseMvpPresenter<IStationDetailView> implem
 
     @Override
     public void queryStationDetail(final String station) {
-        database = new AppDatabase(weakView.get().getCurrentActivity());
+        if (database == null) {
+            database = new AppDatabase(weakView.get().getCurrentActivity());
+        }
 
         disposable = Observable.just(station)
                 .doOnSubscribe(new Consumer<Disposable>() {
@@ -55,10 +57,10 @@ class StationDetailPresenter extends BaseMvpPresenter<IStationDetailView> implem
                 })
                 .doOnNext(new Consumer<List<StationData>>() {
                     @Override
-                    public void accept(List<StationData> stationData) throws NoSuchElementException {
+                    public void accept(List<StationData> stationData) throws NoSuchDataException {
                         if (stationData.size() == 0) {
                             Log.d(TAG, "accept: 本地查询结果为空");
-                            throw new NoSuchElementException();
+                            throw new NoSuchDataException();
                         } else {
                             isLocal = true;
                         }

@@ -1,6 +1,5 @@
 package com.hefeibus.www.hefeibus.fragment.search;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,7 +12,6 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.hefeibus.www.hefeibus.R;
 import com.hefeibus.www.hefeibus.adapter.OnItemClickListener;
@@ -21,7 +19,7 @@ import com.hefeibus.www.hefeibus.adapter.SearchPageExpandListAdapter;
 import com.hefeibus.www.hefeibus.basemvp.BaseMvpFragment;
 import com.hefeibus.www.hefeibus.entity.GroupInfo;
 import com.hefeibus.www.hefeibus.utils.Parameters;
-import com.hefeibus.www.hefeibus.view.auto_complete.AutoSearchActivity;
+import com.hefeibus.www.hefeibus.view.auto_search.AutoSearchActivity;
 import com.hefeibus.www.hefeibus.view.line_detail.LineDetailActivity;
 
 import java.util.HashMap;
@@ -44,8 +42,6 @@ public class SearchFragment extends BaseMvpFragment<ISearchPresenter> implements
     private RelativeLayout container;
     //适配器
     private SearchPageExpandListAdapter adapter;
-    //静态toast
-    private static Toast toast;
 
     /**
      * 这里是 Fragment 执行的入口
@@ -93,15 +89,9 @@ public class SearchFragment extends BaseMvpFragment<ISearchPresenter> implements
         });
         //开关缓存功能
         cacheSwitcher.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 getMyActivity().getMyApp().setCachingStatus(isChecked);
-                if (isChecked) {
-                    showToast("已开启数据缓存");
-                } else {
-                    showToast("已关闭数据缓存");
-                }
             }
         });
         //点击开始查询线路详情
@@ -115,28 +105,30 @@ public class SearchFragment extends BaseMvpFragment<ISearchPresenter> implements
         });
     }
 
-    @SuppressLint("ShowToast")
-    private void showToast(String msg) {
-        if (toast == null) {
-            toast = Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT);
-        } else {
-            toast.setText(msg);
-        }
-        toast.show();
-    }
 
     @Override
     public void onDestroy() {
-        toast = null;
         super.onDestroy();
     }
 
     @Override
     protected void init() {
-        cacheSwitcher.setChecked(getMyActivity().getMyApp().isCaching());
+        refreshSwitch();
         presenter.loadGroupLineData();
     }
 
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        //刷新switch状态
+        refreshSwitch();
+    }
+
+    private void refreshSwitch() {
+        if (getMyActivity() != null && getMyActivity().getMyApp() != null) {
+            cacheSwitcher.setChecked(getMyActivity().getMyApp().isCaching());
+        }
+    }
 
     @Override
     public SearchFragment getCurrentFragment() {

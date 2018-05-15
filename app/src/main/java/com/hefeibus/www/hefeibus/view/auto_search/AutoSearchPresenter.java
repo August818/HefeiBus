@@ -1,4 +1,4 @@
-package com.hefeibus.www.hefeibus.view.auto_complete;
+package com.hefeibus.www.hefeibus.view.auto_search;
 
 import com.hefeibus.www.hefeibus.basemvp.BaseMvpPresenter;
 import com.hefeibus.www.hefeibus.entity.Item;
@@ -17,7 +17,9 @@ class AutoSearchPresenter extends BaseMvpPresenter<IAutoSearchView> implements I
 
     @Override
     public List<Item> getResultSet() {
-        database = new AppDatabase(weakView.get().getCurrentActivity());
+        if (database == null) {
+            database = new AppDatabase(weakView.get().getCurrentActivity());
+        }
         return database.queryResultSet();
     }
 }

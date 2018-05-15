@@ -1,4 +1,4 @@
-package com.hefeibus.www.hefeibus.view.auto_complete;
+package com.hefeibus.www.hefeibus.view.auto_search;
 
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
@@ -35,7 +35,6 @@ public class AutoSearchActivity extends BaseMvpActivity<IAutoSearchPresenter> im
 
     @Override
     protected void initViews() {
-        //隐藏
         findViewById(R.id.cache_switcher).setVisibility(View.INVISIBLE);
         editText = (EditText) findViewById(R.id.search_box);
         listView = (ListView) findViewById(R.id.list_view);
@@ -59,8 +58,8 @@ public class AutoSearchActivity extends BaseMvpActivity<IAutoSearchPresenter> im
 
     @Override
     protected void setAttributes() {
-        listView.setAdapter(adapter);
         setToolbar();
+        listView.setAdapter(adapter);
         editText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

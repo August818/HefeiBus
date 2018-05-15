@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primary"
+    android:orientation="vertical">
+
+    <include layout="@layout/top_toolbar" />
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/transfer_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:drawablePadding="6dp"
+            android:drawableStart="@drawable/ic_location"
+            android:gravity="center_vertical"
+            android:text="@string/transfer_start"
+            android:textColor="@color/icons"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/icons"
+            app:layout_constraintEnd_toStartOf="@+id/transfer_reverse"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/transfer_start" />
+
+        <TextView
+            android:id="@+id/transfer_stop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:drawablePadding="6dp"
+            android:drawableStart="@drawable/ic_location"
+            android:gravity="center_vertical"
+            android:text="@string/transfer_stop"
+            android:textColor="@color/icons"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view" />
+
+        <Button
+            android:id="@+id/transfer_reverse"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/ic_import_reverse"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </android.support.constraint.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/transfer_commit_search"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="3"
+            android:background="@drawable/search_background_selector"
+            android:text="@string/transfer_search_commit"
+            android:textColor="@color/primary_dark" />
+
+        <Button
+            android:id="@+id/clear"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/search_background_selector"
+            android:text="@string/clear"
+            android:textColor="@color/primary_dark" />
+
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/search_background_selector">
+
+        <!--<include layout="@layout/layout_empty" />-->
+        <ExpandableListView
+            android:id="@+id/expandable_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp" />
+
+    </RelativeLayout>
+
+
+</LinearLayout>
