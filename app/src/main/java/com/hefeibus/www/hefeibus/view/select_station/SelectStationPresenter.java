@@ -20,6 +20,8 @@ class SelectStationPresenter extends BaseMvpPresenter<ISelectStationView> implem
 
     @Override
     public void onDestroy() {
-        database.close();
+        if (database != null) {
+            database.close();
+        }
     }
 }

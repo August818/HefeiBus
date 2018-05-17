@@ -7,40 +7,126 @@
     android:orientation="vertical"
     android:padding="5dp">
 
-    <TextView
-        android:id="@+id/transfer_start"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="5dp"
-        tool:text="起点：三孝口" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="起点"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/start"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="center_vertical"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            tool:text="三孝口" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/divider" />
 
     <TextView
         android:id="@+id/transfer_info1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_marginStart="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginBottom="5dp"
         android:layout_marginTop="5dp"
-        tool:text="三孝口站上车乘坐122路 (8 站)周谷堆站下车" />
+        android:gravity="center"
+        tool:text="三孝口站上车乘坐122路（8站）在周谷堆站下车" />
 
-    <TextView
-        android:id="@+id/transfer_info2"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/transfer_container"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="5dp"
-        tool:text="乘坐111路(13 站)\n在省旅游学校站下车" />
+        android:orientation="vertical"
+        >
 
-    <TextView
-        android:id="@+id/transfer_stop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="5dp"
-        tool:text="终点：省旅游学校" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="途经"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/middle"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:gravity="center_vertical"
+                android:textAlignment="center"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                tool:text="周谷堆" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/divider" />
+
+        <TextView
+            android:id="@+id/transfer_info2"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            tool:text="周谷堆站上车乘坐111路 (13 站)省旅游学校站下车" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="终点"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/stop"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="center_vertical"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            tool:text="省旅游学校" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/divider" />
+
 
 </LinearLayout>

@@ -12,7 +12,9 @@ class AutoSearchPresenter extends BaseMvpPresenter<IAutoSearchView> implements I
 
     @Override
     public void onDestroy() {
-        database.close();
+        if (database != null) {
+            database.close();
+        }
     }
 
     @Override

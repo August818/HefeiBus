@@ -135,7 +135,9 @@ class StationDetailPresenter extends BaseMvpPresenter<IStationDetailView> implem
             disposable.dispose();
             return 1;
         }
-        database.close();
+        if (database != null) {
+            database.close();
+        }
         return 0;
     }
 }

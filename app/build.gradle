@@ -5,13 +5,13 @@ android {
         fordebug {
             keyAlias 'debug'
             keyPassword 'zxc123'
-            storeFile file('/Users/xyw-mbp/hfbusKey')
+            storeFile file('/Users/xyw/hfbusKey')
             storePassword 'android'
         }
         forrelease {
             keyAlias 'release'
             keyPassword 'zxc123'
-            storeFile file('/Users/xyw-mbp/hfbusKey')
+            storeFile file('/Users/xyw/hfbusKey')
             storePassword 'android'
         }
     }

@@ -124,7 +124,9 @@ class LineDetailPresenter extends BaseMvpPresenter<ILineDetailView> implements I
             disposable.dispose();
             return 1;
         }
-        database.close();
+        if (database != null) {
+            database.close();
+        }
         return 0;
     }
 }

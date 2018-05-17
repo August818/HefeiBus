@@ -33,7 +33,9 @@ class TransferPresenter extends BaseMvpPresenter<ITransferView> implements ITran
         if (dispose != null && !dispose.isDisposed()) {
             dispose.dispose();
         }
-        database.close();
+        if (database != null) {
+            database.close();
+        }
     }
 
     @Override
@@ -133,6 +135,7 @@ class TransferPresenter extends BaseMvpPresenter<ITransferView> implements ITran
                             @Override
                             public void run(@NonNull ITransferView view) {
                                 view.setStatus(ProgramStatus.ERROR_NETWORK_UNREACHED);
+
                             }
                         });
                     }

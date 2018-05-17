@@ -173,7 +173,7 @@ public class TransferFragment extends BaseMvpFragment<ITransferPresenter> implem
             /**
              * TODO
              */
-            presenter.commitQuery("三孝口", "省旅游学校");
+            presenter.commitQuery("省旅游学校", "孝肃桥");
             return;
         }
         if (start.equals(stop)) {
@@ -267,19 +267,12 @@ public class TransferFragment extends BaseMvpFragment<ITransferPresenter> implem
     @Override
     public void repostTransferData(List<TransferData> transferData, String start, String stop) {
         Log.d(TAG, "repostTransferData: " + transferData.size());
-        List<TransferData> dataList = new ArrayList<>();
-
         while (transferData.size() > 6) {
             transferData.remove(transferData.size() - 1);
         }
         adapter.setStartStation(start);
         adapter.setStopStation(stop);
         adapter.setDataList(transferData);
-    }
-
-    public void encounterError() {
-        Log.d(TAG, "encounterError!");
-        mLayoutManager.showErrorLayout();
     }
 
     @Override

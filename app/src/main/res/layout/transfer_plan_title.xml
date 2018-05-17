@@ -3,37 +3,55 @@
     xmlns:tool="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp"
     android:orientation="horizontal"
     android:padding="5dp">
 
     <TextView
         android:id="@+id/first_line"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_marginStart="25dp"
-        android:gravity="center_vertical"
+        android:layout_marginStart="40dp"
+        android:layout_weight="1"
         android:textSize="16sp"
-        tool:text="122" />
+        android:textStyle="bold"
+        tool:text="1" />
 
     <TextView
         android:id="@+id/type"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_marginStart="25dp"
-        android:gravity="center_vertical"
+        android:layout_weight="1"
         android:textSize="16sp"
         tool:text="转乘" />
 
 
     <TextView
         android:id="@+id/second_line"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_marginStart="25dp"
-        android:gravity="center_vertical"
+        android:layout_weight="1"
         android:textAlignment="center"
         android:textSize="16sp"
+        android:textStyle="bold"
         tool:text="111" />
 
+    <TextView
+        android:id="@+id/total"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="end"
+        android:textAlignment="gravity"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        tool:text="21" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:text="站"
+        android:textAlignment="center"
+        android:textSize="16sp" />
 </LinearLayout>
