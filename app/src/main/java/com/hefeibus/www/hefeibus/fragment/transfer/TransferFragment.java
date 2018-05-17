@@ -170,16 +170,11 @@ public class TransferFragment extends BaseMvpFragment<ITransferPresenter> implem
         Log.d(TAG, "onClick: \t起点 " + start + "\t终点 " + stop);
         if (start.equals(getString(R.string.transfer_start)) || stop.equals(getString(R.string.transfer_stop))) {
             Toast.makeText(getContext(), "请选择起点和终点", Toast.LENGTH_SHORT).show();
-            /**
-             * TODO
-             */
-            presenter.commitQuery("省旅游学校", "孝肃桥");
             return;
         }
         if (start.equals(stop)) {
             Toast.makeText(getContext(), "起点终点一致，请原地转圈～", Toast.LENGTH_SHORT).show();
             return;
-
         }
         presenter.commitQuery(start, stop);
     }
