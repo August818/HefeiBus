@@ -6,6 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.baidu.location.LocationClient;
+import com.baidu.mapapi.map.BaiduMap;
+import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.MyLocationData;
 import com.hefeibus.www.hefeibus.R;
 import com.hefeibus.www.hefeibus.basemvp.BaseMvpFragment;
 import com.hefeibus.www.hefeibus.basemvp.IPresenter;
@@ -16,7 +20,9 @@ import com.hefeibus.www.hefeibus.basemvp.IPresenter;
  */
 
 public class AroundFragment extends BaseMvpFragment {
-
+    public LocationClient mLocationClient = null;
+    private MapView mMapView;
+    private BaiduMap mBaiduMap;
 
     @Override
     protected void init() {
@@ -36,11 +42,21 @@ public class AroundFragment extends BaseMvpFragment {
 
     @Override
     protected void setAttributes() {
-
+        // 开启定位图层
+        mBaiduMap.setMyLocationEnabled(true);
+        MyLocationData locData = new MyLocationData.Builder()
+                .accuracy(5000)
+                .direction(100)
+                .latitude(31.49)
+                .longitude(117.14)
+                .build();
+        mBaiduMap.setMyLocationData(locData);
     }
 
     @Override
     protected void initViews(View view) {
+        mMapView = (MapView) view.findViewById(R.id.map);
+        mBaiduMap = mMapView.getMap();
 
     }
 
