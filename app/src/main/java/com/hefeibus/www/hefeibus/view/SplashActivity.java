@@ -2,7 +2,6 @@ package com.hefeibus.www.hefeibus.view;
 
 import android.Manifest;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -94,7 +93,7 @@ public class SplashActivity extends BaseMvpActivity {
             if (clearCache) {
                 int resource = R.raw.local;
                 InputStream inputStream = getResources().openRawResource(resource);
-                FileOutputStream outputStream = openFileOutput(Parameters.DATABASE_NAME, Context.MODE_PRIVATE);
+                FileOutputStream outputStream = openFileOutput(Parameters.DATABASE_NAME, MODE_PRIVATE);
                 int c;
                 while ((c = inputStream.read()) != -1) {
                     outputStream.write(c);

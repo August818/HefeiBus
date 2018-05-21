@@ -15,7 +15,9 @@ import com.hefeibus.www.hefeibus.basemvp.IPresenter;
  * Created by xyw-mac on 2018/3/18.
  */
 
-public class ArroundFragment extends BaseMvpFragment {
+public class AroundFragment extends BaseMvpFragment {
+
+
     @Override
     protected void init() {
 

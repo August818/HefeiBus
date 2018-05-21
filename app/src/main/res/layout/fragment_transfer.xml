@@ -99,7 +99,6 @@
             android:text="@string/clear"
             android:textColor="@color/primary_dark" />
 
-
     </LinearLayout>
 
     <RelativeLayout

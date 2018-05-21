@@ -23,7 +23,6 @@ import com.hefeibus.www.hefeibus.entity.TransferData;
 import com.hefeibus.www.hefeibus.utils.Parameters;
 import com.hefeibus.www.hefeibus.view.select_station.SelectStationActivity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import me.bakumon.statuslayoutmanager.library.StatusLayoutManager;
@@ -83,6 +82,7 @@ public class TransferFragment extends BaseMvpFragment<ITransferPresenter> implem
                 .setEmptyLayout(R.layout.layout_empty)
                 .setLoadingLayout(R.layout.layout_loading)
                 .setErrorLayout(R.layout.layout_error)
+                .setDefaultLayoutsBackgroundColor(getResources().getColor(R.color.icons))
                 .build();
     }
 

@@ -5,10 +5,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.Toolbar;
 
 import com.hefeibus.www.hefeibus.R;
 import com.hefeibus.www.hefeibus.basemvp.BaseMvpActivity;
+import com.hefeibus.www.hefeibus.fragment.AroundFragment;
+import com.hefeibus.www.hefeibus.fragment.ProfileFragment;
 import com.hefeibus.www.hefeibus.fragment.search.SearchFragment;
 import com.hefeibus.www.hefeibus.fragment.transfer.TransferFragment;
 
@@ -22,7 +23,6 @@ import java.util.List;
 
 public class MainActivity extends BaseMvpActivity<IMainPresenter> implements IMainView {
     private TabLayout mTablayout;
-    private Toolbar mToolbar;
     private ViewPager mViewPager;
 
     @Override
@@ -55,6 +55,8 @@ public class MainActivity extends BaseMvpActivity<IMainPresenter> implements IMa
         List<Fragment> list = new ArrayList<>();
         list.add(new SearchFragment());
         list.add(new TransferFragment());
+        list.add(new AroundFragment());
+        list.add(new ProfileFragment());
         MyPagerAdapter adapter = new MyPagerAdapter(getSupportFragmentManager(), list);
         mViewPager.setAdapter(adapter);
     }
@@ -64,7 +66,6 @@ public class MainActivity extends BaseMvpActivity<IMainPresenter> implements IMa
      */
     @Override
     protected void initViews() {
-        // mToolbar = (Toolbar) findViewById(R.id.component_global_toolbar);
         mTablayout = (TabLayout) findViewById(R.id.activity_main_tablayout);
         mViewPager = (ViewPager) findViewById(R.id.activity_main_content);
     }
@@ -83,7 +84,7 @@ public class MainActivity extends BaseMvpActivity<IMainPresenter> implements IMa
     class MyPagerAdapter extends FragmentPagerAdapter {
         private List<Fragment> list;
 
-        public MyPagerAdapter(FragmentManager fm, List<Fragment> list) {
+        MyPagerAdapter(FragmentManager fm, List<Fragment> list) {
             super(fm);
             this.list = list;
         }

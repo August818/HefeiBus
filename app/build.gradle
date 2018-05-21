@@ -5,13 +5,13 @@ android {
         fordebug {
             keyAlias 'debug'
             keyPassword 'zxc123'
-            storeFile file('/Users/xyw/hfbusKey')
+            storeFile file('/Users/xyw-mbp/hfbusKey')
             storePassword 'android'
         }
         forrelease {
             keyAlias 'release'
             keyPassword 'zxc123'
-            storeFile file('/Users/xyw/hfbusKey')
+            storeFile file('/Users/xyw-mbp/hfbusKey')
             storePassword 'android'
         }
     }
@@ -57,6 +57,5 @@ dependencies {
     //尝试 RxJava + Retrofit 做网络请求
     implementation 'io.reactivex.rxjava2:rxjava:2.1.12'
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
-    implementation files('src/main/jniLibs/BaiduLBS_Android.jar')
     implementation 'com.github.Bakumon:StatusLayoutManager:1.0.2'
 }
