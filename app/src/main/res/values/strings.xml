@@ -13,5 +13,11 @@
     <string name="transfer_search_commit">换乘查询</string>
     <string name="no_data_tips">暂时没有数据，来一组查询吧？</string>
     <string name="clear">清空</string>
-    <string name="info">%1$s 站上车，乘坐 %2$s 路（ %3$s 站 ）在 %4$s 站下车</string>
+    <string name="info">%1$s 站上车\n乘坐 %2$s 路（ %3$s 站 ）\n %4$s 站下车</string>
+    <string name="app_label">合肥公交</string>
+    <string name="my_site">我的收藏</string>
+    <string name="my_address">常用地址</string>
+    <string name="my_arrive_site">到站提醒</string>
+    <string name="my_clear_cache">清除缓存</string>
+    <string name="my_about">关于我</string>
 </resources>

@@ -99,6 +99,7 @@ public class TransferFragment extends BaseMvpFragment<ITransferPresenter> implem
             public void onClick(View v) {
                 startTv.setText(getString(R.string.transfer_start));
                 stopTv.setText(getString(R.string.transfer_stop));
+                mLayoutManager.showEmptyLayout();
             }
         });
 

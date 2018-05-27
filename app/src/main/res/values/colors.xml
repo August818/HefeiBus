@@ -5,13 +5,9 @@
     <!--软件 ToolBar 色调-->
     <color name="primary_dark">#0097A7</color>
     <!--辅助色-->
-    <color name="primary_light">#B2EBF2</color>
     <!--辅助色-->
-    <color name="accent">#009688</color>
     <!--文本颜色-->
-    <color name="primary_text">#212121</color>
     <!--不可用状态-->
-    <color name="secondary_text">#757575</color>
     <color name="icons">#FFFFFF</color>
     <color name="divider">#BDBDBD</color>
     <color name="orange">#FFA500</color>

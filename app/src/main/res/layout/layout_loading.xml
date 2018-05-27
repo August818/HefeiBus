@@ -6,7 +6,6 @@
     android:orientation="vertical">
 
     <ProgressBar
-        android:id="@+id/icons"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:indeterminateTint="@color/primary"

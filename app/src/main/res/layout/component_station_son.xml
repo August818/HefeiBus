@@ -16,7 +16,6 @@
         tool:text="快速公交2号线" />
 
     <TextView
-        android:id="@+id/line_station1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
@@ -26,7 +25,6 @@
         tool:text="合肥火车站 6:00-23:00" />
 
     <TextView
-        android:id="@+id/line_station2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"

@@ -59,6 +59,7 @@ public class MainActivity extends BaseMvpActivity<IMainPresenter> implements IMa
         list.add(new ProfileFragment());
         MyPagerAdapter adapter = new MyPagerAdapter(getSupportFragmentManager(), list);
         mViewPager.setAdapter(adapter);
+        mViewPager.setOffscreenPageLimit(4);
     }
 
     /**

@@ -1,28 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/primary"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="match_parent"
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="这里是账户信息界面" />
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
-    </ScrollView>
+        android:layout_gravity="center"
+        android:layout_marginTop="100dp"
+        app:srcCompat="@drawable/ic_bus" />
 
     <TextView
-        android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:layout_marginBottom="20dp"
+        android:gravity="center"
+        android:text="@string/app_label"
+        android:textAlignment="gravity"
+        android:textColor="@color/icons"
+        android:textSize="28sp" />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:drawablePadding="15dp"
+        android:drawableStart="@drawable/ic_favorite_disable_24dp"
+        android:text="@string/my_site"
+        android:textColor="@color/icons"
+        android:textSize="18sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/icons" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:drawablePadding="15dp"
+        android:drawableStart="@drawable/ic_location"
+        android:text="@string/my_address"
+        android:textColor="@color/icons"
+        android:textSize="18sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/icons" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:drawablePadding="15dp"
+        android:drawableStart="@drawable/ic_access_alarm_black_24dp"
+        android:text="@string/my_arrive_site"
+        android:textColor="@color/icons"
+        android:textSize="18sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/icons" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:drawablePadding="15dp"
+
+        android:drawableStart="@drawable/ic_my_error"
+        android:text="@string/my_clear_cache"
+        android:textColor="@color/icons"
+        android:textSize="18sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/icons" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+
+        android:drawablePadding="15dp"
+        android:drawableStart="@drawable/ic_settings_black_24dp"
+        android:text="@string/my_about"
+        android:textColor="@color/icons"
+        android:textSize="18sp" />
+
+
 </LinearLayout>

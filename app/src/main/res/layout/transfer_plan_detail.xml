@@ -41,18 +41,16 @@
     <TextView
         android:id="@+id/transfer_info1"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="5dp"
+        android:layout_height="wrap_content"
         android:gravity="center"
+        android:padding="10dp"
         tool:text="三孝口站上车乘坐122路（8站）在周谷堆站下车" />
 
     <LinearLayout
         android:id="@+id/transfer_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -88,10 +86,9 @@
         <TextView
             android:id="@+id/transfer_info2"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"
+            android:layout_height="wrap_content"
             android:gravity="center"
+            android:padding="10dp"
             tool:text="周谷堆站上车乘坐111路 (13 站)省旅游学校站下车" />
 
 
