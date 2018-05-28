@@ -85,7 +85,7 @@ public class LineDetailActivity extends BaseMvpActivity<ILineDetailPresenter> im
     protected void setAttributes() {
         setToolbar();
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        adapter.setListener(new OnItemClickListener() {
+        adapter.setListener(new OnItemClickListener<String>() {
             @Override
             public void onClick(String station) {
                 Intent intent = new Intent(LineDetailActivity.this, StationDetailActivity.class);

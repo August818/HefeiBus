@@ -48,7 +48,7 @@ public class StationDetailActivity extends BaseMvpActivity<IStationDetailPresent
     protected void setAttributes() {
         setToolbar();
         adapter = new StationDetailExpandListAdapter(this);
-        adapter.setListener(new OnItemClickListener() {
+        adapter.setListener(new OnItemClickListener<String>() {
             @Override
             public void onClick(String itemName) {
                 String name = itemName.substring(0, itemName.indexOf("路"));

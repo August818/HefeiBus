@@ -15,6 +15,7 @@ public class Parameters {
     public static final String INTENT_LINE_KEY = "pass_line_key";
     //传递站点信息键名
     public static final String INTENT_STATION_KEY = "pass_station_key";
+    public static final String INTENT_TRANSFER_KEY = "pass_transfer_key";
 
     //Key string saved in Preference
     //缓存标记
@@ -29,4 +30,10 @@ public class Parameters {
     public static final int CODE_START = 50;
     //终点 Code
     public static final int CODE_STOP = 60;
+
+    public static final String HISTORY = "history_preferences";
+
+    public static final String key_History_Line = "key_line";
+    public static final String key_History_Station = "key_station";
+    public static final String key_History_Trans = "key_trans";
 }

@@ -95,7 +95,7 @@ public class SearchFragment extends BaseMvpFragment<ISearchPresenter> implements
             }
         });
         //点击开始查询线路详情
-        adapter.setListener(new OnItemClickListener() {
+        adapter.setListener(new OnItemClickListener<String>() {
             @Override
             public void onClick(String itemName) {
                 Intent intent = new Intent(getContext(), LineDetailActivity.class);

@@ -20,4 +20,9 @@
     <string name="my_arrive_site">到站提醒</string>
     <string name="my_clear_cache">清除缓存</string>
     <string name="my_about">关于我</string>
+    <string name="recent_station">最近的车站</string>
+    <string name="history_title">历史记录</string>
+    <string name="recent_line">最近的线路</string>
+    <string name="recent_transfer">最近的换乘方案</string>
+    <string name="no_histroy">查询历史记录将显示在这里</string>
 </resources>

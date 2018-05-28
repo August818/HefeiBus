@@ -5,8 +5,8 @@
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="56dp"
-    android:layout_gravity="right"
-    app:title="合肥公交"
+    android:layout_gravity="end"
+    app:title="@string/app_name"
     app:titleTextColor="@color/icons"
     tools:showIn="@layout/fragment_search">
 

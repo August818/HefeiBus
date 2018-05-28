@@ -1,5 +1,5 @@
 package com.hefeibus.www.hefeibus.adapter;
 
-public interface OnItemClickListener {
-    void onClick(String itemName);
+public interface OnItemClickListener<T> {
+    void onClick(T itemName);
 }

@@ -45,7 +45,7 @@ public class SelectStationActivity extends BaseMvpActivity<ISelectStationPresent
     @Override
     protected void setAttributes() {
         listView.setAdapter(adapter);
-        adapter.setListener(new OnItemClickListener() {
+        adapter.setListener(new OnItemClickListener<String>() {
             @Override
             public void onClick(String itemName) {
                 hintKeyboard();

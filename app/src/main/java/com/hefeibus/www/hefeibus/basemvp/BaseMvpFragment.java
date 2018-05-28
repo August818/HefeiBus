@@ -1,11 +1,15 @@
 package com.hefeibus.www.hefeibus.basemvp;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.hefeibus.www.hefeibus.sqlite.HistoryDatabase;
+import com.hefeibus.www.hefeibus.view.mian_framework.MainActivity;
 
 /**
  * Fragment base Activity
@@ -14,6 +18,15 @@ import android.view.ViewGroup;
 
 public abstract class BaseMvpFragment<P extends IPresenter> extends Fragment implements IView {
     protected P presenter;
+    protected MainActivity mActivity;
+    protected HistoryDatabase database;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mActivity = (MainActivity) context;
+        database = new HistoryDatabase(context);
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -72,4 +85,9 @@ public abstract class BaseMvpFragment<P extends IPresenter> extends Fragment imp
      * @return the resource id of layout resource
      */
     protected abstract int setLayoutView();
+
+    @Override
+    public HistoryDatabase getHistoryHandler() {
+        return database;
+    }
 }

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
+import com.hefeibus.www.hefeibus.sqlite.HistoryDatabase;
 import com.hefeibus.www.hefeibus.utils.ActivityController;
 
 /**
@@ -64,5 +65,10 @@ public abstract class BaseMvpActivity<P extends IPresenter> extends AppCompatAct
         super.onDestroy();
         if (presenter != null) presenter.onDetach();
         ActivityController.getInstance().remove(this);
+    }
+
+    @Override
+    public HistoryDatabase getHistoryHandler() {
+        return null;
     }
 }

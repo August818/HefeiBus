@@ -8,10 +8,13 @@ import android.support.v4.view.ViewPager;
 
 import com.hefeibus.www.hefeibus.R;
 import com.hefeibus.www.hefeibus.basemvp.BaseMvpActivity;
-import com.hefeibus.www.hefeibus.fragment.AroundFragment;
+import com.hefeibus.www.hefeibus.basemvp.TransferHandler;
+import com.hefeibus.www.hefeibus.entity.Wrapper;
+import com.hefeibus.www.hefeibus.fragment.history.HistoryFragment;
 import com.hefeibus.www.hefeibus.fragment.ProfileFragment;
 import com.hefeibus.www.hefeibus.fragment.search.SearchFragment;
 import com.hefeibus.www.hefeibus.fragment.transfer.TransferFragment;
+import com.hefeibus.www.hefeibus.sqlite.HistoryDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +27,7 @@ import java.util.List;
 public class MainActivity extends BaseMvpActivity<IMainPresenter> implements IMainView {
     private TabLayout mTablayout;
     private ViewPager mViewPager;
+    private MyPagerAdapter adapter;
 
     @Override
     protected void init() {
@@ -55,9 +59,9 @@ public class MainActivity extends BaseMvpActivity<IMainPresenter> implements IMa
         List<Fragment> list = new ArrayList<>();
         list.add(new SearchFragment());
         list.add(new TransferFragment());
-        list.add(new AroundFragment());
+        list.add(new HistoryFragment());
         list.add(new ProfileFragment());
-        MyPagerAdapter adapter = new MyPagerAdapter(getSupportFragmentManager(), list);
+        adapter = new MyPagerAdapter(getSupportFragmentManager(), list);
         mViewPager.setAdapter(adapter);
         mViewPager.setOffscreenPageLimit(4);
     }
@@ -77,6 +81,16 @@ public class MainActivity extends BaseMvpActivity<IMainPresenter> implements IMa
     @Override
     protected int setLayoutView() {
         return R.layout.activity_main;
+    }
+
+    public ViewPager getViewPager() {
+        return mViewPager;
+    }
+
+    public void requestTransferOutSide(Wrapper wrapper) {
+        mViewPager.setCurrentItem(1, true);
+        TransferHandler handler = (TransferHandler) adapter.getItem(1);
+        handler.requestFromOutside(wrapper.getStart(), wrapper.getStop());
     }
 
     /**

@@ -18,6 +18,7 @@ import com.hefeibus.www.hefeibus.R;
 import com.hefeibus.www.hefeibus.adapter.TransferPlanExpandListAdapter;
 import com.hefeibus.www.hefeibus.basemvp.App;
 import com.hefeibus.www.hefeibus.basemvp.BaseMvpFragment;
+import com.hefeibus.www.hefeibus.basemvp.TransferHandler;
 import com.hefeibus.www.hefeibus.entity.ProgramStatus;
 import com.hefeibus.www.hefeibus.entity.TransferData;
 import com.hefeibus.www.hefeibus.utils.Parameters;
@@ -34,7 +35,7 @@ import static android.app.Activity.RESULT_OK;
  * Created by xyw-mac on 2018/3/18.
  */
 
-public class TransferFragment extends BaseMvpFragment<ITransferPresenter> implements ITransferView {
+public class TransferFragment extends BaseMvpFragment<ITransferPresenter> implements ITransferView, TransferHandler {
     private static final String TAG = "TransferFragment";
     private Switch cacheSwitcher;
     private TextView startTv, stopTv;
@@ -162,7 +163,7 @@ public class TransferFragment extends BaseMvpFragment<ITransferPresenter> implem
         });
     }
 
-    /**
+    /*
      * 执行查询条件
      */
     private void performQuery() {
@@ -285,5 +286,12 @@ public class TransferFragment extends BaseMvpFragment<ITransferPresenter> implem
 
     public App getMyApp() {
         return getMyActivity().getMyApp();
+    }
+
+    @Override
+    public void requestFromOutside(String start, String stop) {
+        startTv.setText(start);
+        stopTv.setText(stop);
+        commitBtn.callOnClick();
     }
 }
