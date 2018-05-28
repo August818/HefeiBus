@@ -55,7 +55,7 @@ public class TransferFragment extends BaseMvpFragment<ITransferPresenter> implem
 
     @Override
     protected ITransferPresenter onPresenterCreated() {
-        return new TransferPresenter();
+        return new TransferPresenter(database);
     }
 
     @Override

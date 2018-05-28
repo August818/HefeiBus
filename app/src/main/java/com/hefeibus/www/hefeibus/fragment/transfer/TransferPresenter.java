@@ -9,6 +9,7 @@ import com.hefeibus.www.hefeibus.entity.TransferData;
 import com.hefeibus.www.hefeibus.entity.Type;
 import com.hefeibus.www.hefeibus.network.Network;
 import com.hefeibus.www.hefeibus.sqlite.AppDatabase;
+import com.hefeibus.www.hefeibus.sqlite.HistoryDatabase;
 import com.hefeibus.www.hefeibus.utils.NoSuchDataException;
 
 import java.util.List;
@@ -27,6 +28,12 @@ class TransferPresenter extends BaseMvpPresenter<ITransferView> implements ITran
     private AppDatabase database;
     private String type = Type.换乘查询.getType();
     private boolean isLocal;
+    private HistoryDatabase historyDatabase;
+
+    TransferPresenter(HistoryDatabase historyDatabase) {
+        this.historyDatabase = historyDatabase;
+    }
+
 
     @Override
     public void onDestroy() {

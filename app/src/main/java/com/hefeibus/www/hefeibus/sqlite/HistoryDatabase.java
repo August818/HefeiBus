@@ -14,4 +14,12 @@ public class HistoryDatabase {
     public void requestHistory() {
 
     }
+
+    public void appendLine(String lineName) {
+
+    }
+
+    public void appendStation(String station) {
+
+    }
 }

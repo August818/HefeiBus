@@ -7,6 +7,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.baidu.mapapi.SDKInitializer;
+import com.hefeibus.www.hefeibus.sqlite.HistoryDatabase;
 import com.hefeibus.www.hefeibus.utils.Parameters;
 
 public class App extends Application {
@@ -14,6 +15,7 @@ public class App extends Application {
     private static final String TAG = "App";
     private boolean isCaching;
     private Toast toast;
+    private HistoryDatabase database;
 
     @Override
     public void onCreate() {
@@ -21,6 +23,7 @@ public class App extends Application {
         //注册百度Api
         SDKInitializer.initialize(this);
         initCacheStatus();
+        database = new HistoryDatabase(this);
     }
 
     /**
@@ -76,4 +79,7 @@ public class App extends Application {
     }
 
 
+    public HistoryDatabase getHistoryDataBase() {
+        return database;
+    }
 }

@@ -14,10 +14,12 @@ import com.hefeibus.www.hefeibus.utils.ActivityController;
 
 public abstract class BaseMvpActivity<P extends IPresenter> extends AppCompatActivity implements IView {
     protected P presenter;
+    protected HistoryDatabase database;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        database = getMyApp().getHistoryDataBase();
         presenter = onCreatePresenter();
         if (presenter != null) presenter.onAttach(this);
         ActivityController.getInstance().add(this);

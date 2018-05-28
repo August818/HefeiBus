@@ -33,7 +33,7 @@ public class StationDetailActivity extends BaseMvpActivity<IStationDetailPresent
 
     @Override
     protected IStationDetailPresenter onCreatePresenter() {
-        return new StationDetailPresenter();
+        return new StationDetailPresenter(database);
     }
 
     @Override

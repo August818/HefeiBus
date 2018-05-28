@@ -8,6 +8,8 @@ import com.hefeibus.www.hefeibus.entity.LineData;
 import com.hefeibus.www.hefeibus.entity.Type;
 import com.hefeibus.www.hefeibus.network.Network;
 import com.hefeibus.www.hefeibus.sqlite.AppDatabase;
+import com.hefeibus.www.hefeibus.sqlite.DatabaseHelper;
+import com.hefeibus.www.hefeibus.sqlite.HistoryDatabase;
 import com.hefeibus.www.hefeibus.utils.NoSuchDataException;
 
 import io.reactivex.Observable;
@@ -23,7 +25,11 @@ class LineDetailPresenter extends BaseMvpPresenter<ILineDetailView> implements I
     private AppDatabase database;
     private String type = Type.线路查询.getType();
     private Disposable disposable;
+    private HistoryDatabase historyDatabase;
 
+    LineDetailPresenter(HistoryDatabase database) {
+        historyDatabase = database;
+    }
 
     @Override
     public void queryLineDetail(final String lineName) {
@@ -86,6 +92,7 @@ class LineDetailPresenter extends BaseMvpPresenter<ILineDetailView> implements I
                 .subscribe(new Consumer<LineData>() {
                     @Override
                     public void accept(final LineData lineData) {
+                        historyDatabase.appendLine(lineData.getLineName());
                         ifViewAttached(new ViewAction<ILineDetailView>() {
                             @Override
                             public void run(@NonNull ILineDetailView view) {

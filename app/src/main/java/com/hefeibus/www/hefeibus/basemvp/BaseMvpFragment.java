@@ -25,7 +25,7 @@ public abstract class BaseMvpFragment<P extends IPresenter> extends Fragment imp
     public void onAttach(Context context) {
         super.onAttach(context);
         mActivity = (MainActivity) context;
-        database = new HistoryDatabase(context);
+        database = mActivity.database;
     }
 
     @Override
