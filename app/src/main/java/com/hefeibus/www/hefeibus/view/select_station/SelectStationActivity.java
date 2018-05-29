@@ -13,7 +13,7 @@ import android.widget.ListView;
 import com.hefeibus.www.hefeibus.R;
 import com.hefeibus.www.hefeibus.adapter.OnItemClickListener;
 import com.hefeibus.www.hefeibus.adapter.SelectStationListAdapter;
-import com.hefeibus.www.hefeibus.basemvp.BaseMvpActivity;
+import com.hefeibus.www.hefeibus.base.BaseMvpActivity;
 import com.hefeibus.www.hefeibus.utils.Parameters;
 
 import java.util.List;
@@ -32,7 +32,7 @@ public class SelectStationActivity extends BaseMvpActivity<ISelectStationPresent
 
     @Override
     protected ISelectStationPresenter onCreatePresenter() {
-        return new SelectStationPresenter();
+        return new SelectStationPresenter(mAppDatabase);
     }
 
     @Override
@@ -86,12 +86,6 @@ public class SelectStationActivity extends BaseMvpActivity<ISelectStationPresent
     protected void init() {
         List<String> resultSet = presenter.getStationSet();
         adapter.setResultSet(resultSet);
-    }
-
-    @Override
-    protected void onDestroy() {
-        presenter.onDestroy();
-        super.onDestroy();
     }
 
     @Override

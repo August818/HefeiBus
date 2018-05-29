@@ -1,4 +1,4 @@
-package com.hefeibus.www.hefeibus.basemvp;
+package com.hefeibus.www.hefeibus.base;
 
 public interface IPresenter<V extends IView> {
 

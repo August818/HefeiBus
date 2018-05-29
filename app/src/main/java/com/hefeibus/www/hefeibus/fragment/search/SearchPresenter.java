@@ -2,7 +2,7 @@ package com.hefeibus.www.hefeibus.fragment.search;
 
 import android.support.annotation.NonNull;
 
-import com.hefeibus.www.hefeibus.basemvp.BaseMvpPresenter;
+import com.hefeibus.www.hefeibus.base.BaseMvpPresenter;
 import com.hefeibus.www.hefeibus.entity.GroupInfo;
 import com.hefeibus.www.hefeibus.sqlite.AppDatabase;
 

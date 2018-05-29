@@ -1,27 +1,20 @@
 package com.hefeibus.www.hefeibus.view.auto_search;
 
-import com.hefeibus.www.hefeibus.basemvp.BaseMvpPresenter;
+import com.hefeibus.www.hefeibus.base.BaseMvpPresenter;
 import com.hefeibus.www.hefeibus.entity.Item;
 import com.hefeibus.www.hefeibus.sqlite.AppDatabase;
 
 import java.util.List;
 
 class AutoSearchPresenter extends BaseMvpPresenter<IAutoSearchView> implements IAutoSearchPresenter {
+    private AppDatabase mAppDatabase;
 
-    private AppDatabase database;
-
-    @Override
-    public void onDestroy() {
-        if (database != null) {
-            database.close();
-        }
+    AutoSearchPresenter(AppDatabase mAppDatabase) {
+        this.mAppDatabase = mAppDatabase;
     }
 
     @Override
     public List<Item> getResultSet() {
-        if (database == null) {
-            database = new AppDatabase(weakView.get().getCurrentActivity());
-        }
-        return database.queryResultSet();
+        return mAppDatabase.queryResultSet();
     }
 }

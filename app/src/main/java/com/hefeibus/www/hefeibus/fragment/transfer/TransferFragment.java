@@ -16,9 +16,9 @@ import android.widget.Toast;
 
 import com.hefeibus.www.hefeibus.R;
 import com.hefeibus.www.hefeibus.adapter.TransferPlanExpandListAdapter;
-import com.hefeibus.www.hefeibus.basemvp.App;
-import com.hefeibus.www.hefeibus.basemvp.BaseMvpFragment;
-import com.hefeibus.www.hefeibus.basemvp.TransferHandler;
+import com.hefeibus.www.hefeibus.base.App;
+import com.hefeibus.www.hefeibus.base.BaseMvpFragment;
+import com.hefeibus.www.hefeibus.base.TransferHandler;
 import com.hefeibus.www.hefeibus.entity.ProgramStatus;
 import com.hefeibus.www.hefeibus.entity.TransferData;
 import com.hefeibus.www.hefeibus.utils.Parameters;

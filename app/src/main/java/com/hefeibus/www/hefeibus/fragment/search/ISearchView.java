@@ -1,6 +1,6 @@
 package com.hefeibus.www.hefeibus.fragment.search;
 
-import com.hefeibus.www.hefeibus.basemvp.IView;
+import com.hefeibus.www.hefeibus.base.IView;
 import com.hefeibus.www.hefeibus.entity.GroupInfo;
 
 import java.util.HashMap;

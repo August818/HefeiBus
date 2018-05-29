@@ -1,7 +1,7 @@
 package com.hefeibus.www.hefeibus.utils;
 
 public class Parameters {
-    //local database file name
+    //local mHistoryDatabase file name
     public static final String DATABASE_NAME = "local.db";
 
     //query city name

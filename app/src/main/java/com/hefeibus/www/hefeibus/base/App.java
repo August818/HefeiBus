@@ -1,4 +1,4 @@
-package com.hefeibus.www.hefeibus.basemvp;
+package com.hefeibus.www.hefeibus.base;
 
 import android.annotation.SuppressLint;
 import android.app.Application;
@@ -7,6 +7,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.baidu.mapapi.SDKInitializer;
+import com.hefeibus.www.hefeibus.sqlite.AppDatabase;
 import com.hefeibus.www.hefeibus.sqlite.HistoryDatabase;
 import com.hefeibus.www.hefeibus.utils.Parameters;
 
@@ -15,7 +16,8 @@ public class App extends Application {
     private static final String TAG = "App";
     private boolean isCaching;
     private Toast toast;
-    private HistoryDatabase database;
+    private HistoryDatabase mHistoryDatabase;
+    private AppDatabase mAppDatabase;
 
     @Override
     public void onCreate() {
@@ -23,7 +25,8 @@ public class App extends Application {
         //注册百度Api
         SDKInitializer.initialize(this);
         initCacheStatus();
-        database = new HistoryDatabase(this);
+        mHistoryDatabase = new HistoryDatabase(this);
+        mAppDatabase = new AppDatabase(this);
     }
 
     /**
@@ -79,7 +82,21 @@ public class App extends Application {
     }
 
 
+    /**
+     * 全局获取历史记录的 DB 操作对象
+     *
+     * @return db helper
+     */
     public HistoryDatabase getHistoryDataBase() {
-        return database;
+        return mHistoryDatabase;
+    }
+
+    /**
+     * 全局获取历史记录的 DB 操作对象
+     *
+     * @return db helper
+     */
+    public AppDatabase getAppDatabase() {
+        return mAppDatabase;
     }
 }

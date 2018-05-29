@@ -13,7 +13,7 @@ import android.widget.Button;
 import com.hefeibus.www.hefeibus.R;
 import com.hefeibus.www.hefeibus.adapter.DisplayHistoryAdapter;
 import com.hefeibus.www.hefeibus.adapter.OnItemClickListener;
-import com.hefeibus.www.hefeibus.basemvp.BaseMvpFragment;
+import com.hefeibus.www.hefeibus.base.BaseMvpFragment;
 import com.hefeibus.www.hefeibus.entity.Wrapper;
 import com.hefeibus.www.hefeibus.utils.Parameters;
 import com.hefeibus.www.hefeibus.view.line_detail.LineDetailActivity;

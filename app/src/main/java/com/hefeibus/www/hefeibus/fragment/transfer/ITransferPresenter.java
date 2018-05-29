@@ -1,6 +1,6 @@
 package com.hefeibus.www.hefeibus.fragment.transfer;
 
-import com.hefeibus.www.hefeibus.basemvp.IPresenter;
+import com.hefeibus.www.hefeibus.base.IPresenter;
 
 interface ITransferPresenter extends IPresenter<ITransferView> {
     void onDestroy();

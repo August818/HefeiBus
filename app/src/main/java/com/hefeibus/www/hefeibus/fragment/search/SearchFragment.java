@@ -16,7 +16,7 @@ import android.widget.TextView;
 import com.hefeibus.www.hefeibus.R;
 import com.hefeibus.www.hefeibus.adapter.OnItemClickListener;
 import com.hefeibus.www.hefeibus.adapter.SearchPageExpandListAdapter;
-import com.hefeibus.www.hefeibus.basemvp.BaseMvpFragment;
+import com.hefeibus.www.hefeibus.base.BaseMvpFragment;
 import com.hefeibus.www.hefeibus.entity.GroupInfo;
 import com.hefeibus.www.hefeibus.utils.Parameters;
 import com.hefeibus.www.hefeibus.view.auto_search.AutoSearchActivity;

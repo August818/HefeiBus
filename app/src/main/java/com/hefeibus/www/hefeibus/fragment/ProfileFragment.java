@@ -7,8 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.hefeibus.www.hefeibus.R;
-import com.hefeibus.www.hefeibus.basemvp.BaseMvpFragment;
-import com.hefeibus.www.hefeibus.basemvp.IPresenter;
+import com.hefeibus.www.hefeibus.base.BaseMvpFragment;
+import com.hefeibus.www.hefeibus.base.IPresenter;
 
 /**
  * 个人资料界面

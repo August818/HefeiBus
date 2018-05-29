@@ -1,4 +1,4 @@
-package com.hefeibus.www.hefeibus.basemvp;
+package com.hefeibus.www.hefeibus.base;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -25,7 +25,7 @@ public abstract class BaseMvpFragment<P extends IPresenter> extends Fragment imp
     public void onAttach(Context context) {
         super.onAttach(context);
         mActivity = (MainActivity) context;
-        database = mActivity.database;
+        database = mActivity.mHistoryDatabase;
     }
 
     @Override

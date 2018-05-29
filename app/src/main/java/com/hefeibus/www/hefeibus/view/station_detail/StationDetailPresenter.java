@@ -3,7 +3,7 @@ package com.hefeibus.www.hefeibus.view.station_detail;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.hefeibus.www.hefeibus.basemvp.BaseMvpPresenter;
+import com.hefeibus.www.hefeibus.base.BaseMvpPresenter;
 import com.hefeibus.www.hefeibus.entity.StationData;
 import com.hefeibus.www.hefeibus.entity.Type;
 import com.hefeibus.www.hefeibus.network.Network;
@@ -29,16 +29,15 @@ class StationDetailPresenter extends BaseMvpPresenter<IStationDetailView> implem
     private boolean isLocal;
     private HistoryDatabase historyDatabase;
 
-    StationDetailPresenter(HistoryDatabase historyDatabase) {
+
+    StationDetailPresenter(AppDatabase database, HistoryDatabase historyDatabase) {
+        this.database = database;
         this.historyDatabase = historyDatabase;
     }
 
 
     @Override
     public void queryStationDetail(final String station) {
-        if (database == null) {
-            database = new AppDatabase(weakView.get().getCurrentActivity());
-        }
 
         disposable = Observable.just(station)
                 .doOnSubscribe(new Consumer<Disposable>() {
@@ -142,9 +141,6 @@ class StationDetailPresenter extends BaseMvpPresenter<IStationDetailView> implem
         if (disposable != null && !disposable.isDisposed()) {
             disposable.dispose();
             return 1;
-        }
-        if (database != null) {
-            database.close();
         }
         return 0;
     }

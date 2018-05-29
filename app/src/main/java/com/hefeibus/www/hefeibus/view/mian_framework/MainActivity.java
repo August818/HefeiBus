@@ -7,14 +7,13 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 
 import com.hefeibus.www.hefeibus.R;
-import com.hefeibus.www.hefeibus.basemvp.BaseMvpActivity;
-import com.hefeibus.www.hefeibus.basemvp.TransferHandler;
+import com.hefeibus.www.hefeibus.base.BaseMvpActivity;
+import com.hefeibus.www.hefeibus.base.TransferHandler;
 import com.hefeibus.www.hefeibus.entity.Wrapper;
-import com.hefeibus.www.hefeibus.fragment.history.HistoryFragment;
 import com.hefeibus.www.hefeibus.fragment.ProfileFragment;
+import com.hefeibus.www.hefeibus.fragment.history.HistoryFragment;
 import com.hefeibus.www.hefeibus.fragment.search.SearchFragment;
 import com.hefeibus.www.hefeibus.fragment.transfer.TransferFragment;
-import com.hefeibus.www.hefeibus.sqlite.HistoryDatabase;
 
 import java.util.ArrayList;
 import java.util.List;

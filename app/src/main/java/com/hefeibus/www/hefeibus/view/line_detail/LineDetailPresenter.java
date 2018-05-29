@@ -3,12 +3,11 @@ package com.hefeibus.www.hefeibus.view.line_detail;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.hefeibus.www.hefeibus.basemvp.BaseMvpPresenter;
+import com.hefeibus.www.hefeibus.base.BaseMvpPresenter;
 import com.hefeibus.www.hefeibus.entity.LineData;
 import com.hefeibus.www.hefeibus.entity.Type;
 import com.hefeibus.www.hefeibus.network.Network;
 import com.hefeibus.www.hefeibus.sqlite.AppDatabase;
-import com.hefeibus.www.hefeibus.sqlite.DatabaseHelper;
 import com.hefeibus.www.hefeibus.sqlite.HistoryDatabase;
 import com.hefeibus.www.hefeibus.utils.NoSuchDataException;
 
@@ -22,20 +21,18 @@ import io.reactivex.schedulers.Schedulers;
 
 class LineDetailPresenter extends BaseMvpPresenter<ILineDetailView> implements ILineDetailPresenter {
     private static final String TAG = "LineDetailPresenter";
-    private AppDatabase database;
+    private AppDatabase mAppDatabase;
+    private HistoryDatabase historyDatabase;
     private String type = Type.线路查询.getType();
     private Disposable disposable;
-    private HistoryDatabase historyDatabase;
 
-    LineDetailPresenter(HistoryDatabase database) {
+    LineDetailPresenter(HistoryDatabase database, AppDatabase appDatabase) {
         historyDatabase = database;
+        mAppDatabase = appDatabase;
     }
 
     @Override
     public void queryLineDetail(final String lineName) {
-        if (database == null) {
-            database = new AppDatabase(weakView.get().getCurrentActivity());
-        }
         disposable = Observable.just(lineName)
                 .doOnSubscribe(new Consumer<Disposable>() {
                     @Override
@@ -118,11 +115,11 @@ class LineDetailPresenter extends BaseMvpPresenter<ILineDetailView> implements I
     }
 
     private LineData queryLineFromLocal(String lineName) {
-        return database.queryLineFromLocal(lineName);
+        return mAppDatabase.queryLineFromLocal(lineName);
     }
 
     private void writeLineToLocal(LineData lineData) {
-        database.writeLineToLocal(lineData);
+        mAppDatabase.writeLineToLocal(lineData);
     }
 
     @Override
@@ -130,9 +127,6 @@ class LineDetailPresenter extends BaseMvpPresenter<ILineDetailView> implements I
         if (disposable != null && !disposable.isDisposed()) {
             disposable.dispose();
             return 1;
-        }
-        if (database != null) {
-            database.close();
         }
         return 0;
     }

@@ -3,7 +3,7 @@ package com.hefeibus.www.hefeibus.fragment.transfer;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.hefeibus.www.hefeibus.basemvp.BaseMvpPresenter;
+import com.hefeibus.www.hefeibus.base.BaseMvpPresenter;
 import com.hefeibus.www.hefeibus.entity.ProgramStatus;
 import com.hefeibus.www.hefeibus.entity.TransferData;
 import com.hefeibus.www.hefeibus.entity.Type;
@@ -154,7 +154,7 @@ class TransferPresenter extends BaseMvpPresenter<ITransferView> implements ITran
     }
 
     private List<TransferData> queryTransferPlanFromLocal(String start, String stop) {
-        return database.queryTransferPlan(start, stop);
+        return database.queryTransferPlanFromLocal(start, stop);
     }
 
     private class TransferPojo {

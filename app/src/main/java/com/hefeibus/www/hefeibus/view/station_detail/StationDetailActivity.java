@@ -16,7 +16,7 @@ import android.widget.Toast;
 import com.hefeibus.www.hefeibus.R;
 import com.hefeibus.www.hefeibus.adapter.OnItemClickListener;
 import com.hefeibus.www.hefeibus.adapter.StationDetailExpandListAdapter;
-import com.hefeibus.www.hefeibus.basemvp.BaseMvpActivity;
+import com.hefeibus.www.hefeibus.base.BaseMvpActivity;
 import com.hefeibus.www.hefeibus.entity.StationData;
 import com.hefeibus.www.hefeibus.utils.Parameters;
 import com.hefeibus.www.hefeibus.view.line_detail.LineDetailActivity;
@@ -24,16 +24,16 @@ import com.hefeibus.www.hefeibus.view.line_detail.LineDetailActivity;
 import java.util.List;
 
 public class StationDetailActivity extends BaseMvpActivity<IStationDetailPresenter> implements IStationDetailView {
+    private static final String TAG = "StationDetailActivity";
     private TextView stationName;
     private ExpandableListView mExpandableListView;
     private StationDetailExpandListAdapter adapter;
     private Dialog mDialog;
     private Toolbar toolbar;
-    private static final String TAG = "StationDetailActivity";
 
     @Override
     protected IStationDetailPresenter onCreatePresenter() {
-        return new StationDetailPresenter(database);
+        return new StationDetailPresenter(mAppDatabase, mHistoryDatabase);
     }
 
     @Override

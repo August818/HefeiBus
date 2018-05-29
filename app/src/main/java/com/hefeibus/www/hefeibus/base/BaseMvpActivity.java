@@ -1,9 +1,10 @@
-package com.hefeibus.www.hefeibus.basemvp;
+package com.hefeibus.www.hefeibus.base;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
+import com.hefeibus.www.hefeibus.sqlite.AppDatabase;
 import com.hefeibus.www.hefeibus.sqlite.HistoryDatabase;
 import com.hefeibus.www.hefeibus.utils.ActivityController;
 
@@ -14,12 +15,14 @@ import com.hefeibus.www.hefeibus.utils.ActivityController;
 
 public abstract class BaseMvpActivity<P extends IPresenter> extends AppCompatActivity implements IView {
     protected P presenter;
-    protected HistoryDatabase database;
+    protected HistoryDatabase mHistoryDatabase;
+    protected AppDatabase mAppDatabase;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        database = getMyApp().getHistoryDataBase();
+        mHistoryDatabase = getMyApp().getHistoryDataBase();
+        mAppDatabase = getMyApp().getAppDatabase();
         presenter = onCreatePresenter();
         if (presenter != null) presenter.onAttach(this);
         ActivityController.getInstance().add(this);

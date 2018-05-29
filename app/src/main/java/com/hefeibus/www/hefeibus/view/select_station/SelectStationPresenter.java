@@ -1,6 +1,6 @@
 package com.hefeibus.www.hefeibus.view.select_station;
 
-import com.hefeibus.www.hefeibus.basemvp.BaseMvpPresenter;
+import com.hefeibus.www.hefeibus.base.BaseMvpPresenter;
 import com.hefeibus.www.hefeibus.sqlite.AppDatabase;
 
 import java.util.List;
@@ -10,18 +10,14 @@ class SelectStationPresenter extends BaseMvpPresenter<ISelectStationView> implem
     private static final String TAG = "SelectStationPresenter";
     private AppDatabase database;
 
-    @Override
-    public List<String> getStationSet() {
-        if (database == null) {
-            database = new AppDatabase(weakView.get().getCurrentActivity());
-        }
-        return database.getStationIndex();
+    SelectStationPresenter(AppDatabase database) {
+        this.database = database;
     }
 
     @Override
-    public void onDestroy() {
-        if (database != null) {
-            database.close();
-        }
+    public List<String> getStationSet() {
+        return database.getStationIndex();
     }
+
+
 }

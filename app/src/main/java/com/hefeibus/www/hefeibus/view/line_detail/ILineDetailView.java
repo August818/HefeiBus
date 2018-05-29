@@ -1,6 +1,6 @@
 package com.hefeibus.www.hefeibus.view.line_detail;
 
-import com.hefeibus.www.hefeibus.basemvp.IView;
+import com.hefeibus.www.hefeibus.base.IView;
 import com.hefeibus.www.hefeibus.entity.LineData;
 
 interface ILineDetailView extends IView {

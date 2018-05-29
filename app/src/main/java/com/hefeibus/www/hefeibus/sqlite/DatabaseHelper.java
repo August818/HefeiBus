@@ -68,7 +68,7 @@ public class DatabaseHelper {
     public void close() {
         if (database != null && database.isOpen()) {
             database.close();
-            Log.d(TAG, "close: database close successfully");
+            Log.d(TAG, "close: mHistoryDatabase close successfully");
         }
     }
 }

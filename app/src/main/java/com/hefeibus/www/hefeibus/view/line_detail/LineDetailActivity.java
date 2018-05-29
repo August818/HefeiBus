@@ -19,7 +19,7 @@ import android.widget.Toast;
 import com.hefeibus.www.hefeibus.R;
 import com.hefeibus.www.hefeibus.adapter.LineDetailAdapter;
 import com.hefeibus.www.hefeibus.adapter.OnItemClickListener;
-import com.hefeibus.www.hefeibus.basemvp.BaseMvpActivity;
+import com.hefeibus.www.hefeibus.base.BaseMvpActivity;
 import com.hefeibus.www.hefeibus.entity.LineData;
 import com.hefeibus.www.hefeibus.utils.Parameters;
 import com.hefeibus.www.hefeibus.view.station_detail.StationDetailActivity;
@@ -54,7 +54,7 @@ public class LineDetailActivity extends BaseMvpActivity<ILineDetailPresenter> im
 
     @Override
     protected ILineDetailPresenter onCreatePresenter() {
-        return new LineDetailPresenter(database);
+        return new LineDetailPresenter(mHistoryDatabase, mAppDatabase);
     }
 
 

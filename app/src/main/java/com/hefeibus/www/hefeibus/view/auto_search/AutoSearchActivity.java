@@ -11,7 +11,7 @@ import android.widget.ListView;
 
 import com.hefeibus.www.hefeibus.R;
 import com.hefeibus.www.hefeibus.adapter.AutoSearchListAdapter;
-import com.hefeibus.www.hefeibus.basemvp.BaseMvpActivity;
+import com.hefeibus.www.hefeibus.base.BaseMvpActivity;
 import com.hefeibus.www.hefeibus.entity.Item;
 
 import java.util.List;
@@ -30,7 +30,7 @@ public class AutoSearchActivity extends BaseMvpActivity<IAutoSearchPresenter> im
 
     @Override
     protected IAutoSearchPresenter onCreatePresenter() {
-        return new AutoSearchPresenter();
+        return new AutoSearchPresenter(mAppDatabase);
     }
 
     @Override
@@ -82,12 +82,6 @@ public class AutoSearchActivity extends BaseMvpActivity<IAutoSearchPresenter> im
     protected void init() {
         List<Item> resultSet = presenter.getResultSet();
         adapter.setResultSet(resultSet);
-    }
-
-    @Override
-    protected void onDestroy() {
-        presenter.onDestroy();
-        super.onDestroy();
     }
 
     @Override

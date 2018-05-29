@@ -1,6 +1,6 @@
 package com.hefeibus.www.hefeibus.fragment.search;
 
-import com.hefeibus.www.hefeibus.basemvp.IPresenter;
+import com.hefeibus.www.hefeibus.base.IPresenter;
 
 interface ISearchPresenter extends IPresenter<ISearchView> {
     /**

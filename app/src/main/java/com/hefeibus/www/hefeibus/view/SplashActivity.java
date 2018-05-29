@@ -17,8 +17,8 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.hefeibus.www.hefeibus.R;
-import com.hefeibus.www.hefeibus.basemvp.BaseMvpActivity;
-import com.hefeibus.www.hefeibus.basemvp.IPresenter;
+import com.hefeibus.www.hefeibus.base.BaseMvpActivity;
+import com.hefeibus.www.hefeibus.base.IPresenter;
 import com.hefeibus.www.hefeibus.utils.ActivityController;
 import com.hefeibus.www.hefeibus.utils.Parameters;
 import com.hefeibus.www.hefeibus.view.mian_framework.MainActivity;
