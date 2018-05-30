@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.hefeibus.www.hefeibus.sqlite.HistoryDatabase;
+import com.hefeibus.www.hefeibus.sqlite.AppDatabase;
 import com.hefeibus.www.hefeibus.view.mian_framework.MainActivity;
 
 /**
@@ -19,13 +19,13 @@ import com.hefeibus.www.hefeibus.view.mian_framework.MainActivity;
 public abstract class BaseMvpFragment<P extends IPresenter> extends Fragment implements IView {
     protected P presenter;
     protected MainActivity mActivity;
-    protected HistoryDatabase database;
+    protected AppDatabase mAppDatabase;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         mActivity = (MainActivity) context;
-        database = mActivity.mHistoryDatabase;
+        mAppDatabase = mActivity.mAppDatabase;
     }
 
     @Override
@@ -86,8 +86,4 @@ public abstract class BaseMvpFragment<P extends IPresenter> extends Fragment imp
      */
     protected abstract int setLayoutView();
 
-    @Override
-    public HistoryDatabase getHistoryHandler() {
-        return database;
-    }
 }

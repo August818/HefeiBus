@@ -3,7 +3,6 @@
     xmlns:tool="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="10dp"
     android:orientation="vertical"
     android:padding="5dp">
 
@@ -15,4 +14,8 @@
         android:layout_marginStart="30dp"
         tool:text="快速公交1号线" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/divider" />
 </LinearLayout>

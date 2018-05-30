@@ -8,7 +8,6 @@ import com.hefeibus.www.hefeibus.entity.StationData;
 import com.hefeibus.www.hefeibus.entity.Type;
 import com.hefeibus.www.hefeibus.network.Network;
 import com.hefeibus.www.hefeibus.sqlite.AppDatabase;
-import com.hefeibus.www.hefeibus.sqlite.HistoryDatabase;
 import com.hefeibus.www.hefeibus.utils.NoSuchDataException;
 
 import java.util.List;
@@ -27,18 +26,15 @@ class StationDetailPresenter extends BaseMvpPresenter<IStationDetailView> implem
     private String type = Type.站点查询.getType();
     private Disposable disposable;
     private boolean isLocal;
-    private HistoryDatabase historyDatabase;
 
 
-    StationDetailPresenter(AppDatabase database, HistoryDatabase historyDatabase) {
+    StationDetailPresenter(AppDatabase database) {
         this.database = database;
-        this.historyDatabase = historyDatabase;
     }
 
 
     @Override
     public void queryStationDetail(final String station) {
-
         disposable = Observable.just(station)
                 .doOnSubscribe(new Consumer<Disposable>() {
                     @Override
@@ -97,7 +93,6 @@ class StationDetailPresenter extends BaseMvpPresenter<IStationDetailView> implem
                 .subscribe(new Consumer<List<StationData>>() {
                     @Override
                     public void accept(final List<StationData> stationData) {
-                        historyDatabase.appendStation(station);
                         ifViewAttached(new ViewAction<IStationDetailView>() {
                             @Override
                             public void run(@NonNull IStationDetailView view) {

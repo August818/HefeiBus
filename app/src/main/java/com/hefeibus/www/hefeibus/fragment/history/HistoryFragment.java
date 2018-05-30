@@ -19,6 +19,8 @@ import com.hefeibus.www.hefeibus.utils.Parameters;
 import com.hefeibus.www.hefeibus.view.line_detail.LineDetailActivity;
 import com.hefeibus.www.hefeibus.view.station_detail.StationDetailActivity;
 
+import java.util.List;
+
 /**
  * 附近界面
  * Created by xyw-mac on 2018/3/18.
@@ -40,7 +42,7 @@ public class HistoryFragment extends BaseMvpFragment<IHistoryPresenter> implemen
 
     @Override
     protected IHistoryPresenter onPresenterCreated() {
-        return new HistoryPresenter(database);
+        return new HistoryPresenter(mAppDatabase);
     }
 
 
@@ -111,7 +113,17 @@ public class HistoryFragment extends BaseMvpFragment<IHistoryPresenter> implemen
     }
 
     private void refreshData() {
-        presenter.requestHistory();
+        lineAdapter.getDataList().clear();
+        stationAdapter.getDataList().clear();
+        transAdapter.getDataList().clear();
+        presenter.getHistory();
+    }
+
+    @Override
+    public void setDatum(List<String> line, List<String> station, List<Wrapper> transfer) {
+        lineAdapter.getDataList().addAll(line);
+        stationAdapter.getDataList().addAll(station);
+        transAdapter.getDataList().addAll(transfer);
         transAdapter.notifyDataSetChanged();
         lineAdapter.notifyDataSetChanged();
         stationAdapter.notifyDataSetChanged();

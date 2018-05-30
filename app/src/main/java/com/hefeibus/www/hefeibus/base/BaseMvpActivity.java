@@ -5,7 +5,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import com.hefeibus.www.hefeibus.sqlite.AppDatabase;
-import com.hefeibus.www.hefeibus.sqlite.HistoryDatabase;
 import com.hefeibus.www.hefeibus.utils.ActivityController;
 
 /**
@@ -15,13 +14,11 @@ import com.hefeibus.www.hefeibus.utils.ActivityController;
 
 public abstract class BaseMvpActivity<P extends IPresenter> extends AppCompatActivity implements IView {
     protected P presenter;
-    protected HistoryDatabase mHistoryDatabase;
     protected AppDatabase mAppDatabase;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mHistoryDatabase = getMyApp().getHistoryDataBase();
         mAppDatabase = getMyApp().getAppDatabase();
         presenter = onCreatePresenter();
         if (presenter != null) presenter.onAttach(this);
@@ -72,8 +69,4 @@ public abstract class BaseMvpActivity<P extends IPresenter> extends AppCompatAct
         ActivityController.getInstance().remove(this);
     }
 
-    @Override
-    public HistoryDatabase getHistoryHandler() {
-        return null;
-    }
 }

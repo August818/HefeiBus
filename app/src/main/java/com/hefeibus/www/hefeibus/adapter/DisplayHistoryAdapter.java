@@ -5,8 +5,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.hefeibus.www.hefeibus.R;
+import com.hefeibus.www.hefeibus.entity.Wrapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,13 +36,20 @@ public class DisplayHistoryAdapter<T> extends RecyclerView.Adapter<DisplayHistor
         if (dataList.size() == 0) {
             view = LayoutInflater.from(mContext).inflate(R.layout.layout_histroy_empty, parent, false);
         } else {
-            view = LayoutInflater.from(mContext).inflate(R.layout.component_group_line_son, parent, false);
+            view = LayoutInflater.from(mContext).inflate(R.layout.histroy_record_item, parent, false);
         }
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(DisplayHistoryAdapter.ViewHolder holder, int position) {
+        if (dataList.size() == 0) return;
+        if (dataList.get(position) instanceof String) {
+            holder.text.setText((CharSequence) dataList.get(position));
+        } else {
+            Wrapper wrapper = (Wrapper) dataList.get(position);
+            holder.text.setText(wrapper.getStart() + " 前往 " + wrapper.getStop());
+        }
 
     }
 
@@ -54,6 +63,8 @@ public class DisplayHistoryAdapter<T> extends RecyclerView.Adapter<DisplayHistor
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
+        TextView text;
+
         ViewHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -64,6 +75,7 @@ public class DisplayHistoryAdapter<T> extends RecyclerView.Adapter<DisplayHistor
                     }
                 }
             });
+            text = (TextView) itemView.findViewById(R.id.line_name);
         }
     }
 

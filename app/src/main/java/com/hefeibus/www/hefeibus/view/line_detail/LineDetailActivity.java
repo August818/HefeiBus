@@ -54,7 +54,7 @@ public class LineDetailActivity extends BaseMvpActivity<ILineDetailPresenter> im
 
     @Override
     protected ILineDetailPresenter onCreatePresenter() {
-        return new LineDetailPresenter(mHistoryDatabase, mAppDatabase);
+        return new LineDetailPresenter(mAppDatabase);
     }
 
 

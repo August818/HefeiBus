@@ -9,6 +9,7 @@ import com.hefeibus.www.hefeibus.entity.Item;
 import com.hefeibus.www.hefeibus.entity.LineData;
 import com.hefeibus.www.hefeibus.entity.StationData;
 import com.hefeibus.www.hefeibus.entity.TransferData;
+import com.hefeibus.www.hefeibus.entity.Wrapper;
 import com.hefeibus.www.hefeibus.utils.Parameters;
 
 import java.util.ArrayList;
@@ -335,5 +336,50 @@ public class AppDatabase {
     public void close() {
         mHelper.close();
         mContext = null;
+    }
+
+    /**
+     * @return 线路记录
+     */
+    public List<String> getLineRec() {
+        List<String> var = new ArrayList<>();
+        Cursor cursor = mHelper.executeCursor(dbName,
+                "select distinct value from HistoryRecord where type = 1 limit 5", null);
+        while (cursor.moveToNext()) {
+            var.add(cursor.getString(cursor.getColumnIndex("value")));
+        }
+        cursor.close();
+        return var;
+    }
+
+    /**
+     * @return 车站记录
+     */
+    public List<String> getStationRec() {
+        List<String> var = new ArrayList<>();
+        Cursor cursor = mHelper.executeCursor(dbName,
+                "select distinct value from HistoryRecord where type = 2 limit 5", null);
+        while (cursor.moveToNext()) {
+            var.add(cursor.getString(cursor.getColumnIndex("value")));
+        }
+        cursor.close();
+        return var;
+
+    }
+
+    /**
+     * @return 换乘记录
+     */
+    public List<Wrapper> getTransferRec() {
+        List<Wrapper> var = new ArrayList<>();
+        Cursor cursor = mHelper.executeCursor(dbName,
+                "select distinct value from HistoryRecord where type = 3 limit 5", null);
+        while (cursor.moveToNext()) {
+            String var2 = cursor.getString(cursor.getColumnIndex("value"));
+            String[] var3 = var2.split("\\|");
+            var.add(new Wrapper(var3[0], var3[1]));
+        }
+        cursor.close();
+        return var;
     }
 }

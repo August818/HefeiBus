@@ -9,7 +9,6 @@ import com.hefeibus.www.hefeibus.entity.TransferData;
 import com.hefeibus.www.hefeibus.entity.Type;
 import com.hefeibus.www.hefeibus.network.Network;
 import com.hefeibus.www.hefeibus.sqlite.AppDatabase;
-import com.hefeibus.www.hefeibus.sqlite.HistoryDatabase;
 import com.hefeibus.www.hefeibus.utils.NoSuchDataException;
 
 import java.util.List;
@@ -25,25 +24,14 @@ import io.reactivex.schedulers.Schedulers;
 class TransferPresenter extends BaseMvpPresenter<ITransferView> implements ITransferPresenter {
     private static final String TAG = "TransferPresenter";
     private Disposable dispose;
-    private AppDatabase database;
+    private AppDatabase mAppDatabase;
     private String type = Type.换乘查询.getType();
     private boolean isLocal;
-    private HistoryDatabase historyDatabase;
 
-    TransferPresenter(HistoryDatabase historyDatabase) {
-        this.historyDatabase = historyDatabase;
+    TransferPresenter(AppDatabase mAppDatabase) {
+        this.mAppDatabase = mAppDatabase;
     }
 
-
-    @Override
-    public void onDestroy() {
-        if (dispose != null && !dispose.isDisposed()) {
-            dispose.dispose();
-        }
-        if (database != null) {
-            database.close();
-        }
-    }
 
     @Override
     public void onCancel() {
@@ -61,8 +49,8 @@ class TransferPresenter extends BaseMvpPresenter<ITransferView> implements ITran
 
     @Override
     public void commitQuery(final String start, final String stop) {
-        if (database == null) {
-            database = new AppDatabase(weakView.get().getCurrentActivity().getContext());
+        if (mAppDatabase == null) {
+            mAppDatabase = new AppDatabase(weakView.get().getCurrentActivity().getContext());
         }
         TransferPojo transferPojo = new TransferPojo(start, stop);
 
@@ -150,14 +138,21 @@ class TransferPresenter extends BaseMvpPresenter<ITransferView> implements ITran
     }
 
     private void writeTransferPlanToLocal(String start, String stop) {
-        database.writeTransferPlanToLocal(start, stop);
+        mAppDatabase.writeTransferPlanToLocal(start, stop);
     }
 
     private List<TransferData> queryTransferPlanFromLocal(String start, String stop) {
-        return database.queryTransferPlanFromLocal(start, stop);
+        return mAppDatabase.queryTransferPlanFromLocal(start, stop);
     }
 
+    @Override
+    public void onDestroy() {
+        if (dispose != null && !dispose.isDisposed()) {
+            dispose.dispose();
+        }
+    }
     private class TransferPojo {
+
         private String start, stop;
 
         private TransferPojo(String start, String stop) {
