@@ -104,6 +104,7 @@ class TransferPresenter extends BaseMvpPresenter<ITransferView> implements ITran
                 .subscribe(new Consumer<List<TransferData>>() {
                     @Override
                     public void accept(final List<TransferData> transferData) {
+                        mAppDatabase.writeTransferHistory(start, stop);
                         ifViewAttached(new ViewAction<ITransferView>() {
                             @Override
                             public void run(@NonNull ITransferView view) {
@@ -151,6 +152,7 @@ class TransferPresenter extends BaseMvpPresenter<ITransferView> implements ITran
             dispose.dispose();
         }
     }
+
     private class TransferPojo {
 
         private String start, stop;

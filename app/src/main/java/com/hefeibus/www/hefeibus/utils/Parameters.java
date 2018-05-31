@@ -36,4 +36,5 @@ public class Parameters {
     public static final String key_History_Line = "key_line";
     public static final String key_History_Station = "key_station";
     public static final String key_History_Trans = "key_trans";
+    public static final String key_History_count = "key_record_count";
 }

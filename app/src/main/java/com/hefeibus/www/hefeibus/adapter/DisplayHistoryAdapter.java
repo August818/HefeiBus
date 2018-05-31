@@ -13,10 +13,13 @@ import com.hefeibus.www.hefeibus.entity.Wrapper;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DisplayHistoryAdapter<T> extends RecyclerView.Adapter<DisplayHistoryAdapter.ViewHolder> {
+public class DisplayHistoryAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context mContext;
     private List<T> dataList = new ArrayList<>();
     private OnItemClickListener<T> listener;
+
+    private int empty = 0;
+    private int nonNull = 1;
 
     public DisplayHistoryAdapter(Context mContext) {
         this.mContext = mContext;
@@ -31,26 +34,33 @@ public class DisplayHistoryAdapter<T> extends RecyclerView.Adapter<DisplayHistor
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view;
-        if (dataList.size() == 0) {
-            view = LayoutInflater.from(mContext).inflate(R.layout.layout_histroy_empty, parent, false);
-        } else {
-            view = LayoutInflater.from(mContext).inflate(R.layout.histroy_record_item, parent, false);
-        }
-        return new ViewHolder(view);
+    public int getItemViewType(int position) {
+        return dataList.size();
     }
 
     @Override
-    public void onBindViewHolder(DisplayHistoryAdapter.ViewHolder holder, int position) {
-        if (dataList.size() == 0) return;
-        if (dataList.get(position) instanceof String) {
-            holder.text.setText((CharSequence) dataList.get(position));
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view;
+        if (viewType == 0) {
+            view = LayoutInflater.from(mContext).inflate(R.layout.layout_histroy_empty, parent, false);
+            return new EmptyViewHolder(view);
         } else {
-            Wrapper wrapper = (Wrapper) dataList.get(position);
-            holder.text.setText(wrapper.getStart() + " 前往 " + wrapper.getStop());
+            view = LayoutInflater.from(mContext).inflate(R.layout.histroy_record_item, parent, false);
+            return new NonNullViewHolder(view);
         }
+    }
 
+    @Override
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        if (holder instanceof DisplayHistoryAdapter.NonNullViewHolder) {
+            NonNullViewHolder var = (NonNullViewHolder) holder;
+            if (dataList.get(position) instanceof String) {
+                var.text.setText((CharSequence) dataList.get(position));
+            } else {
+                Wrapper wrapper = (Wrapper) dataList.get(position);
+                var.text.setText(wrapper.getStart() + " 前往 " + wrapper.getStop());
+            }
+        }
     }
 
     /**
@@ -62,10 +72,10 @@ public class DisplayHistoryAdapter<T> extends RecyclerView.Adapter<DisplayHistor
         return dataList.size() == 0 ? 1 : dataList.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    class NonNullViewHolder extends RecyclerView.ViewHolder {
         TextView text;
 
-        ViewHolder(View itemView) {
+        NonNullViewHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -79,4 +89,10 @@ public class DisplayHistoryAdapter<T> extends RecyclerView.Adapter<DisplayHistor
         }
     }
 
+    class EmptyViewHolder extends RecyclerView.ViewHolder {
+
+        EmptyViewHolder(View itemView) {
+            super(itemView);
+        }
+    }
 }

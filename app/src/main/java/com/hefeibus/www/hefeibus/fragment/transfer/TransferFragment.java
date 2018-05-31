@@ -210,17 +210,6 @@ public class TransferFragment extends BaseMvpFragment<ITransferPresenter> implem
         mLayoutManager.showEmptyLayout();
     }
 
-    public void showLoadingLayout() {
-        Log.d(TAG, "showLoadingLayout!");
-        mLayoutManager.showLoadingLayout();
-    }
-
-
-    public void restoreLayout() {
-        Log.d(TAG, "restoreLoadingLayout!");
-        mLayoutManager.showSuccessLayout();
-    }
-
     @Override
     public TransferFragment getCurrentActivity() {
         return this;

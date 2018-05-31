@@ -45,10 +45,10 @@ public class MainActivity extends BaseMvpActivity<IMainPresenter> implements IMa
     protected void setAttributes() {
 
         //设置 Tablayout 的 title
-        mTablayout.addTab(mTablayout.newTab().setText("搜索"));
+        mTablayout.addTab(mTablayout.newTab().setText("查询"));
         mTablayout.addTab(mTablayout.newTab().setText("换乘"));
-        mTablayout.addTab(mTablayout.newTab().setText("附近"));
-        mTablayout.addTab(mTablayout.newTab().setText("我的"));
+        mTablayout.addTab(mTablayout.newTab().setText("历史"));
+        mTablayout.addTab(mTablayout.newTab().setText("设置"));
 
         //联动 viewpager 和 tablayout
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTablayout));

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,12 +29,12 @@ import java.util.List;
 
 public class HistoryFragment extends BaseMvpFragment<IHistoryPresenter> implements IHistoryView {
 
+    private static final String TAG = "HistoryFragment";
     private RecyclerView stationRv, lineRv, transRv;
     private Button clearBtn;
     private DisplayHistoryAdapter<String> stationAdapter;
     private DisplayHistoryAdapter<String> lineAdapter;
     private DisplayHistoryAdapter<Wrapper> transAdapter;
-
 
     @Override
     protected int setLayoutView() {
@@ -44,7 +45,6 @@ public class HistoryFragment extends BaseMvpFragment<IHistoryPresenter> implemen
     protected IHistoryPresenter onPresenterCreated() {
         return new HistoryPresenter(mAppDatabase);
     }
-
 
     @Nullable
     @Override
@@ -66,6 +66,7 @@ public class HistoryFragment extends BaseMvpFragment<IHistoryPresenter> implemen
         lineAdapter = new DisplayHistoryAdapter<>(getContext());
         transAdapter = new DisplayHistoryAdapter<>(getContext());
 
+        //设置站点点击监听
         stationAdapter.setListener(new OnItemClickListener<String>() {
             @Override
             public void onClick(String itemName) {
@@ -75,6 +76,7 @@ public class HistoryFragment extends BaseMvpFragment<IHistoryPresenter> implemen
             }
         });
 
+        //设置线路点击监听
         lineAdapter.setListener(new OnItemClickListener<String>() {
             @Override
             public void onClick(String itemName) {
@@ -85,6 +87,7 @@ public class HistoryFragment extends BaseMvpFragment<IHistoryPresenter> implemen
             }
         });
 
+        //设置换乘点击监听
         transAdapter.setListener(new OnItemClickListener<Wrapper>() {
             @Override
             public void onClick(Wrapper wrapper) {
@@ -92,9 +95,7 @@ public class HistoryFragment extends BaseMvpFragment<IHistoryPresenter> implemen
             }
         });
 
-        stationRv.setAdapter(stationAdapter);
-        lineRv.setAdapter(lineAdapter);
-        transRv.setAdapter(transAdapter);
+        //设置清除监听
         clearBtn.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("ApplySharedPref")
             @Override
@@ -103,6 +104,10 @@ public class HistoryFragment extends BaseMvpFragment<IHistoryPresenter> implemen
                 refreshData();
             }
         });
+
+        stationRv.setAdapter(stationAdapter);
+        lineRv.setAdapter(lineAdapter);
+        transRv.setAdapter(transAdapter);
     }
 
     @Override
@@ -113,10 +118,14 @@ public class HistoryFragment extends BaseMvpFragment<IHistoryPresenter> implemen
     }
 
     private void refreshData() {
+        clearAdapter();
+        presenter.getHistory();
+    }
+
+    private void clearAdapter() {
         lineAdapter.getDataList().clear();
         stationAdapter.getDataList().clear();
         transAdapter.getDataList().clear();
-        presenter.getHistory();
     }
 
     @Override
@@ -130,7 +139,13 @@ public class HistoryFragment extends BaseMvpFragment<IHistoryPresenter> implemen
     }
 
     @Override
-    protected void init() {
+    public void onResume() {
+        super.onResume();
+        Log.d(TAG, "onResume: refresh");
         refreshData();
+    }
+
+    @Override
+    protected void init() {
     }
 }

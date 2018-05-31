@@ -137,6 +137,7 @@ public class StationDetailActivity extends BaseMvpActivity<IStationDetailPresent
     protected void onDestroy() {
         int i = presenter == null ? 0 : presenter.onDestroy();
         if (i == 1) Log.d(TAG, "onDestroy: RxJava has disposed");
+        this.setResult(RESULT_OK);
         super.onDestroy();
     }
 }

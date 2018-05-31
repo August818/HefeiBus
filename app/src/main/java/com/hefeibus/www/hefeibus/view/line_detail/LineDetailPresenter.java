@@ -86,6 +86,7 @@ class LineDetailPresenter extends BaseMvpPresenter<ILineDetailView> implements I
                 .subscribe(new Consumer<LineData>() {
                     @Override
                     public void accept(final LineData lineData) {
+                        mAppDatabase.writeLineHistory(lineData.getLineName());
                         ifViewAttached(new ViewAction<ILineDetailView>() {
                             @Override
                             public void run(@NonNull ILineDetailView view) {

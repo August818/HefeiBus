@@ -33,13 +33,13 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 
 public class LineDetailActivity extends BaseMvpActivity<ILineDetailPresenter> implements ILineDetailView {
+    private static final String TAG = "LineDetailActivity";
     private Toolbar toolbar;
     private RecyclerView recyclerView;
     private TextView info1, info2, info3, info4, info5, info6;
     private Button reverse_btn;
     private Button favour_Btn;
     private LineDetailAdapter adapter = new LineDetailAdapter();
-    private static final String TAG = "LineDetailActivity";
     private Dialog mDialog;
     private Disposable disposable;
     private LineData lineData;
@@ -248,6 +248,7 @@ public class LineDetailActivity extends BaseMvpActivity<ILineDetailPresenter> im
         if (disposable != null && !disposable.isDisposed()) {
             disposable.dispose();
         }
+        this.setResult(RESULT_OK);
         super.onDestroy();
     }
 }

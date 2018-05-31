@@ -93,6 +93,7 @@ class StationDetailPresenter extends BaseMvpPresenter<IStationDetailView> implem
                 .subscribe(new Consumer<List<StationData>>() {
                     @Override
                     public void accept(final List<StationData> stationData) {
+                        database.writeStationHistory(station);
                         ifViewAttached(new ViewAction<IStationDetailView>() {
                             @Override
                             public void run(@NonNull IStationDetailView view) {
