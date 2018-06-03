@@ -27,6 +27,7 @@
 
 
     <TextView
+        android:id="@+id/collection"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
@@ -42,6 +43,7 @@
         android:background="@color/icons" />
 
     <TextView
+        android:id="@+id/adress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
@@ -57,6 +59,7 @@
         android:background="@color/icons" />
 
     <TextView
+        android:id="@+id/arrive"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
@@ -72,11 +75,12 @@
         android:background="@color/icons" />
 
     <TextView
+        android:id="@+id/clear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
-        android:drawablePadding="15dp"
 
+        android:drawablePadding="15dp"
         android:drawableStart="@drawable/ic_my_error"
         android:text="@string/my_clear_cache"
         android:textColor="@color/icons"
@@ -88,10 +92,11 @@
         android:background="@color/icons" />
 
     <TextView
+        android:id="@+id/about"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
 
+        android:layout_margin="15dp"
         android:drawablePadding="15dp"
         android:drawableStart="@drawable/ic_settings_black_24dp"
         android:text="@string/my_about"

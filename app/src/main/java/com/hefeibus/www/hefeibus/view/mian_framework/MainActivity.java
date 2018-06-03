@@ -10,9 +10,9 @@ import com.hefeibus.www.hefeibus.R;
 import com.hefeibus.www.hefeibus.base.BaseMvpActivity;
 import com.hefeibus.www.hefeibus.base.TransferHandler;
 import com.hefeibus.www.hefeibus.entity.Wrapper;
-import com.hefeibus.www.hefeibus.fragment.ProfileFragment;
 import com.hefeibus.www.hefeibus.fragment.history.HistoryFragment;
 import com.hefeibus.www.hefeibus.fragment.search.SearchFragment;
+import com.hefeibus.www.hefeibus.fragment.setting.SettingFragment;
 import com.hefeibus.www.hefeibus.fragment.transfer.TransferFragment;
 
 import java.util.ArrayList;
@@ -59,7 +59,7 @@ public class MainActivity extends BaseMvpActivity<IMainPresenter> implements IMa
         list.add(new SearchFragment());
         list.add(new TransferFragment());
         list.add(new HistoryFragment());
-        list.add(new ProfileFragment());
+        list.add(new SettingFragment());
         adapter = new MyPagerAdapter(getSupportFragmentManager(), list);
         mViewPager.setAdapter(adapter);
         mViewPager.setOffscreenPageLimit(4);
