@@ -6,7 +6,6 @@ import com.hefeibus.www.hefeibus.base.BaseMvpPresenter;
 import com.hefeibus.www.hefeibus.entity.Wrapper;
 import com.hefeibus.www.hefeibus.sqlite.AppDatabase;
 
-import java.util.Collections;
 import java.util.List;
 
 class HistoryPresenter extends BaseMvpPresenter<IHistoryView> implements IHistoryPresenter {
@@ -33,10 +32,6 @@ class HistoryPresenter extends BaseMvpPresenter<IHistoryView> implements IHistor
         line = mAppdatabase.getLineRec();
         station = mAppdatabase.getStationRec();
         transfer = mAppdatabase.getTransferRec();
-
-        Collections.reverse(line);
-        Collections.reverse(station);
-        Collections.reverse(transfer);
 
         ifViewAttached(new ViewAction<IHistoryView>() {
             @Override

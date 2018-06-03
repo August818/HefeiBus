@@ -345,7 +345,7 @@ public class AppDatabase {
         String count = mContext.getSharedPreferences(Parameters.APP_PREFERENCES, Context.MODE_PRIVATE).getString(Parameters.key_History_count, "5");
         List<String> var = new ArrayList<>();
         Cursor cursor = mHelper.executeCursor(dbName,
-                "select distinct value from HistoryRecord where type = 1 limit ?", new String[]{count});
+                "select distinct value from HistoryRecord where type = 1 order by rowid desc limit ?", new String[]{count});
         while (cursor.moveToNext()) {
             var.add(cursor.getString(cursor.getColumnIndex("value")));
         }
@@ -360,7 +360,7 @@ public class AppDatabase {
         String count = mContext.getSharedPreferences(Parameters.APP_PREFERENCES, Context.MODE_PRIVATE).getString(Parameters.key_History_count, "5");
         List<String> var = new ArrayList<>();
         Cursor cursor = mHelper.executeCursor(dbName,
-                "select distinct value from HistoryRecord where type = 2 limit ?", new String[]{count});
+                "select distinct value from HistoryRecord where type = 2 order by rowid desc limit ?", new String[]{count});
         while (cursor.moveToNext()) {
             var.add(cursor.getString(cursor.getColumnIndex("value")));
         }
@@ -376,7 +376,7 @@ public class AppDatabase {
         String count = mContext.getSharedPreferences(Parameters.APP_PREFERENCES, Context.MODE_PRIVATE).getString(Parameters.key_History_count, "5");
         List<Wrapper> var = new ArrayList<>();
         Cursor cursor = mHelper.executeCursor(dbName,
-                "select distinct value from HistoryRecord where type = 3 limit ?", new String[]{count});
+                "select distinct value from HistoryRecord where type = 3 order by rowid desc limit ?", new String[]{count});
         while (cursor.moveToNext()) {
             String var2 = cursor.getString(cursor.getColumnIndex("value"));
             String[] var3 = var2.split("\\|");
@@ -387,54 +387,18 @@ public class AppDatabase {
     }
 
     public void writeLineHistory(String lineName) {
-        Cursor cursor = mHelper.executeCursor(dbName,
-                "select * from HistoryRecord where type = 1", null);
-
-        if (cursor.getCount() == 5) {
-            //如果有5条数据，那么移动到最后一条，删除该数据，然后再插入
-            cursor.moveToFirst();
-            String var1 = cursor.getString(cursor.getColumnIndex("value"));
-            mHelper.executeModifyCount(dbName,
-                    "delete from HistoryRecord where value = ?", new String[]{var1});
-            cursor.close();
-        }
-
         mHelper.executeModifyCount(dbName,
                 "insert into HistoryRecord(type,value) values (1,?)", new String[]{lineName + "路"});
 
     }
 
     public void writeStationHistory(String stationName) {
-        Cursor cursor = mHelper.executeCursor(dbName,
-                "select * from HistoryRecord where type = 2", null);
-
-        if (cursor.getCount() == 5) {
-            //如果有5条数据，那么移动到最后一条，删除该数据，然后再插入
-            cursor.moveToFirst();
-            String var1 = cursor.getString(cursor.getColumnIndex("value"));
-            mHelper.executeModifyCount(dbName,
-                    "delete from HistoryRecord where value = ? ", new String[]{var1});
-            cursor.close();
-        }
-
         mHelper.executeModifyCount(dbName,
                 "insert into HistoryRecord(type,value) values (2,?)", new String[]{stationName});
 
     }
 
     public void writeTransferHistory(String start, String stop) {
-        Cursor cursor = mHelper.executeCursor(dbName,
-                "select * from HistoryRecord where type = 3", null);
-
-        if (cursor.getCount() == 5) {
-            //如果有5条数据，那么移动到最后一条，删除该数据，然后再插入
-            cursor.moveToFirst();
-            String var1 = cursor.getString(cursor.getColumnIndex("value"));
-            mHelper.executeModifyCount(dbName,
-                    "delete from HistoryRecord where value = ?", new String[]{var1});
-            cursor.close();
-        }
-
         String transfer = start + "|" + stop;
         mHelper.executeModifyCount(dbName,
                 "insert into HistoryRecord(type,value) values (3,?)", new String[]{transfer});
